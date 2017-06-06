@@ -1,0 +1,16 @@
+.banner {
+  background: linear-gradient(white, $off-black);
+  height: 200px;
+  position: relative;
+}
+
+.banner h1 {
+  position: absolute;
+  font: $base-font;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  font-size: 23px;
+  padding-right: 10px;
+  font-weight: bolder;
+}
