@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :user_recipes, only: [:new, :create, :edit, :update] do
       resources :recipes, only: [:show]
     end
-    resources :shopping_items, only: [:edit, :update]
+    resources :shopping_items, only: [:update]
   end
 
 
