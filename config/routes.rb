@@ -5,13 +5,14 @@ Rails.application.routes.draw do
 
 
   resources :users, only: [:show] do
-    resources :user_recipes, only: [:new, :create, :edit, :update] do
+    resources :user_recipes, only: [:index, :create, :edit, :update] do
       resources :recipes, only: [:show]
     end
     resources :shopping_items, only: [:update]
   end
 
-get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
+  get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
+  get "calendar/:date", to: "user_recipes#index", as: 'calendar'
 
 
 end
