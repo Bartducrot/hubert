@@ -1,5 +1,28 @@
 
 
-<%= link_to "previous day", calendar_path(@day - 1) %>
-<%= link_to "next day", calendar_path(@day + 1) %>
+<h1><%= @day.strftime('%A %e %B') %></h1>
+<h2>Recipe of the day</h2>
+
+<%= simple_form_for [current_user, @user_recipe] do |f|%>
+  <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
+  <%= f.input :number_of_people %>
+  <%= f.association :recipe %>
+  <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <% @user_recipes.each do |u_recipe| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <% recipe = Recipe.find(u_recipe.recipe_id) %>
+        <h3><%= recipe.name %></h3>
+        <p><%= recipe.recipe_type %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<%= link_to "#{(@day - 1).strftime('%A %e %B')}", calendar_path(@day - 1) %>
+<%= link_to "#{(@day + 1).strftime('%A %e %B')}", calendar_path(@day + 1) %>
 
