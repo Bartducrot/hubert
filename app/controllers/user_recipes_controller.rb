@@ -16,8 +16,10 @@ class UserRecipesController < ApplicationController
 
   def create
     @user_recipe = UserRecipe.new(user_recipe_params)
+    @user_recipe.user = current_user
     @user_recipe.save
-    redirect_to user_user_recipes_path(current_user)
+    # redirect_to user_user_recipes_path(current_user)
+    redirect_to calendar_path(user_recipe_params[:date])
   end
 
   def edit
@@ -33,7 +35,7 @@ class UserRecipesController < ApplicationController
   private
 
   def user_recipe_params
-    params.require(:user_recipe).permit(:number_of_people, :recipe_id, :user_id, :date)
+    params.require(:user_recipe).permit(:number_of_people, :recipe_id, :date)
   end
 
 end
