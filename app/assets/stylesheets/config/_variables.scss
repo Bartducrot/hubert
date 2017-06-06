@@ -3,8 +3,10 @@
  * ------------------------------------- */
 // Google fonts
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,300,700|Raleway:400,100,300,700,500");
-$base-font: "Open Sans", "Helvetica", "sans-serif";
-$header-font: "Raleway", "Helvetica", "sans-serif";
+// $base-font: "Open Sans", "Helvetica", "sans-serif";
+// $header-font: "Raleway", "Helvetica", "sans-serif";
+$base-font: AvenirLTStd-Light, "Open Sans", open-sans, sans-serif;
+$header-font: AvenirLTStd-Light, "Open Sans", open-sans, sans-serif;
 
 // Local fonts (uncomment following lines)
 // @font-face {
@@ -24,6 +26,25 @@ $base-height: 1.4;
  * Colors
  * ------------------------------------- */
 // Scheme
+
+
+// main color for app */
+$brand-color: #FF6161;
+// light grey used for main background color
+$light-grey: #F9F9F9;
+// used for background boxes
+$medium-grey: #E3E3E3;
+// used for icons
+$grey: #C6C6C6;
+// used for main text
+$dark-grey: #575757;
+// used for dark buttons
+$darker-grey: #5B5B5B;
+// used for titles
+$off-black: #161616;
+
+
+
 $brand-color: #D23333;
 
 $red: #EE5F5B;
