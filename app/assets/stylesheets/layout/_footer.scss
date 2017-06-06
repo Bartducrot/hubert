@@ -1,1 +1,65 @@
-// Your footer style
+ .footer {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  color: white;
+  background-color: $off-black;
+  box-shadow: 0 -5px 5px -5px $off-black;
+  z-index: 60;
+ }
+
+ .footer-flex {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background-color: $off-black;
+ }
+
+ .footer-flex-left {
+  i {
+    padding: 10px 20px;
+    font-size: 31px;
+    z-index: 51;
+  }
+   :hover {
+    color: $red
+  }
+ }
+ .footer-flex-right {
+  i {
+    padding: 10px 20px;
+    font-size: 31px;
+    z-index: 50;
+  }
+  :hover {
+    color: $red
+  }
+}
+
+.home-button {
+  font-size: 40px;
+}
+
+.home-button:hover {
+  color: $red;
+}
+
+ .footer-circle {
+  background-color: $off-black;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -20px;
+  left: 0px;
+  right: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 -5px 5px -5px $off-black;
+  z-index: 0;
+ }
+
