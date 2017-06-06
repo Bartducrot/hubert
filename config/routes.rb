@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :shopping_items, only: [:update]
   end
 
+  get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'
+
 
 end
