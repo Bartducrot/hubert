@@ -5,11 +5,11 @@ Rails.application.routes.draw do
 
 
   resources :users, only: [:show] do
-    resources :user_recipes, only: [:index, :create, :edit, :update] do
-      resources :recipes, only: [:show]
-    end
-    resources :shopping_items, only: [:update, :show]
+    resources :user_recipes, only: [:index, :create, :edit, :update]
+    resources :shopping_items, only: [:update]
   end
+  resources :recipes, only: [:show]
+
 
   get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'
