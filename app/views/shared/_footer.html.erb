@@ -16,25 +16,25 @@
   <div class="footer-flex">
     <div class="footer-flex-left">
       <%= link_to user_path(current_user.id) do  %>
-      <i class="fa fa-user footer-menu-item" aria-hidden="true"></i>
+        <i class="fa fa-user footer-menu-item" aria-hidden="true"></i>
       <% end %>
       <%= link_to cookbook_path do  %>
-      <i class="fa fa-book footer-menu-item" aria-hidden="true"></i>
+        <i class="fa fa-book footer-menu-item" aria-hidden="true"></i>
       <% end %>
     </div>
 
     <div class="footer-circle">
       <%= link_to root_path do  %>
-      <i class="fa fa-plus home-button" aria-hidden="true"></i>
+        <i class="fa fa-plus home-button" aria-hidden="true"></i>
       <% end %>
     </div>
 
      <div class="footer-flex-right">
       <%= link_to calendar_path(Date.today) do  %>
-      <i class="fa fa-calendar footer-menu-item" aria-hidden="true"></i>
+        <i class="fa fa-calendar footer-menu-item" aria-hidden="true"></i>
       <% end %>
       <%= link_to shopping_cart_path do  %>
-      <i class="fa fa-shopping-basket footer-menu-item" aria-hidden="true"></i>
+        <i class="fa fa-shopping-basket footer-menu-item" aria-hidden="true"></i>
       <% end %>
     </div>
   </div>
