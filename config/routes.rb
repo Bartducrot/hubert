@@ -8,11 +8,12 @@ Rails.application.routes.draw do
     resources :user_recipes, only: [:index, :create, :edit, :update] do
       resources :recipes, only: [:show]
     end
-    resources :shopping_items, only: [:update]
+    resources :shopping_items, only: [:update, :show]
   end
 
   get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'
+  get "/shopping_cart", to: "pages#shopping_cart"
 
 
 end
