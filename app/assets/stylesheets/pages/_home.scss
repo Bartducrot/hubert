@@ -1,4 +1,82 @@
-/* -------------------------------------
- * CSS code specific to home page
- * (margin/padding adjustments)
- * ------------------------------------- */
+.meal-menu {
+  background-color: $off-black;
+  height: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.meals p {
+  color: $light-grey;
+  font: $base-font;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+.meal-menu-bar {
+  background-color: $off-black;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.left-meal-menu-bar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.left-meal-menu-bar p {
+  padding-right: 10px;
+  margin-top: 3px;
+  font-size: 15px;
+  color: $light-grey;
+  font: $base-font;
+}
+
+.right-meal-menu-bar p {
+  background-color: $red;
+  margin-top: 4px;
+  padding: 2px;
+  border-radius: 2px;
+  font-size: 12px;
+  color: white;
+  font: $base-font;
+  font-weight: bold;
+}
+
+.right-meal-menu-bar p:hover {
+    background-color: $red;
+  }
+
+.ingredient-method-titles {
+  display: flex;
+  justify-content: space-around;
+}
+
+.method-text p {
+  padding: 20px;
+  font: $base-font;
+  color: $darker-grey;
+  font-size: 15px;
+}
+
+.ingredients-list ul {
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font: $base-font;
+  color: $darker-grey;
+  font-size: 15px;
+}
+
+.ingredients-list ul li {
+  list-style-type: none;
+  padding-top: 5px;
+}
+
+
+
