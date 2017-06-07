@@ -12,7 +12,11 @@
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
     <%= yield %>
-    <%= render 'shared/footer' %>
+    <% if current_user == nil %>
+      <a class=“btn btn-primary” href=users/sign_in><i class=“fa fa-commenting-o” aria-hidden=“true”></i><span style=“display:inline-block; width: 10px;“></span><strong>  Sign in </strong></a>
+    <% else %>
+      <%= render 'shared/footer' %>
+    <% end %>
     <%= javascript_include_tag 'application' %>
     <%= yield(:after_js) %>
   </body>
