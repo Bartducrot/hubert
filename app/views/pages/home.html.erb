@@ -1,29 +1,7 @@
+
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
-
-<div class="swiper-container">
-  <div class="swiper-wrapper">
-    <% Recipe.all.each do |recipe|%>
-    <div class="swiper-slide">
-      <div class="col-xs-12 recipe-cards">
-          <% if Recipe.all != nil %>
-            <%= render "shared/card", recipe: recipe %>
-          <% else %>
-            <h3> There are no recipes yet</h3>
-          <% end %>
-      </div>
-    </div>
-    <% end %>
-  </div>
-</div>
-
-<!-- Initialize Swiper -->
-<% content_for(:after_js) do %>
-   <script>
-    var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-        spaceBetween: 30,
-    });
-   </script>
-<% end %>
+<form>
+  <input type="button" value="Click Me" onclick="getConfirmation();" />
+</form>
+<%= render "shared/swiper" %>

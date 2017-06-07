@@ -1,8 +1,10 @@
- <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0) 30%, rgba(0,0,0,3)), url('<%= image_path ("https://placeimg.com/400/300/any"), crop: :fill %>');">
+ <div class="card">
+    <%= recipe.id %>
+    <h3><%= recipe.name %></h3>
   <div class="card-difficulty"><i class="fa fa-cutlery" aria-hidden="true"></i> <%= recipe.recipe_type.upcase %></div>
   <div class="card-time"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= recipe.category %></div>
   <div class="card-description">
-    <p><%= recipe.name %></p>
+    <%= recipe %>
     <!-- <p><%= recipe.instructions %></p> -->
   </div>
 </div>
