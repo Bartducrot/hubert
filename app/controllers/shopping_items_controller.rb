@@ -1,6 +1,5 @@
 class ShoppingItemsController < ApplicationController
-  before_action :set_shopping_item, only: [:update]
-
+  before_action :set_shopping_item
   def update
     @shopping_item.bought = true
     @show_item.save
@@ -10,6 +9,6 @@ class ShoppingItemsController < ApplicationController
   private
 
   def set_shopping_item
-    @shopping_item = ShoppingItems.find(params[:id])
+    @shopping_item = ShoppingItem.find(params[:id])
   end
 end
