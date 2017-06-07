@@ -1,0 +1,28 @@
+.form-wrapper {
+  background-image: url("recipe.jpg");
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  color: white;
+  font-weight: bolder;
+  margin: auto;
+}
+
+.form-container h3 {
+  color: white;
+  font-weight: bolder;
+  text-align:center;
+}
+
+.form-container p {
+  color: white;
+  font-weight: lighter;
+  text-align:center;
+}
+
+
