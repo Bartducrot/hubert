@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+<!-- <div class="footer">
+  <div class="footer-menu">
+    <i class="fa fa-user footer-menu-item" aria-hidden="true"></i>
+    <i class="fa fa-book footer-menu-item" aria-hidden="true"></i>
+    <i class="fa fa-book footer-menu-item" aria-hidden="true"></i>
+    <i class="fa fa-calendar footer-menu-item" aria-hidden="true"></i>
+    <i class="fa fa-shopping-basket footer-menu-item" aria-hidden="true"></i>
+  </div>
+
+  <div class="footer-circle">
+  </div>
+
+</div> -->
+ <% if user_signed_in? %>
+=======
+>>>>>>> eb6207cae894f3622232de4e4ca82976c957c4bf
 <div class="footer">
   <div class="footer-flex">
     <div class="footer-flex-left">
@@ -25,3 +42,28 @@
     </div>
   </div>
 </div>
+ <% else %>
+ <footer>
+  <div class="footer" id="footer">
+      <div class="container footer-menu">
+
+        <div class="footer-second-row">
+          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+          <i class="fa fa-google-plus-square" aria-hidden="true"></i>
+          <div id="c">
+            <div id="s">
+              <div class="l guide">
+              </div>
+            </div>
+            <div class="l2 guide">
+              </div>
+          </div>
+        </div>
+        <div class="footer-third-row">
+          <h2>HUBERT</h2>
+        </div>
+      </div>
+  </div>
+</footer>
+<% end %>

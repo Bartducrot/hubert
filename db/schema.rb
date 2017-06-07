@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607094351) do
+ActiveRecord::Schema.define(version: 20170607145005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +22,11 @@ ActiveRecord::Schema.define(version: 20170607094351) do
     t.date "end_of_seasonality"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unit"
   end
 
   create_table "recipe_ingredients", force: :cascade do |t|
     t.integer "quantity"
-    t.string "unit"
     t.bigint "recipe_id"
     t.bigint "ingredient_id"
     t.datetime "created_at", null: false
