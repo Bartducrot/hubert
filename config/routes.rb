@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'
-  get "/shopping_cart", to: "pages#shopping_cart"
+  get "/shopping_cart", to: "user_recipes#shopping_cart"
 
 
 
