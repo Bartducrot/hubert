@@ -1,9 +1,23 @@
   <div class="card-difficulty"><i class="fa fa-cutlery" aria-hidden="true"></i> <%= recipe.recipe_type.upcase %></div>
-  <div class="card-time"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= recipe.category %></div>
-  <div class="card-description">
     <p><%= recipe.name %></p>
+  <div class="card-time"><i class="fa fa-clock-o" aria-hidden="true"></i> <%= recipe.category %></div>
+  <div class="" id="recipe-js-<%= recipe.id %>"><%= recipe.id %></div>
+  <div class="card-description">
+    <p><% recipe.id %></p>
     <!-- <p><%= recipe.instructions %></p> -->
   </div>
 
 
 
+<% content_for(:after_js) do %>
+   <script type="text/javascript">
+      <!--
+        function getConfirmation(){
+          var node = document.getElementById('recipe-js-<%= raw recipe.id %>');
+          window.alert(node.textContent);
+          console.log(node.textContent);
+           }
+      //-->
+
+   </script>
+<% end %>
