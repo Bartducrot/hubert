@@ -33,8 +33,7 @@ Recipe.destroy_all
         recipe.instructions = instructions
         recipe.save!
 
-
-        puts "hacked recipe #{recipe.name}"
+        puts "WOUHOOOO #{recipe.name}"
 
       end
     end
