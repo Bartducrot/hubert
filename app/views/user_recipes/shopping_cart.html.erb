@@ -1,10 +1,14 @@
 <% @ingredients_hash.each_key do |category| %>
-  <h2><%= category.capitalize %></h2>
-  <ul>
-    <% @ingredients_hash[category].each do |item| %>
-      <li><%= item %></li>
-    <% end %>
-  </ul>
+  <form action="">
+    <h2><%= category.capitalize %></h2>
+    <p>
+      <% @ingredients_hash[category].each do |item| %>
+        <input type="checkbox" name="<%= item[:name] %>" <%= "checked" if item[:bought] %> >
+        <label for="<%= item[:name] %>"><%= item[:name].capitalize %> , <%= item[:quantity] %><%= item[:unit] %></label>
+        <br>
+      <% end %>
+    </p>
+  </form>
 <% end %>
 
 

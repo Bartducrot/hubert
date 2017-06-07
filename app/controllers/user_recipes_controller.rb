@@ -15,17 +15,17 @@ class UserRecipesController < ApplicationController
       end
     end
     @recipe_ingredients = []
-    @ingredients = []
+    # @ingredients = []
     @shopping_items.each do |item|
-      @recipe_ingredients << RecipeIngredient.find(item.recipe_ingredient_id)
-      @ingredients << Ingredient.find(item.recipe_ingredient.ingredient_id)
+      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item.bought]
+      # @ingredients << Ingredient.find(item.recipe_ingredient.ingredient_id)
     end
     @ingredients_hash = {}
     @recipe_ingredients.each do |r_ingredient|
-      unless @ingredients_hash.has_key?(r_ingredient.ingredient.category)
-        @ingredients_hash[r_ingredient.ingredient.category] = []
+      unless @ingredients_hash.has_key?(r_ingredient.first.ingredient.category)
+        @ingredients_hash[r_ingredient.first.ingredient.category] = []
       end
-      @ingredients_hash[r_ingredient.ingredient.category] << [r_ingredient.ingredient.name, r_ingredient.quantity, r_ingredient.ingredient.unit]
+      @ingredients_hash[r_ingredient.first.ingredient.category] << {bought: r_ingredient.last , name: r_ingredient.first.ingredient.name, quantity: r_ingredient.first.quantity, unit: r_ingredient.first.ingredient.unit}
     end
   end
 
