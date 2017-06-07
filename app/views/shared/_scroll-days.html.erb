@@ -21,9 +21,11 @@
     <div class="scroll-btn">
       <h2><%= link_to "#{(@day - 1).strftime('%a %e %b')}", calendar_path(@day - 1) %></h2>
     </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{ @day.strftime('%a %e %b')}", calendar_path(@day) %></h2>
-    </div>
+    <%= link_to calendar_path(@day), class: "selected" do %>
+      <div class="scroll-btn">
+        <h2> <%= "#{ @day.strftime('%a %e %b')}" %></h2>
+      </div>
+    <% end %>
      <div class="scroll-btn">
       <h2><%= link_to "#{(@day + 1).strftime('%a %e %b')}", calendar_path(@day + 1) %></h2>
     </div>
@@ -45,5 +47,17 @@
     <div class="scroll-btn">
       <h2><%= link_to "#{(@day + 7).strftime('%a %e %b')}", calendar_path(@day + 7) %></h2>
     </div>
+
+  <%= 15.times do |i| %>
+    <%= link_to calendar_path(@day - 8 + i), class: "selected" do %>
+      <div class="scroll-btn">
+        <h2> <%= "#{ (@day - 8 + i).strftime('%a %e %b')}" %></h2>
+      </div>
+    <% end %>
+  <% end %>
   </div>
+
+
+
+
 </div>
