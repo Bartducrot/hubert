@@ -67,6 +67,7 @@ CATEGORY = ["very easy", "easy", "medium" , "hard", "very hard", "nightmare"]
   recipe.instructions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pellentesque dolor ac dolor tempus, eget pellentesque sapien egestas. Maecenas iaculis, neque nec egestas vestibulum, mauris nibh vehicula tellus, et rhoncus tellus enim vel diam. Mauris quis cursus ante. Nulla semper, arcu vitae tempus luctus, elit magna efficitur ligula, vel tincidunt urna augue a velit. Vivamus accumsan massa nec quam hendrerit finibus. Vivamus eros lectus, congue condimentum varius at, varius sed lorem. Suspendisse vitae sem fringilla, mattis dolor at, commodo nisi. Maecenas nulla ex, laoreet sit amet placerat eget, consectetur a purus. Nam sit amet enim sollicitudin, porttitor elit eu, scelerisque felis."
   recipe.save!
 
+
   puts "#{recipe.name} id made of:"
   (2..10).to_a.sample.times do
     recipe_ingredient = RecipeIngredient.new()
