@@ -2,7 +2,32 @@ class UserRecipesController < ApplicationController
 
   def cookbook
     @user_recipes = UserRecipe.where(:user_id == current_user.id)
+    @shopping_items = []
+    @user_recipe.each do |recipe|
+      if recipe.date >= Date.today
+        recipe.shopping_item.each do |item|
+          @shopping_items << item
+        end
+      end
+    end
+    @recipes_ingredients = []
+    @ingredients = []
+    @shopping_items.each do |item|
+      @recipe_ingredients << RecipeIngredient.find(item.recipes_ingredient_id)
+      @ingredients << Ingredient.find(item.recipe_ingredient.ingredient_id)
+    end
+    @ingredients_hash = {}
+    @recipe_ingredients.each do |r_ingredient|
+      unless @ingredients_hash.has_key?(r_ingredient.ingredient.category)
+        @ingredients_hash[r_ingredient.ingredient.category] = []
+      end
+      @ingredients_hash[r_ingredient.ingredient.category] << [r_ingredient.ingredient.name, r_ingredient.quantity, r_ingredient.ingredient.unit]
+    end
   end
+
+
+
+
 
   def index
     @day = Date.parse(params[:date])
