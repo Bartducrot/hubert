@@ -1,5 +1,7 @@
+
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
 <div class="swiper-container">
   <div class="swiper-wrapper">
     <% Recipe.all.each do |recipe|%>
@@ -16,6 +18,7 @@
   </div>
 </div>
 
+
 <!-- Initialize Swiper -->
 <% content_for(:after_js) do %>
    <script>
@@ -26,3 +29,4 @@
    });
    </script>
 <% end %>
+
