@@ -1,7 +1,7 @@
 <div class="swiper-container">
   <div class="swiper-wrapper">
     <% Recipe.all.each do |recipe|%>
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-recipe-id=<%= recipe.id %>>
       <div class="col-xs-12 recipe-cards">
           <% if Recipe.all != nil %>
             <%= render "shared/card", recipe: recipe %>
@@ -27,8 +27,8 @@
 
       <!--
         function getConfirmation(){
-          var node = document.getElementById('recipe-js');
-          window.alert(node.textContent);
+
+          window.alert($(".swiper-slide-active").data("recipe-id"));
            }
       //-->
 
