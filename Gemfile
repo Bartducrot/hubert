@@ -19,6 +19,8 @@ gem 'autoprefixer-rails'
 gem 'cloudinary', '1.1.0'
 gem 'omniauth-facebook'
 
+gem 'jquery-ui-rails'
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
