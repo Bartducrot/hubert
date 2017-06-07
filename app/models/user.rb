@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
-
+  has_many :user_recipes
   has_many :recipes, through: :user_recipes
+  has_many :shopping_items, through: :user_recipes
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice(:provider, :uid)
