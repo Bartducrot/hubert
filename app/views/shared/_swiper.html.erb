@@ -1,11 +1,11 @@
 <div class="swiper-container">
   <div class="swiper-wrapper">
     <% Recipe.all.each do |recipe|%>
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-recipe-title="<%= recipe.name %>" data-recipe-id="<%= recipe.id %>" data-recipe-type="<%= recipe.recipe_type %>" data-recipe-category="<%= recipe.category %>">
       <div class="col-xs-12 recipe-cards">
           <% if Recipe.all != nil %>
             <%= render "shared/card", recipe: recipe %>
-            <div class="hidden" id="recipe-js"><%= recipe.id %></div>
+           <!--  <div class="hidden" id="recipe-js"><%= recipe.id %></div> -->
           <% else %>
             <h3> There are no recipes yet</h3>
           <% end %>
@@ -27,12 +27,17 @@
 
       <!--
         function getConfirmation(){
-          var node = document.getElementById('recipe-js');
-          window.alert(node.textContent);
+          a = $(".swiper-slide-active").attr("data-recipe-title")
+          b = $(".swiper-slide-active").attr("data-recipe-id")
+          c = $(".swiper-slide-active").attr("data-recipe-type")
+          d = $(".swiper-slide-active").attr("data-recipe-category")
+          /*window.alert($(".swiper-slide-active").data("recipe-id"));*/
+          $('ol li').append(a);
+          $('ol li').append(b);
+          $('ol li').append(c);
+          $('ol li').append(d);
            }
       //-->
 
    </script>
 <% end %>
-
-<!-- ajax request to get info from current card -->
