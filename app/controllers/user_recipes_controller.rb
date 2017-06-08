@@ -59,7 +59,8 @@ class UserRecipesController < ApplicationController
       @shopping_items << ShoppingItem.create!(bought: false, quantity: (recipe_ingredient.quantity * @user_recipe.number_of_people),  recipe_ingredient_id: recipe_ingredient.id, user_recipe_id: @user_recipe.id)
     end
     # redirect_to user_user_recipes_path(current_user)
-    redirect_to calendar_path(user_recipe_params[:date])
+    # redirect_to calendar_path(user_recipe_params[:date])
+    # - ajax doesn't redirect
   end
 
   def edit
