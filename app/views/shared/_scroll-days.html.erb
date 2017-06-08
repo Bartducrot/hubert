@@ -1,51 +1,33 @@
 <div class="scroller">
   <div class="scroll-flex">
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 7).strftime('%a %e %b')}", calendar_path(@day - 7) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 6).strftime('%a %e %b')}", calendar_path(@day - 6) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 5).strftime('%a %e %b')}", calendar_path(@day - 5) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 4).strftime('%a %e %b')}", calendar_path(@day - 4) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 3).strftime('%a %e %b')}", calendar_path(@day - 3) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 2).strftime('%a %e %b')}", calendar_path(@day - 2) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day - 1).strftime('%a %e %b')}", calendar_path(@day - 1) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{ @day.strftime('%a %e %b')}", calendar_path(@day) %></h2>
-    </div>
-     <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 1).strftime('%a %e %b')}", calendar_path(@day + 1) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 2).strftime('%a %e %b')}", calendar_path(@day + 2) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 3).strftime('%a %e %b')}", calendar_path(@day + 3) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 4).strftime('%a %e %b')}", calendar_path(@day + 4) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 5).strftime('%a %e %b')}", calendar_path(@day + 5) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 6).strftime('%a %e %b')}", calendar_path(@day + 6) %></h2>
-    </div>
-    <div class="scroll-btn">
-      <h2><%= link_to "#{(@day + 7).strftime('%a %e %b')}", calendar_path(@day + 7) %></h2>
-    </div>
+
+
+    <% 15.times do |i| %>
+      <% day = (@day - 7 + i) %>
+      <% class_name = "scroll-btn " %>
+
+      <% if day == @day %>
+        <% class_name += "selected " %>
+      <% end %>
+
+      <%if day == Date.today %>
+        <% class_name += "today " %>
+      <% end %>
+
+
+
+      <%= link_to calendar_path(day) do %>
+        <div class="<%= class_name %>" >
+          <h2> <%= "#{ day.strftime('%a %e %b')}" %></h2>
+        </div>
+      <% end %>
+    <% end %>
+
   </div>
+
+
+
+
 </div>
 
 <form>
