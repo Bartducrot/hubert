@@ -23,3 +23,30 @@
     <% end %>
   </div>
 </div>
+
+<h2 class="text-center">Breakfast</h2>
+<%= render "shared/swiper", meal: "breakfast" %>
+<form>
+  <input type="button" value="Click Me" onclick="getConfirmation('breakfast');" />
+</form>
+<ol>
+  <li>recipes</li>
+</ol>
+
+<h2 class="text-center">Lunch</h2>
+<%= render "shared/swiper", meal: "lunch" %>
+<form>
+  <input type="button" value="Click Me" onclick="getConfirmation('lunch');" />
+</form>
+<ol>
+  <li>recipes</li>
+</ol>
+
+<h2 class="text-center">Dinner</h4>
+<%= render "shared/swiper", meal: "dinner" %>
+<form>
+  <input type="button" value="Click Me" onclick="getConfirmation('dinner');" />
+</form>
+<ol>
+  <li>recipes</li>
+</ol>
