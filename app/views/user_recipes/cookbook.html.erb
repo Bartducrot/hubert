@@ -1,1 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Your current recipes</h2>
+    </div>
+    <% @next_user_recipes.each do |u_recipe| %>
+    <% recipe = Recipe.find(u_recipe.recipe_id) %>
+      <%= link_to recipe_path(recipe) do %>
+        <div class="col-xs-12">
+          <div class="btn-recipe <%= recipe.category %>">
+            <div class="recipe-name" ><%= recipe.name %></div>
+            <div class="recipe-date" ><%= u_recipe.date.strftime("%A %d/%m/%Y") %></div>
+            <div class="recipe-category"><%= recipe.category %></div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
 

@@ -2,6 +2,7 @@ class UserRecipesController < ApplicationController
 
   def cookbook
     @user_recipes = UserRecipe.where(:user_id == current_user.id)
+    @next_user_recipes = UserRecipe.where(user_id: current_user.id).where("date >= ?", Date.today).order(:date)
   end
 
   def shopping_cart
