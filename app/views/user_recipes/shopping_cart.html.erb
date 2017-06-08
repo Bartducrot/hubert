@@ -1,0 +1,10 @@
+<% @ingredients_hash.each_key do |category| %>
+  <h2><%= category.capitalize %></h2>
+  <ul>
+    <% @ingredients_hash[category].each do |item| %>
+      <li><%= item %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
