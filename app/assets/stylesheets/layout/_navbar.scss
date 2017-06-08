@@ -5,7 +5,7 @@
   transition: all 0.3s ease;
   display: flex;
   height: 70px;
-  padding: 0px 30px;
+  padding: 0px 5px;
   align-items: center;
   justify-content: space-between;
 }
@@ -36,7 +36,7 @@
 .navbar-wagon-item {
   flex: 0 1 auto;
   cursor: pointer;
-  padding: 0 20px;
+  padding: 0 5px;
 }
 
 /* Navbar standard link */
@@ -130,3 +130,4 @@
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
 }
+
