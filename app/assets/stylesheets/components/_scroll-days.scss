@@ -6,6 +6,7 @@
   overflow-x: auto;
   display: flex;
   text-decoration: none;
+  justify-content: center;
 }
 
 #element::-webkit-scrollbar, ::-webkit-scrollbar  {
@@ -13,23 +14,32 @@
 }
 
 .scroll-btn {
-  margin: 20px;
+  margin: 15px;
   background-color: $off-black;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   box-shadow: -1px -1px 0px 1px rgba(227,227,227,0.83);
+  border: 2px $off-black solid;
+  &.today{
+    border: 2px $blue solid;
+    background-color: $green;
+  }
+  &.selected {
+    background-color: $red;
+  }
+
 }
 
 .scroll-btn h2 {
   margin-top: 5px;
   font-size: 12px;
-  width: 50px;
-  height: 50px;
   color: white;
   font-weight: bolder;
-  padding-top: 9px;
+  padding-top: 5px;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
 }
+
+
