@@ -10,5 +10,11 @@
   &.btn-checked{
     background-color: $green;
   }
+}
 
+.btn-recipe {
+  color: white;
+  margin: 5px 10px;
+  min-height: 95px;
+  border-radius: 10px;
 }
