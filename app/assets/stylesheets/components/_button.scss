@@ -1,0 +1,14 @@
+.btn-checkbox
+{
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  margin: 3px 10px 3px 0;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 1px 1px 3px $darker-grey;
+  &.btn-checked{
+    background-color: $green;
+  }
+
+}

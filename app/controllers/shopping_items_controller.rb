@@ -2,9 +2,13 @@ class ShoppingItemsController < ApplicationController
   before_action :set_shopping_item
 
   def update
-    @shopping_item.bought = true
-    @show_item.save
-    redirect_to :back
+    if @shopping_item.bought
+      @shopping_item.bought = false
+    else
+      @shopping_item.bought = true
+    end
+    @shopping_item.save
+    redirect_to shopping_cart_path
   end
 
   private
