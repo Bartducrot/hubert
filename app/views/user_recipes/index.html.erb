@@ -1,14 +1,16 @@
 <%= render 'shared/scroll-days' %>
 
-<h1><%= @day.strftime('%A %e %B') %></h1>
-<h2>Recipe of the day</h2>
+<!-- <h1><%= @day.strftime('%A %e %B') %></h1> -->
+<div class="container">
+  <h4>Recipe of the day</h4>
 
-<%= simple_form_for [current_user, @user_recipe] do |f|%>
-  <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
-  <%= f.input :number_of_people %>
-  <%= f.association :recipe %>
-  <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
-<% end %>
+  <%= simple_form_for [current_user, @user_recipe] do |f|%>
+    <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
+    <%= f.input :number_of_people %>
+    <%= f.association :recipe %>
+    <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
+  <% end %>
+</div>
 
 <div class="container">
   <div class="row">
@@ -22,31 +24,26 @@
       </div>
     <% end %>
   </div>
+
 </div>
 
-<h2 class="text-center">Breakfast</h2>
-<%= render "shared/swiper", meal: "breakfast" %>
+<h4 class="center">Breakfast</h4>
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('breakfast');" />
 </form>
-<ol>
-  <li>recipes</li>
-</ol>
+<%= render "shared/swiper", meal: "breakfast" %>
 
-<h2 class="text-center">Lunch</h2>
-<%= render "shared/swiper", meal: "lunch" %>
+
+<h4 class="text-center">Lunch</h4>
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('lunch');" />
 </form>
-<ol>
-  <li>recipes</li>
-</ol>
+<%= render "shared/swiper", meal: "lunch" %>
 
-<h2 class="text-center">Dinner</h4>
-<%= render "shared/swiper", meal: "dinner" %>
+
+<h4 class="text-center">Dinner</h4>
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('dinner');" />
 </form>
-<ol>
-  <li>recipes</li>
-</ol>
+<%= render "shared/swiper", meal: "dinner" %>
+
