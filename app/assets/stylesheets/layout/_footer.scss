@@ -7,6 +7,13 @@
   background-color: $off-black;
   box-shadow: 0 -5px 5px -5px $off-black;
   z-index: 60;
+  i {
+    color: white;
+  }
+
+  i:hover {
+    color: rgb(210, 210, 210);
+  }
  }
 
  .footer-flex {
@@ -22,9 +29,6 @@
     font-size: 31px;
     z-index: 51;
   }
-   :hover {
-    color: $red
-  }
  }
  .footer-flex-right {
   i {
@@ -32,20 +36,13 @@
     font-size: 31px;
     z-index: 50;
   }
-  :hover {
-    color: $red
-  }
 }
 
 .home-button {
   font-size: 40px;
 }
 
-.home-button:hover {
-  color: $red;
-}
-
- .footer-circle {
+.footer-circle {
   background-color: $off-black;
   width: 80px;
   height: 80px;
