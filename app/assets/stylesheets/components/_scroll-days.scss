@@ -6,7 +6,6 @@
   overflow-x: auto;
   display: flex;
   text-decoration: none;
-  justify-content: center;
 }
 
 #element::-webkit-scrollbar, ::-webkit-scrollbar  {
@@ -14,14 +13,13 @@
 }
 
 .scroll-btn {
-  margin: 15px;
   background-color: $off-black;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   box-shadow: -1px -1px 0px 1px rgba(227,227,227,0.83);
   border: 2px $off-black solid;
-  &.today{
+  &.today {
     border: 2px $blue solid;
     background-color: $green;
   }
@@ -40,6 +38,37 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  position: relative;
 }
+
+.badge-container {
+  position: relative;
+  margin: 6px;
+  font-size: 25px;
+  line-height: 30px;
+  color: grey;
+  width: 50px;
+}
+.badge {
+  font-size: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  position: absolute;
+  top: -5px;
+  right:-2px;
+}
+
+.badge-blue {
+
+}
+
+
 
 
