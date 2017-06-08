@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-
+  resources :user_recipes, only: [:create]
   resources :users, only: [:show] do
-    resources :user_recipes, only: [:index, :create, :edit, :update]
+    resources :user_recipes, only: [:index, :edit, :update]
     resources :shopping_items, only: [:update]
   end
   resources :recipes, only: [:show]

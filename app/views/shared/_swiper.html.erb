@@ -2,7 +2,7 @@
   <div class="swiper-wrapper">
     <% Recipe.all.each do |recipe|%>
 
-    <div class="swiper-slide swiper-slide-<%= meal %>" data-recipe-title="<%= recipe.name %>" data-recipe-id="<%= recipe.id %>" data-recipe-type="<%= recipe.recipe_type %>" data-recipe-category="<%= recipe.category %>">
+    <div class="swiper-slide swiper-slide-<%= meal %>" data-recipe-title="<%= recipe.name %>" data-recipe-id="<%= recipe.id %>">
       <div class="col-xs-12 recipe-cards">
           <% if Recipe.all != nil %>
             <%= render "shared/card", recipe: recipe %>
@@ -31,7 +31,16 @@
       var a = $(".swiper-slide-" + meal + ".swiper-slide-active").attr("data-recipe-id")
       /*window.alert($(".swiper-slide-active").data("recipe-id"));*/
       alert(a);
-       }
+      $.ajax({
+          method:'POST',
+          url: '/user_recipes',
+          data: { user_recipe: {recipe_id: a, date: "<%= params[:date] %>", number_of_people: 1}},
+          // insert proper number of people when feature is available
+          success: function(){
+            $(this).User_recipe("done");
+          }
+        });
+      }
   //-->
 
    </script>
