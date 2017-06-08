@@ -1,90 +1,39 @@
-.recipe-cards {
-  padding-right: 0px;
-  padding-left: 0px;
-
-}
-.recipe-index-container {
-  margin-top: 50px;
-  h1 {
-    color: black;
-    padding-top: 0px;
-    font-weight: 500;
-    font-size: 80px;
-  }
-}
 .card {
-  height: 250px;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-  background-size: cover !important;
-  color: white;
-  position: relative;
-  margin: 0;
-  cursor: pointer;
-  border-radius: 3px;
-  margin: 3px;
-  text-shadow: 1px 1px 2px black;
-  box-shadow: 1px 1px 2px rgb(150, 150, 150);
-}
-
-.card:hover {
-  box-shadow: none;
-  top: 1px;
-}
-.card-user {
-  position: absolute;
-  right: 15px;
-  bottom: 15px;
-}
-.card-difficulty {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-.card-time {
-  position: absolute;
-  top: 30px;
-  left: 10px;
-  font-size: 15px;
-  font-weight: 500;
-  text-transform: uppercase;
-}
-
-.card-rating {
-  position: absolute;
-  bottom: 15px;
-  left: 35%;
-  font-size: 25px;
-  font-weight: 300;
-  color: $yellow;
-}
-.card-description {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-
-  h3 {
-    font-size: 25px;
-    font-weight: 300;
-  }
-  h4 {
-    font-size: 20px;
-    font-weight: 300;
-  }
-}
-
-.card-link {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  height: 130px;
   width: 100%;
-  z-index:2;
-  background: black;
-  opacity: 0;
+  background: linear-gradient(white, $off-black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
 }
-.card-link:hover{
-  opacity: 0.2;
+
+.card h3 {
+  font: $base-font;
+  color: white;
+  font-size: 23px;
+  font-weight: bolder;
+  margin-bottom: 30px;
+}
+
+.card-time {
+  color: white;
+  font-weight: bolder;
+  font-size: 15px;
+}
+
+.banner-chevron-left {
+  position: absolute;
+  left: 7px;
+  bottom: 55px;
+  color: white;
+}
+
+
+.banner-chevron-right {
+  position: absolute;
+  right: 7px;
+  bottom: 55px;
+  color: white;
 }
