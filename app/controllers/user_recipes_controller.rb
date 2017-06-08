@@ -6,7 +6,9 @@ class UserRecipesController < ApplicationController
 
   def shopping_cart
     @user_recipes = UserRecipe.where(:user_id == current_user.id)
+
     @shopping_items = []
+
     @user_recipes.each do |recipe|
       if recipe.date >= Date.today
         recipe.shopping_items.each do |item|
@@ -17,15 +19,19 @@ class UserRecipesController < ApplicationController
     @recipe_ingredients = []
     # @ingredients = []
     @shopping_items.each do |item|
-      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item.bought]
+      #create [recipe_ingr, shopping_item]
+      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
+
       # @ingredients << Ingredient.find(item.recipe_ingredient.ingredient_id)
     end
+
     @ingredients_hash = {}
+
     @recipe_ingredients.each do |r_ingredient|
       unless @ingredients_hash.has_key?(r_ingredient.first.ingredient.category)
         @ingredients_hash[r_ingredient.first.ingredient.category] = []
       end
-      @ingredients_hash[r_ingredient.first.ingredient.category] << {bought: r_ingredient.last , name: r_ingredient.first.ingredient.name, quantity: r_ingredient.first.quantity, unit: r_ingredient.first.ingredient.unit}
+      @ingredients_hash[r_ingredient.first.ingredient.category] << {s_item: r_ingredient.last , name: r_ingredient.first.ingredient.name, quantity: r_ingredient.first.quantity, unit: r_ingredient.first.ingredient.unit}
     end
   end
 

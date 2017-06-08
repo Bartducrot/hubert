@@ -1,14 +1,21 @@
 <% @ingredients_hash.each_key do |category| %>
-  <form action="">
-    <h2><%= category.capitalize %></h2>
-    <p>
-      <% @ingredients_hash[category].each do |item| %>
-        <input type="checkbox" name="<%= item[:name] %>" <%= item[:bought] ? "checked" : item[:bought] %> >
-        <label for="<%= item[:name] %>"><%= item[:name].capitalize %> , <%= item[:quantity] %><%= item[:unit] %></label>
-        <br>
-      <% end %>
-    </p>
-  </form>
+
+  <h2><%= category.capitalize %></h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10">
+        <% @ingredients_hash[category].each do |item| %>
+          <%= simple_form_for [current_user, item[:s_item]], class: "form-inline" do |f| %>
+            <% bought = item[:s_item].bought %>
+            <%= f.submit " ", class: (bought ? "btn-checkbox btn-checked" : "btn-checkbox") %>
+            <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>"><%= " #{item[:name]} #{item[:quantity]}#{item[:unit]}" %></span>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
 <% end %>
 
 
