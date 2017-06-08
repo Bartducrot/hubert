@@ -25,9 +25,10 @@ INGREDIENTS = {
     "lamb chops", "ground lamb", "beef ribs", "duck", "pancetta", "beef liver",
     "leg of lamb", "chicken giblets", "beef shank", "pork belly", "cornish hen",
     "lamb shoulder", "lamb shank"],
-  "sauce" => ["mustard"]
+  "sauce" => ["mustard", "ketchup"]
 }
 
+ShoppingItem.destroy_all
 UserRecipe.destroy_all
 RecipeIngredient.destroy_all
 Recipe.destroy_all
@@ -54,16 +55,16 @@ puts ""
 puts "Start seeding Recipe with RANDOM name, category, and recipe_type"
 
 PLACES = ["paris", "london", "berlin", "new york", "lyon", "sydney", "milano", "roma", "lille", "bangkok", "ho chi minh city", "hanoi", "los angeles", "tokyo", "america"," california", "asia",  "japan", "france"]
-TYPE = ["starter", "main", "dessert", "tapas"]
-CATEGORY = ["very easy", "easy", "medium" , "hard", "very hard", "nightmare"]
+TYPE = ["starter", "main", "dessert"]
+CATEGORY = ["breakfast" , "lunch", "dinner", "aperitivo"]
 
 100.times do
   recipe = Recipe.new()
   main_ingredient = Ingredient.all.sample
   side_ingredient = Ingredient.all.sample
   recipe.name = "#{main_ingredient.name} with #{side_ingredient.name} from #{PLACES.sample}"
-  recipe.recipe_type = TYPE.sample
   recipe.category = CATEGORY.sample
+  recipe.recipe_type = (recipe.category == "aperitivo" ? "starter" : TYPE.sample)
   recipe.instructions = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pellentesque dolor ac dolor tempus, eget pellentesque sapien egestas. Maecenas iaculis, neque nec egestas vestibulum, mauris nibh vehicula tellus, et rhoncus tellus enim vel diam. Mauris quis cursus ante. Nulla semper, arcu vitae tempus luctus, elit magna efficitur ligula, vel tincidunt urna augue a velit. Vivamus accumsan massa nec quam hendrerit finibus. Vivamus eros lectus, congue condimentum varius at, varius sed lorem. Suspendisse vitae sem fringilla, mattis dolor at, commodo nisi. Maecenas nulla ex, laoreet sit amet placerat eget, consectetur a purus. Nam sit amet enim sollicitudin, porttitor elit eu, scelerisque felis."
   recipe.save!
 
