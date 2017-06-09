@@ -28,7 +28,7 @@
 
   <!--
     function getConfirmation(){
-      var a = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")
+      var a = $(".swiper-slide-breakfast.swiper-slide-active").attr("data-recipe-id")
 
       $.ajax({
           method:'POST',
@@ -39,7 +39,7 @@
             $(this).User_recipe("done");
           }
         });
-      var b = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")
+/*      var b = $(".swiper-slide-lunch.swiper-slide-active").attr("data-recipe-id")
 
       $.ajax({
           method:'POST',
@@ -62,7 +62,7 @@
           }
         });
 
-      var d = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")
+      var d = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")*/
 
       alert("Breakfast: " + a + ",  Lunch: " + b + ",  Aperitivo: " + c + ",  Dinner: " + d);
       $.ajax({
