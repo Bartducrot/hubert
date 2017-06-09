@@ -27,10 +27,9 @@
    });
 
   <!--
-    function getConfirmation(meal){
-      var a = $(".swiper-slide-" + meal + ".swiper-slide-active").attr("data-recipe-id")
-      /*window.alert($(".swiper-slide-active").data("recipe-id"));*/
-      alert(a);
+    function getConfirmation(){
+      var a = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")
+
       $.ajax({
           method:'POST',
           url: '/user_recipes',
@@ -40,8 +39,41 @@
             $(this).User_recipe("done");
           }
         });
-      }
-  //-->
+      var b = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")
 
+      $.ajax({
+          method:'POST',
+          url: '/user_recipes',
+          data: { user_recipe: {recipe_id: b, date: "<%= params[:date] %>", number_of_people: 1}},
+          // insert proper number of people when feature is available
+          success: function(){
+            $(this).User_recipe("done");
+          }
+        });
+      var c = $(".swiper-slide-aperitivo.swiper-slide-active").attr("data-recipe-id")
+
+      $.ajax({
+          method:'POST',
+          url: '/user_recipes',
+          data: { user_recipe: {recipe_id: c, date: "<%= params[:date] %>", number_of_people: 1}},
+          // insert proper number of people when feature is available
+          success: function(){
+            $(this).User_recipe("done");
+          }
+        });
+
+      var d = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")
+
+      alert("Recipe numbers: " + a + ", " + b + ", " + c + ", " + d);
+      $.ajax({
+          method:'POST',
+          url: '/user_recipes',
+          data: { user_recipe: {recipe_id: d, date: "<%= params[:date] %>", number_of_people: 1}},
+          // insert proper number of people when feature is available
+          success: function(){
+            $(this).User_recipe("done");
+          }
+        });
+      }
    </script>
 <% end %>
