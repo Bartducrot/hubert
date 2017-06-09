@@ -1,4 +1,18 @@
-.calender-flex-box {
-  display: flex;
-  align-items: center;
+.close {
+  display: none;
+}
+
+.meal-type {
+  position: relative;
+}
+
+.meal-cross {
+  position: absolute;
+  top: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.swiper-shared {
+  margin-top: -10px;
 }
