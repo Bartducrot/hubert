@@ -3,14 +3,13 @@
 
 <!-- <h1><%= @day.strftime('%A %e %B') %></h1>
 <h2>Recipe of the day</h2>
-
 <%= simple_form_for [current_user, @user_recipe] do |f|%>
   <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
   <%= f.input :number_of_people %>
   <%= f.association :recipe %>
   <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
 <% end %>
-
+<h6 class="text-center"><%= @day.strftime('%A %e %B') %></h6>
 <div class="container">
   <div class="row">
     <% @user_recipes.each do |u_recipe| %>
@@ -40,12 +39,10 @@
   </div>
 
 
+
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('breakfast');" />
 </form>
-<ol>
-  <li>recipes</li>
-</ol>
 
 <h2 class="text-center">Lunch</h2>
 
@@ -60,13 +57,10 @@
   </div>
 </div>
 
-
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('lunch');" />
 </form>
-<ol>
-  <li>recipes</li>
-</ol>
+
 
 <h2 class="text-center">Aperitivo</h4>
 

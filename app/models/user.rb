@@ -7,6 +7,20 @@ class User < ApplicationRecord
   has_many :user_recipes
   has_many :recipes, through: :user_recipes
   has_many :shopping_items, through: :user_recipes
+  has_many :ingredient_tastes
+  has_many :ingredients, through: :ingredient_tastes
+
+
+  def known_ingredients
+    @ingredients = Ingredient.joins(:ingredient_tastes).where(ingredient_tastes: {user: self})
+  end
+
+  def unknown_ingredients
+    @known_ingredients = known_ingredients
+    @ingredients = Ingredient.all - known_ingredients
+  end
+
+
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice(:provider, :uid)

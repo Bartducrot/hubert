@@ -1,0 +1,47 @@
+.recipe-name {
+  font-size: 20px;
+  padding: 5px 10px;
+  &:first-letter{
+    text-transform: capitalize;
+  }
+}
+.recipe-date {
+  font-size: 15px;
+  text-align: right;
+  padding-right: 10px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-style: italic;
+}
+
+.recipe-category{
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  text-transform: uppercase;
+  background: $dark-grey;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+
+.breakfast {
+  background: $blue;
+  position: relative;
+}
+
+.lunch{
+  background: $red;
+  position: relative;
+}
+
+.dinner {
+  background: $brand-color;
+  position: relative;
+}
+
+.aperitivo {
+  background: $orange;
+  position: relative;
+}
