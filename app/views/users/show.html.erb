@@ -5,7 +5,7 @@
   </div>
   <h3><%= @user.first_name + " " + @user.last_name %></h3>
 </div>
-<div class="container preferences">
+<!-- <div class="container preferences">
   <h4>Preferences:</h4>
   <div class="settings">
     <div class="row">
@@ -20,3 +20,98 @@
     </div>
   </div>
 </div>
+ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/utils/Draggable.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Noto+Sans' rel='stylesheet' type='text/css'>
+
+</div>
+<div class="content">
+</div>
+
+<div class="footer-swipe">
+  <div id="swipe_dislike" class="rate"></div>
+
+  <div class="info"></div>
+
+  <div id="swipe_like" class="rate"></div>
+</div>
+
+<script>
+  $(document).ready(function(event) {
+
+    $("div#swipe_like").on( "click", function() {
+      swipeLike();
+    });
+
+    $("div#swipe_dislike").on( "click", function() {
+      swipeDislike();
+    });
+
+    $(.card).on('swipe', function() {
+      <% ingredient = @ingredients.pop %>
+      addNewProfile( <%= ingredient.name  %>, <%= ingredient.category %> , <%= image_tag("ingredients.jpg", width: 400, height: 300, crop: :fill) %>);
+    });
+
+    function swipe() {
+      Draggable.create("#photo", {
+          throwProps:true,
+          onDragEnd:function(endX) {
+            if(Math.round(this.endX) > 0 ) {
+              swipeLike();
+            }
+            else {
+              swipeDislike();
+            }
+            console.log(Math.round(this.endX));
+        }
+      });
+    }
+
+    function swipeLike() {
+
+        var $photo = $("div.content").find('#photo');
+
+        var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo]});
+        swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=400", top:"+=300", rotation:"60"}], ease:Power1.easeInOut});
+
+        addNewProfile();
+    }
+
+    function swipeDislike() {
+
+        var $photo = $("div.content").find('#photo');
+
+        var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo]});
+        swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=-350", top:"+=300", rotation:"-60"}], ease:Power1.easeInOut});
+
+        addNewProfile();
+    }
+
+    function remove(photo) {
+        $(photo).remove();
+    }
+
+    function addNewProfile(names, ages, photos) {
+
+
+      $("div.content").prepend('<div class="photo" id="photo" style="background-image:url(http://web.arjentienkamp.com/codepen/tinder/photo'+photos+'.jpg)">'
+        + '<span class="meta">'
+        + '<p>'+names+', '+ages+'</p>'
+        + '<span class="moments">0</span>'
+        + '<span class="users">0</span>'
+        + '</span>'
+        + '</div>');
+
+        swipe();
+    }
+
+  });
+
+</script>
