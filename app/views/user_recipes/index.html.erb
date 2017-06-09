@@ -1,5 +1,6 @@
 <%= render 'shared/scroll-days' %>
 
+
 <!-- <h1><%= @day.strftime('%A %e %B') %></h1>
 <h2>Recipe of the day</h2>
 
@@ -24,8 +25,21 @@
   </div>
 </div> -->
 
+
+
 <h2 class="text-center">Breakfast</h2>
-<%= render "shared/swiper", meal: "breakfast" %>
+
+  <div class="meal breakfast">
+    <div class="open-slider close">
+    <h2 class="delete open-slider close">X</h2>
+      <%= render "shared/swiper", meal: "breakfast" %>
+    </div>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+    </div>
+  </div>
+
+
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('breakfast');" />
 </form>
@@ -34,7 +48,19 @@
 </ol>
 
 <h2 class="text-center">Lunch</h2>
-<%= render "shared/swiper", meal: "lunch" %>
+
+<div class="meal lunch">
+  <div class="open-slider close">
+  <h2 class="delete open-slider close">X</h2>
+
+    <%= render "shared/swiper", meal: "lunch" %>
+  </div>
+  <div class="close-slider">
+    <%= render "shared/empty-meal" %>
+  </div>
+</div>
+
+
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('lunch');" />
 </form>
@@ -42,11 +68,57 @@
   <li>recipes</li>
 </ol>
 
+<h2 class="text-center">Aperitivo</h4>
+
+<div class="meal aperitivo">
+  <div class="open-slider close">
+  <h2 class="delete open-slider close">X</h2>
+
+    <%= render "shared/swiper", meal: "aperitivo" %>
+  </div>
+  <div class="close-slider">
+    <%= render "shared/empty-meal" %>
+  </div>
+</div>
+
+
+<form>
+  <input type="button" value="Click Me" onclick="getConfirmation('aperitivo');" />
+</form>
+<ol>
+  <li>recipes</li>
+</ol>
+
+
 <h2 class="text-center">Dinner</h4>
-<%= render "shared/swiper", meal: "dinner" %>
+
+
+<div class="meal dinner">
+  <div class="open-slider close">
+  <h2 class="delete open-slider close">X</h2>
+    <%= render "shared/swiper", meal: "dinner" %>
+  </div>
+  <div class="close-slider">
+    <%= render "shared/empty-meal" %>
+  </div>
+</div>
+
+
 <form>
   <input type="button" value="Click Me" onclick="getConfirmation('dinner');" />
 </form>
 <ol>
   <li>recipes</li>
 </ol>
+
+
+<%= content_for(:after_js) do %>
+  <script>
+    $(".calender-plus, .delete").click(function() {
+      var $meal = $(this).closest('.meal')
+      console.log($meal)
+      $meal.find(".open-slider").toggleClass("close")
+      $meal.find(".close-slider").toggleClass("close")
+   });
+  </script>
+<% end %>
