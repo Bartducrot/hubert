@@ -9,7 +9,7 @@
   <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
 <% end %>
 -->
-
+<h6 class="text-center"><%= @day.strftime('%A %e %B') %></h6>
 <h4 class="text-center">Breakfast</h4>
 <%= render "shared/swiper", meal: "breakfast" %>
 <form>
