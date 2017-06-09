@@ -1,7 +1,7 @@
 <div class="scroller">
   <div class="scroll-flex">
 
-    <% 30.times do |i| %>
+    <% 29.times do |i| %>
       <% day = (@day - 14 + i) %>
       <% class_name = "scroll-btn " %>
 
@@ -30,4 +30,10 @@
   </div>
 </div>
 
-
+<%= content_for(:after_js) do %>
+<script>
+  $('scroll-flex').on('scroll', function() {
+    console.log(window)
+  });
+</script>
+<% end %>
