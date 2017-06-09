@@ -1,11 +1,12 @@
 class IngredientTastesController < ApplicationController
 
-  def create
+  before_action :set_ingredient_taste, only: [:update]
 
-    @ingredient
-    @ingredient_taste = IngredientTaste.new()
-    @ingredient_taste.user = current_user
-    @ingredient_taste.ingredient =
+  def swiper
+    @ingredients = current_user.unknown_ingredients
+    # @ingredient_taste = IngredientTaste.new()
+    # @ingredient_taste.user = current_user
+    # @ingredient_taste.ingredient = @ingredients.pop
   end
 
   def update
