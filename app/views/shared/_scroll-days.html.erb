@@ -1,34 +1,34 @@
-<div class="scroller">
-  <div class="scroll-flex">
+  <div class="scroller">
+    <div class="scroll-flex">
 
-    <% 29.times do |i| %>
-      <% day = (@day - 14 + i) %>
-      <% class_name = "scroll-btn " %>
+      <% 29.times do |i| %>
+        <% day = (@day - 14 + i) %>
+        <% class_name = "scroll-btn " %>
 
-      <% if day == @day %>
-        <% class_name += "selected " %>
+        <% if day == @day %>
+          <% class_name += "selected " %>
+        <% end %>
+
+        <%if day == Date.today %>
+          <% class_name += "today " %>
+        <% end %>
+
+        <% bought = current_user.user_recipes.where(date: day).joins(:shopping_items).where("shopping_items.bought = false").count.zero? %>
+
+        <%= link_to calendar_path(day), class: 'badge-container' do %>
+          <div class="<%= class_name %>">
+              <h2><%= "#{ day.strftime('%a %e %b')}" %></h2>
+
+              <% if bought %>
+              <div class="badge badge-blue"><%= current_user.user_recipes.where(date: day).count %></div>
+              <% else %>
+              <div class="badge badge-red"><%= current_user.user_recipes.where(date: day).count %></div>
+              <% end %>
+          </div>
+        <% end %>
       <% end %>
-
-      <%if day == Date.today %>
-        <% class_name += "today " %>
-      <% end %>
-
-      <% bought = current_user.user_recipes.where(date: day).joins(:shopping_items).where("shopping_items.bought = false").count.zero? %>
-
-      <%= link_to calendar_path(day), class: 'badge-container' do %>
-        <div class="<%= class_name %>">
-            <h2><%= "#{ day.strftime('%a %e %b')}" %></h2>
-
-            <% if bought %>
-            <div class="badge badge-blue"><%= current_user.user_recipes.where(date: day).count %></div>
-            <% else %>
-            <div class="badge badge-red"><%= current_user.user_recipes.where(date: day).count %></div>
-            <% end %>
-        </div>
-      <% end %>
-    <% end %>
+    </div>
   </div>
-</div>
 
 <%= content_for(:after_js) do %>
 <script>
