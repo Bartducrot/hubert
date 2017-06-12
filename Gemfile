@@ -21,6 +21,12 @@ gem 'omniauth-facebook'
 
 gem 'jquery-ui-rails'
 
+
+#seed gem
+
+# gem 'hangry', '~> 0.0.13'
+gem 'ingreedy', '~> 0.0.9'
+
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
@@ -31,5 +37,3 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-
