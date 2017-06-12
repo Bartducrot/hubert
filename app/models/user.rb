@@ -20,6 +20,15 @@ class User < ApplicationRecord
     @ingredients = Ingredient.all - known_ingredients
   end
 
+  def selected_recipe(category, date)
+    selected_user_recipe = self.user_recipes.where(date: date).select{|ur| ur.recipe.category == category}.first
+    if selected_user_recipe
+      return selected_user_recipe.recipe
+    else
+      return false
+    end
+  end
+
 
 
   def self.find_for_facebook_oauth(auth)
