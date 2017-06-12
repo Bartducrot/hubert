@@ -34,6 +34,10 @@
   </div>
 </div>
 
+<div class="range-slider">
+  <input class="range-slider__range" type="range" value="1" min="1" max="15">
+  <span class="range-slider__value">0</span>
+</div>
 
 <div class="meal-type">
   <h2 class="text-center">LUNCH</h2>
@@ -44,6 +48,11 @@
   </div>
 </div>
 
+<div class="range-slider">
+  <input class="range-slider__range" type="range" value="1" min="1" max="15">
+  <span class="range-slider__value">0</span>
+</div>
+
 <div class="meal-type">
   <h2 class="text-center">APERITIVO</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
@@ -51,6 +60,11 @@
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
   </div>
+</div>
+
+<div class="range-slider">
+  <input class="range-slider__range" type="range" value="1" min="1" max="15">
+  <span class="range-slider__value">0</span>
 </div>
 
 
@@ -63,6 +77,10 @@
   </div>
 </div>
 
+<div class="range-slider">
+  <input class="range-slider__range" type="range" value="1" min="1" max="15">
+  <span class="range-slider__value">0</span>
+</div>
 
 
 <form>
@@ -72,12 +90,34 @@
 </div>
 
 <%= content_for(:after_js) do %>
-  <script>
+<script>
     $(".calender-plus, .delete").click(function() {
       var $meal = $(this).closest('.meal-type')
       console.log($meal)
       $meal.find(".open-slider").toggleClass("close");
       $meal.find(".close-slider").toggleClass("close");
    });
-  </script>
+
+var rangeSlider = function(){
+  var slider = $('.range-slider'),
+      range = $('.range-slider__range'),
+      value = $('.range-slider__value');
+
+  slider.each(function(){
+
+    value.each(function(){
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
+    });
+
+    range.on('input', function(){
+      $(this).next(value).html(this.value);
+    });
+  });
+};
+
+rangeSlider();
+
+</script>
+
 <% end %>

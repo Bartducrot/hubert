@@ -13,7 +13,7 @@
 
 </div> -->
  <% if user_signed_in? %>
-<div class="footer">
+<div class="footer footer-<%= params[:controller] %>-<%= params[:action] %>">
   <div class="footer-flex">
     <div class="footer-flex-left">
       <%= link_to swiper_path do  %>
