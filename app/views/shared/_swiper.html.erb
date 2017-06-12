@@ -1,6 +1,6 @@
-<div class="swiper-container">
+<div class="swiper-container <%= meal %>-swiper">
   <div class="swiper-wrapper">
-    <% Recipe.all.each do |recipe|%>
+    <% Recipe.where(category: meal).each do |recipe| %>
 
     <div class="swiper-slide swiper-slide-<%= meal %>" data-recipe-title="<%= recipe.name %>" data-recipe-id="<%= recipe.id %>">
       <div class="col-xs-12 recipe-cards">
@@ -21,10 +21,29 @@
 <% content_for(:after_js) do %>
    <script type="text/javascript">
    var swiper = new Swiper('.swiper-container', {
-       pagination: '.swiper-pagination',
-       paginationClickable: true,
-       spaceBetween: 30,
+
+       spaceBetween: 10,
+       onSlideChangeEnd: function(swiper) {
+        // get the id of current meal
+        var a = swiper.slides[swiper.activeIndex];
+        var b = $(a).attr("data-recipe-id")
+        postSelectedMeal(b);
+;       }
    });
+
+   function findUserRecipe() {
+      // if user_recipe_id == this id then update
+      // else
+   }
+
+   function postSelectedMeal(id) {
+    $.ajax({
+        method:'POST',
+        url: '/user_recipes',
+        data: { user_recipe: {recipe_id: id, date: "<%= params[:date] %>", number_of_people: 1}},
+        // insert proper number of people when feature is available
+      });
+   }
 
   <!--
     function getConfirmation(){
