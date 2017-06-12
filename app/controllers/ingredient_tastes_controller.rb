@@ -13,9 +13,16 @@ class IngredientTastesController < ApplicationController
     end
   end
 
-  def update
-    @ingredient = Ingredient.where(:ingredient_taste == @ingredient_taste).find_by(:user == current_user)
+  def like_true
+    # binding.pry
+    # # raise
+    ingredient_taste = IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: true )
+  end
 
+  def like_false
+    # binding.pry
+    # raise
+    ingredient_taste = IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: false )
   end
 
   def index
