@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'
   get "/shopping_cart", to: "user_recipes#shopping_cart", as: 'shopping_cart'
   get "swiper", to: "ingredient_tastes#swiper", as: "swiper"
-
-
-
+  post "/like", to: "ingredient_tastes#like_true"
+  post "/dislike", to: "ingredient_tastes#like_false"
 end

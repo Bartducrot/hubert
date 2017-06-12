@@ -56,6 +56,16 @@
       var ingredient = ingredient_json.pop()
 
       addNewProfile( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
+      console.log(ingredient)
+      $.ajax({
+        type: "POST",
+        url: "/like",
+        data: ingredient,
+        success: function(data) {
+          console.log("Success");
+        }
+      });
+
     }
 
     function swipeDislike() {
@@ -67,6 +77,15 @@
       var ingredient = ingredient_json.pop()
 
       addNewProfile( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
+
+      $.ajax({
+        type: "POST",
+        url: "/dislike",
+        data: ingredient,
+        success: function(data) {
+          console.log("Success");
+        }
+      });
     }
 
     function remove(photo) {
