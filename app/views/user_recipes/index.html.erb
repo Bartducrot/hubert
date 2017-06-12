@@ -24,53 +24,45 @@
   </div>
 </div> -->
 
-
-
-
-
 <div class="meal-type">
   <h2 class="text-center">BREAKFAST</h2>
-    <%= render "shared/swiper", meal: "breakfast", active_recipe: 174  %>
-</div>
-
-
-
-<div class="meal-type">
-<h2 class="text-center">LUNCH</h2>
-  <div class="open-slider close swiper-shared">
-  <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-
-    <%= render "shared/swiper", meal: "lunch", active_recipe: 174 %>
-  </div>
-  <div class="close-slider">
-    <%= render "shared/empty-meal" %>
+    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+      <%= render "shared/swiper", meal: "breakfast", active_recipe: 174 %>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
   </div>
 </div>
 
 
 <div class="meal-type">
-<h2 class="text-center">APERITIVO</h4>
-  <div class="open-slider close swiper-shared">
-  <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-
-    <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174  %>
+  <h2 class="text-center">LUNCH</h2>
+    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+      <%= render "shared/swiper", meal: "lunch", active_recipe: 174 %>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
   </div>
-  <div class="close-slider">
-    <%= render "shared/empty-meal" %>
+</div>
+
+<div class="meal-type">
+  <h2 class="text-center">APERITIVO</h2>
+    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+      <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174 %>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
   </div>
 </div>
 
 
 <div class="meal-type">
-<h2 class="text-center">DINNER</h4>
-  <div class="open-slider close swiper-shared">
-  <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "dinner", active_recipe: 174 %>
-  </div>
-  <div class="close-slider">
-    <%= render "shared/empty-meal" %>
+  <h2 class="text-center">DINNER</h2>
+    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+      <%= render "shared/swiper", meal: "dinner", active_recipe: 174 %>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
   </div>
 </div>
+
+
 
 <form>
   <input type="button" class="btn btn-success center-block" value="Proceed" onclick="getConfirmation();" />
