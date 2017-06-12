@@ -1,92 +1,83 @@
 <div class="main-container">
-
-  <%= render 'shared/scroll-days' %>
-
-
-  <!-- <h1><%= @day.strftime('%A %e %B') %></h1>
-  <h2>Recipe of the day</h2>
-  <%= simple_form_for [current_user, @user_recipe] do |f|%>
-    <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
-    <%= f.input :number_of_people %>
-    <%= f.association :recipe %>
-    <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
-  <% end %>
-  <h6 class="text-center"><%= @day.strftime('%A %e %B') %></h6>
-  <div class="container">
-    <div class="row">
-      <% @user_recipes.each do |u_recipe| %>
-        <div class="col-xs-12 col-sm-6 col-md-4">
-          <% recipe = Recipe.find(u_recipe.recipe_id) %>
-          <h3><%= recipe.name %></h3>
-          <p>for <%= u_recipe.number_of_people %></p>
-          <p><%= recipe.recipe_type %></p>
-          <p><%= recipe.instructions %></p>
-        </div>
-      <% end %>
-    </div>
-  </div> -->
+<%= render 'shared/scroll-days' %>
 
 
-
-
-
-  <div class="meal-type">
-    <h2 class="text-center">BREAKFAST</h2>
-      <%= render "shared/swiper", meal: "breakfast", active_recipe: 174  %>
+<!-- <h1><%= @day.strftime('%A %e %B') %></h1>
+<h2>Recipe of the day</h2>
+<%= simple_form_for [current_user, @user_recipe] do |f|%>
+  <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
+  <%= f.input :number_of_people %>
+  <%= f.association :recipe %>
+  <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
+<% end %>
+<h6 class="text-center"><%= @day.strftime('%A %e %B') %></h6>
+<div class="container">
+  <div class="row">
+    <% @user_recipes.each do |u_recipe| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <% recipe = Recipe.find(u_recipe.recipe_id) %>
+        <h3><%= recipe.name %></h3>
+        <p>for <%= u_recipe.number_of_people %></p>
+        <p><%= recipe.recipe_type %></p>
+        <p><%= recipe.instructions %></p>
+      </div>
+    <% end %>
   </div>
+</div> -->
+
+<div class="meal-type">
+  <h2 class="text-center">BREAKFAST</h2>
+    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+      <%= render "shared/swiper", meal: "breakfast", active_recipe: 174 %>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+  </div>
+</div>
 
 
-
-  <div class="meal-type">
+<div class="meal-type">
   <h2 class="text-center">LUNCH</h2>
-    <div class="open-slider close swiper-shared">
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-
       <%= render "shared/swiper", meal: "lunch", active_recipe: 174 %>
-    </div>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
-    </div>
   </div>
+</div>
 
-
-  <div class="meal-type">
-  <h2 class="text-center">APERITIVO</h4>
-    <div class="open-slider close swiper-shared">
+<div class="meal-type">
+  <h2 class="text-center">APERITIVO</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-
-      <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174  %>
-    </div>
+      <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174 %>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
-    </div>
   </div>
+</div>
 
 
-  <div class="meal-type">
-  <h2 class="text-center">DINNER</h4>
-    <div class="open-slider close swiper-shared">
+<div class="meal-type">
+  <h2 class="text-center">DINNER</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
       <%= render "shared/swiper", meal: "dinner", active_recipe: 174 %>
-    </div>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
-    </div>
   </div>
+</div>
 
-  <form>
-    <input type="button" class="btn btn-success center-block" value="Proceed" onclick="getConfirmation();" />
-  </form>
 
-  <%= content_for(:after_js) do %>
-    <script>
-      $(".calender-plus, .delete").click(function() {
-        var $meal = $(this).closest('.meal-type')
-        console.log($meal)
-        $meal.find(".open-slider").toggleClass("close");
-        $meal.find(".close-slider").toggleClass("close");
-     });
-    </script>
-  <% end %>
+
+<form>
+  <input type="button" class="btn btn-success center-block" value="Proceed" onclick="getConfirmation();" />
+</form>
 
 </div>
+
+<%= content_for(:after_js) do %>
+  <script>
+    $(".calender-plus, .delete").click(function() {
+      var $meal = $(this).closest('.meal-type')
+      console.log($meal)
+      $meal.find(".open-slider").toggleClass("close");
+      $meal.find(".close-slider").toggleClass("close");
+   });
+  </script>
+<% end %>
