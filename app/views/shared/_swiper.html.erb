@@ -1,6 +1,12 @@
 <div class="swiper-container <%= meal %>-swiper">
   <div class="swiper-wrapper">
-    <% Recipe.where(category: meal).each do |recipe| %>
+    <% selected_recipe = current_user.selected_recipe(meal, params[:date]) %>
+    <% if selected_recipe %>
+      <% recipes =  [selected_recipe] + Recipe.where(category: meal).where.not(id: selected_recipe.id) %>
+    <% else %>
+      <% recipes =  Recipe.where(category: meal) %>
+    <% end %>
+    <% recipes.each do |recipe| %>
 
     <div class="swiper-slide swiper-slide-<%= meal %>" data-recipe-title="<%= recipe.name %>" data-recipe-id="<%= recipe.id %>">
       <div class="col-xs-12 recipe-cards">

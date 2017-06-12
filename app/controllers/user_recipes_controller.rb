@@ -2,7 +2,7 @@ class UserRecipesController < ApplicationController
 
   def cookbook
     @user_recipes = UserRecipe.where(:user_id == current_user.id)
-    @next_user_recipes = UserRecipe.where(user_id: current_user.id).where("date >= ?", Date.today).order(:date)
+    @next_user_recipes = UserRecipe.where(user_id: current_user.id).where("date >= ?", Date.today).order(updated_at: :desc)
   end
 
   def shopping_cart
@@ -52,6 +52,8 @@ class UserRecipesController < ApplicationController
   end
 
   def create
+    @recipe = Recipe.find(params[:user_recipe][:recipe_id])
+    UserRecipe.where(user: current_user, date: params[:user_recipe][:date]).select{|ur| ur.recipe.category == @recipe.category}.each{|ur| ur.destroy}
     @user_recipe = UserRecipe.new(user_recipe_params)
     @user_recipe.user = current_user
     @user_recipe.save
