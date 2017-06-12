@@ -28,9 +28,6 @@ gem 'jquery-ui-rails'
 gem 'ingreedy', '~> 0.0.9'
 
 group :development, :test do
-  gem 'binding_of_caller'
-  gem 'better_errors'
-
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'
