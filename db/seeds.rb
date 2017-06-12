@@ -1,6 +1,39 @@
 require 'nokogiri'
 require 'open-uri'
+require 'date'
 
+# puts "Start seeding ingredients"
+# INGREDIENTS = {
+#   "vegetable" => ["garlic", "onion", "olive", "tomato", "potato", "salad greens",
+#     "carrot", "basil", "parsley", "rosemary", "bell pepper", "chili pepper", "corn",
+#     "ginger", "mushroom", "broccoli", "spinach", "green beans", "celery", "red onion",
+#     "cilantro", "cucumber", "pickle", "dill", "avocado", "sweet potato", "zucchini",
+#     "shallot", "cabbage", "asparagus", "cauliflower", "mint", "pumpkin", "kale", "scallion",
+#     "squash", "sun dried tomato", "horseradish", "sweet corn", "beet"],
+#   "dairy" => ["butter", "eggs", "milk", "parmesan", "cheddar", "cream", "sour cream", "cream cheese",
+#     "mozzarella", "american cheese", "yogurt", "evaporated milk", "condensed milk", "whipped cream",
+#     "half and half""monterey jack cheese", "feta", "cottage cheese", "ice cream", "goat cheese",
+#     "frosting", "swiss cheese", "buttermilk", "velveeta", "ricotta", "powdered milk", "blue cheese",
+#     "provolone", "colby cheese", "gouda", "pepper jack", "italian cheese", "soft cheese", "romano",
+#     "brie", "pepperjack cheese", "custard", "cheese soup", "pizza cheese", "ghee", "pecorino cheese",
+#     "gruyere", "creme fraiche", "neufchatel", "muenster", "asiago", "queso fresco cheese", "hard cheese",
+#      "havarti cheese", "mascarpone"],
+#   "meat" => ["chicken breast", "ground beef", "bacon", "sausage", "cooked chicken",
+#    "ham", "veal", "beef steak", "hot dog", "pork chops", "chicken thighs",
+#    "ground turkey", "pork", "turkey", "pepperoni", "whole chicken", "chicken leg",
+#     "ground pork", "chicken wings", "chorizo", "polish sausage", "salami", "pork roast",
+#     "ground chicken", "pork ribs", "venison", "spam", "lamb", "pork shoulder",
+#     "beef roast", "bratwurst", "prosciutto", "chicken roast", "bologna", "corned beef",
+#     "lamb chops", "ground lamb", "beef ribs", "duck", "pancetta", "beef liver",
+#     "leg of lamb", "chicken giblets", "beef shank", "pork belly", "cornish hen",
+#     "lamb shoulder", "lamb shank"],
+#   "sauce" => ["mustard", "ketchup"]
+# }
+
+
+
+ShoppingItem.destroy_all
+UserRecipe.destroy_all
 RecipeIngredient.destroy_all
 Recipe.destroy_all
 Ingredient.destroy_all
