@@ -1,4 +1,5 @@
-<% @ingredients_hash.each_key do |category| %>
+<div class="main-container">
+  <% @ingredients_hash.each_key do |category| %>
 
   <h2><%= category.capitalize %></h2>
   <div class="container">
@@ -15,7 +16,6 @@
     </div>
   </div>
 
+  <% end %>
 
-<% end %>
-
-
+</div>
