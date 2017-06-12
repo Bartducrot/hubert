@@ -1,17 +1,11 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.0/utils/Draggable.min.js"></script>
-
-</div>
-<div class="content">
-</div>
-
-<div class="footer-swipe">
-  <div id="swipe_dislike" class="rate"></div>
-
-  <div class="info"></div>
-
-  <div id="swipe_like" class="rate"></div>
+<div class="swiper">
+  <div id="contentMichael">
+  </div>
+  <div class="footer-swipe">
+    <div id="swipe_dislike" class="rate"></div>
+    <div class="info"></div>
+    <div id="swipe_like" class="rate"></div>
+  </div>
 </div>
 
 <%= content_for(:after_js) do %>
@@ -27,14 +21,11 @@
       swipeDislike();
     });
 
-    $('.card').on('swipe', function() {
-      var ingredient = ingredient_json.pop()
-      addNewProfile( 'ingredient.name', 'ingredient.category' , '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
-    });
-
+    var ingredient = ingredient_json.pop()
+    addNewIngredient( ingredient.name, ingredient.category , '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
 
     function swipe() {
-      Draggable.create("#photo", {
+      Draggable.create("#photoIngredient", {
         throwProps:true,
         onDragEnd:function(endX) {
           if(Math.round(this.endX) > 0 ) {
@@ -48,15 +39,14 @@
     }
 
     function swipeLike() {
-      var $photo = $("div.content").find('#photo');
-
-      var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo]});
-      swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=400", top:"+=300", rotation:"60"}], ease:Power1.easeInOut});
+      var $photo_like = $("div#contentMichael").find('#photoIngredient');
+      console.log($photo_like)
+      var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo_like]});
+      swipe.staggerTo($photo_like, 0.8, {bezier:[{left:"+=400", top:"+=300", rotation:"30"}], ease:Power1.easeInOut});
 
       var ingredient = ingredient_json.pop()
 
-      addNewProfile( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
-      console.log(ingredient)
+      addNewIngredient( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
       $.ajax({
         type: "POST",
         url: "/like",
@@ -69,14 +59,14 @@
     }
 
     function swipeDislike() {
-      var $photo = $("div.content").find('#photo');
+      var $photo = $("div#contentMichael").find('#photoIngredient');
 
       var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo]});
-      swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=-350", top:"+=300", rotation:"-60"}], ease:Power1.easeInOut});
+      swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=-350", top:"+=300", rotation:"-30"}], ease:Power1.easeInOut});
 
       var ingredient = ingredient_json.pop()
 
-      addNewProfile( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
+      addNewIngredient( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
 
       $.ajax({
         type: "POST",
@@ -92,13 +82,11 @@
       $(photo).remove();
     }
 
-    function addNewProfile(name, category, photo) {
-      console.log(name);
-      $("div.content").prepend('<div class="photo" id="photo" style="background-image:url('+photo+')">'
+    function addNewIngredient(name, category, photo) {
+      console.log("add new ingrediemt", name);
+      $("div#contentMichael").prepend('<div class="photo" id="photoIngredient" style="background-image:url('+photo+')">'
         + '<span class="meta">'
         + '<p>'+name+', '+category+'</p>'
-        + '<span class="moments">0</span>'
-        + '<span class="users">0</span>'
         + '</span>'
         + '</div>');
 
