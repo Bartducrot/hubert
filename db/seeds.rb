@@ -28,6 +28,8 @@ INGREDIENTS = {
   "sauce" => ["mustard", "ketchup"]
 }
 
+
+
 ShoppingItem.destroy_all
 UserRecipe.destroy_all
 RecipeIngredient.destroy_all

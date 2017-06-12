@@ -7,6 +7,10 @@ class IngredientTastesController < ApplicationController
     # @ingredient_taste = IngredientTaste.new()
     # @ingredient_taste.user = current_user
     # @ingredient_taste.ingredient = @ingredients.pop
+    @ingredient_objects = []
+    @ingredients.each do |ingredient|
+      @ingredient_objects << { category: ingredient.category, name: ingredient.name }
+    end
   end
 
   def update
