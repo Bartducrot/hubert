@@ -24,4 +24,13 @@
   text-align:center;
 }
 
+.home-link {
+  color: white;
+  font-weight: lighter;
+  margin-top: 10px;
+    &:hover {
+    text-decoration: none;
+    color: $grey;
+    }
+}
 
