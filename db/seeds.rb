@@ -6,9 +6,10 @@ Recipe.destroy_all
 Ingredient.destroy_all
 
 
-1.times do |i|
+10.times do |i|
     base_url = "http://allrecipes.com/recipe/"
-    index_start = 6663
+    # index_start = 6663
+    index_start = 7663
 
     url = base_url + "#{index_start + i}"
     puts url
@@ -32,34 +33,52 @@ Ingredient.destroy_all
     recipe.instructions = instructions
     recipe.save!
 
+    puts "new recipe: #{recipe.name}"
+    puts "#{recipe.instructions}"
+    puts 'Ingredient :'
+
     #search for the ingredient
     html.search('span.recipe-ingred_txt.added').each do |ingr|
+      puts "---- #{ingr.text.strip}"
 
       if ingr.text.strip != "Add all ingredients to list"
-
-        ingredient_category = ["vegetable", "meat", "dairy"].sample
         dose = Ingreedy.parse(ingr.text.strip)
-        ingredient_name = dose.ingredient
-        ingredient_unit = dose.unit
-        ingredient_start_season = Date.new(2017,1,1)
-        ingredient_end_season = Date.new(2017,12,31)
+        ingredient_category = ["vegetable", "meat", "dairy"].sample
+        ingredient = Ingredient.find_by_name(dose.ingredient)
 
-        ingredient = Ingredient.new()
-
-        ingredient.name = ingredient_name
-        ingredient.category = ingredient_category
-        if ingredient_unit.is_a? NilClass
-          ingredient.unit = "unit"
+        if ingredient
+          puts "#{ingredient.name} already exist"
         else
-          ingredient.unit = ingredient_unit
+          ingredient = Ingredient.new()
+          ingredient_name = dose.ingredient
+          ingredient_unit = dose.unit
+          ingredient_start_season = Date.new(2017,1,1)
+          ingredient_end_season = Date.new(2017,12,31)
+
+          ingredient = Ingredient.new()
+
+          ingredient.name = ingredient_name
+          ingredient.category = ingredient_category
+          ingredient.start_of_seasonality = ingredient_start_season
+          ingredient.end_of_seasonality = ingredient_end_season
+          if ingredient_unit.is_a? NilClass
+            ingredient.unit = "unit"
+          else
+            ingredient.unit = ingredient_unit
+          end
+
+          ingredient.save!
+
+          puts "#{ingredient.name} ---- \'#{ingredient.unit}\' has been created"
         end
-        ingredient.start_of_seasonality = ingredient_start_season
-        ingredient.end_of_seasonality = ingredient_end_season
 
-        ingredient.save!
-        puts "#{ingredient.name} ---- #{dose.amount}\'#{ingredient.unit}\'"
+      association = RecipeIngredient.new()
+      association.recipe = recipe
+      association.ingredient = ingredient
+      association.quantity = dose.amount.to_i
+      association.save!
+      puts "the association between #{recipe.name} and #{ingredient.name} has been created"
       end
-
     end
 
 
