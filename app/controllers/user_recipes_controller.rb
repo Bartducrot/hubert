@@ -34,6 +34,11 @@ class UserRecipesController < ApplicationController
       end
       @ingredients_hash[r_ingredient.first.ingredient.category] << {s_item: r_ingredient.last , name: r_ingredient.first.ingredient.name, quantity: r_ingredient.first.quantity, unit: r_ingredient.first.ingredient.unit}
     end
+    @sorted_ingredient_hash = {}
+    @ingredients_hash.each do |category, array|
+      @sorted_ingredient_hash[category] = array.sort_by{ |hsh| hsh[:name] }
+    end
+    @sorted_ingredient_hash
   end
 
 
