@@ -1,0 +1,18 @@
+<div style="padding-top: 70px">
+  <h3>Choose your favourite ingredients</h3>
+  <%= form_tag ingredients_path, method: :get do %>
+    <%= text_field_tag :info, params[:info] %>
+    <%= submit_tag("search")%>
+  <% end %>
+  <% if @ingredients %>
+    <ul>
+      <% @ingredients.each do |i| %>
+        <div id="ingredient-<%= i.id %>">
+          <%= render 'ingredient_tastes/ingredient', i: i, user: @user %>
+        </div>
+      <% end %>
+    </ul>
+    <% else %>
+    <p>No results</p>
+  <% end %>
+</div>
