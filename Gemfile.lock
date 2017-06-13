@@ -43,17 +43,27 @@ GEM
       execjs
     aws_cf_signer (0.1.3)
     bcrypt (3.1.11)
+<<<<<<< HEAD
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+=======
+    blankslate (3.1.3)
+>>>>>>> master
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (9.0.6)
+    carrierwave (0.11.2)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
+      mime-types (>= 1.16)
+      mimemagic (>= 0.3.0)
     cloudinary (1.1.0)
       aws_cf_signer
       rest-client
@@ -84,6 +94,8 @@ GEM
     http-cookie (1.0.3)
       domain_name (~> 0.5)
     i18n (0.8.4)
+    ingreedy (0.0.9)
+      parslet (~> 1.7.0, >= 1.7.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -93,6 +105,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    json (2.1.0)
     jwt (1.5.6)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -105,6 +118,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
+    mimemagic (0.3.2)
     mini_portile2 (2.2.0)
     minitest (5.10.2)
     multi_json (1.12.1)
@@ -129,6 +143,8 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    parslet (1.7.1)
+      blankslate (>= 2.0, <= 4.0)
     pg (0.20.0)
     pg_search (2.0.1)
       activerecord (>= 4.2)
@@ -229,10 +245,12 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass
+  carrierwave (~> 0.11.2)
   cloudinary (= 1.1.0)
   devise
   figaro
   font-awesome-sass
+  ingreedy (~> 0.0.9)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails

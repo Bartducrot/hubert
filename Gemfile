@@ -22,6 +22,21 @@ gem 'cloudinary', '1.1.0'
 gem 'omniauth-facebook'
 
 gem 'jquery-ui-rails'
+gem 'carrierwave', '~> 0.11.2'
+
+
+#seed gem
+# gem 'nokogiri' ## Parse HTML
+# gem 'watir' ## Create a browser which would be dummy
+# gem 'tor'
+# gem 'tor_requests'
+# gem 'selenium' ## Web driver
+# gem 'selenium-webdriver', '~> 3.4', '>= 3.4.1'
+# gem 'aws-sdk', '~> 2.3' ## Amazon cloud
+# gem 'paperclip'
+# gem 'phantomjs', '~> 2.1', '>= 2.1.1.0'
+
+gem 'ingreedy', '~> 0.0.9'
 
 group :development, :test do
   gem 'binding_of_caller'
@@ -33,5 +48,3 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-
-

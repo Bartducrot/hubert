@@ -29,7 +29,7 @@
 <div class="meal-type">
   <h2 class="text-center">BREAKFAST</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-      <%= render "shared/swiper", meal: "breakfast", active_recipe: 174 %>
+      <%= render "shared/swiper", meal: "breakfast"%>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
   </div>
@@ -39,11 +39,13 @@
   <input class="range-slider__range" type="range" value="1" min="1" max="15">
   <span class="range-slider__value">0</span>
 </div>
+
+<hr>
 
 <div class="meal-type">
   <h2 class="text-center">LUNCH</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-      <%= render "shared/swiper", meal: "lunch", active_recipe: 174 %>
+      <%= render "shared/swiper", meal: "lunch"%>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
   </div>
@@ -53,11 +55,13 @@
   <input class="range-slider__range" type="range" value="1" min="1" max="15">
   <span class="range-slider__value">0</span>
 </div>
+
+<hr>
 
 <div class="meal-type">
   <h2 class="text-center">APERITIVO</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-      <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174 %>
+      <%= render "shared/swiper", meal: "aperitivo"%>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
   </div>
@@ -67,12 +71,14 @@
   <input class="range-slider__range" type="range" value="1" min="1" max="15">
   <span class="range-slider__value">0</span>
 </div>
+
+<hr>
 
 
 <div class="meal-type">
   <h2 class="text-center">DINNER</h2>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-      <%= render "shared/swiper", meal: "dinner", active_recipe: 174 %>
+      <%= render "shared/swiper", meal: "dinner"%>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
   </div>
@@ -83,10 +89,7 @@
   <span class="range-slider__value">0</span>
 </div>
 
-
-<form>
-  <input type="button" class="btn btn-success center-block" value="Proceed" onclick="getConfirmation();" />
-</form>
+<hr>
 
 </div>
 
