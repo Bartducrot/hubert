@@ -26,9 +26,9 @@ require 'date'
 
 
 
-# ShoppingItem.destroy_all
-# UserRecipe.destroy_all
-# # RecipeIngredient.destroy_all
+ShoppingItem.destroy_all
+UserRecipe.destroy_all
+# RecipeIngredient.destroy_all
 # Recipe.destroy_all
 # Ingredient.destroy_all
 
