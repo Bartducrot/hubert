@@ -42,7 +42,7 @@ UserRecipe.destroy_all
 100.times do |i|
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
-    index_start = 15020
+    index_start = 15000
 
     url = base_url + "#{index_start + i}"
     puts url
@@ -61,70 +61,75 @@ UserRecipe.destroy_all
     html.search('.directions--section__steps span').each do |step|
       instructions += step.text.strip
     end
-    # instructions = html.search('.directions--section__steps ').text.strip
 
-    recipe = Recipe.new()
-    recipe.name = recipe_name
-    recipe.recipe_type = recipe_type
-    recipe.category = category
-    recipe.instructions = instructions
-    recipe.save!
+    recipe = Recipe.find_by_name(recipe_name)
+    if recipe
+      puts "this recipe already exist in the data base : name = \"#{recipe.name}\" , id = #{recipe.id}"
+    else
 
-    puts "new recipe: #{recipe.name}"
-    puts "Type:"
-    puts "#{recipe.recipe_type}"
-    puts "Instructions: "
-    puts "#{recipe.instructions}"
-    puts 'Ingredient :'
+      recipe = Recipe.new()
+      recipe.name = recipe_name
+      recipe.recipe_type = recipe_type
+      recipe.category = category
+      recipe.instructions = instructions
+      recipe.save!
 
-    #search for the ingredient
-    html.search('span.recipe-ingred_txt.added').each do |ingr|
-      puts "---- #{ingr.text.strip}"
+      puts "new recipe: #{recipe.name}"
+      puts "Type:"
+      puts "#{recipe.recipe_type}"
+      puts "Instructions: "
+      puts "#{recipe.instructions}"
+      puts 'Ingredient :'
 
-      if ingr.text.strip != "Add all ingredients to list"
-        begin
-          dose = Ingreedy.parse(ingr.text.strip)
-        rescue Exception => e
-        end
-        if dose
-          ingredient_category = ["vegetable", "meat", "dairy"].sample
-          ingredient = Ingredient.find_by_name(dose.ingredient)
+      #search for the ingredient
+      html.search('span.recipe-ingred_txt.added').each do |ingr|
+        puts "---- #{ingr.text.strip}"
 
-          if ingredient
-            puts "#{ingredient.name} already exist"
-          else
-            ingredient = Ingredient.new()
-            ingredient_name = dose.ingredient
-            ingredient_unit = dose.unit
-            ingredient_start_season = Date.new(2017,1,1)
-            ingredient_end_season = Date.new(2017,12,31)
+        if ingr.text.strip != "Add all ingredients to list"
+          begin
+            dose = Ingreedy.parse(ingr.text.strip)
+          rescue Exception => e
+          end
+          if dose
+            ingredient_category = ["vegetable", "meat", "dairy"].sample
+            ingredient = Ingredient.find_by_name(dose.ingredient)
 
-            ingredient = Ingredient.new()
-
-            ingredient.name = ingredient_name
-            ingredient.category = ingredient_category
-            ingredient.start_of_seasonality = ingredient_start_season
-            ingredient.end_of_seasonality = ingredient_end_season
-            if ingredient_unit.is_a? NilClass
-              ingredient.unit = "unit"
+            if ingredient
+              puts "#{ingredient.name} already exist"
             else
-              ingredient.unit = ingredient_unit
+              ingredient = Ingredient.new()
+              ingredient_name = dose.ingredient
+              ingredient_unit = dose.unit
+              ingredient_start_season = Date.new(2017,1,1)
+              ingredient_end_season = Date.new(2017,12,31)
+
+              ingredient = Ingredient.new()
+
+              ingredient.name = ingredient_name
+              ingredient.category = ingredient_category
+              ingredient.start_of_seasonality = ingredient_start_season
+              ingredient.end_of_seasonality = ingredient_end_season
+              if ingredient_unit.is_a? NilClass
+                ingredient.unit = "unit"
+              else
+                ingredient.unit = ingredient_unit
+              end
+
+              ingredient.save!
+
+              puts "#{ingredient.name} ---- \'#{ingredient.unit}\' has been created"
             end
 
-            ingredient.save!
-
-            puts "#{ingredient.name} ---- \'#{ingredient.unit}\' has been created"
+            association = RecipeIngredient.new()
+            association.recipe = recipe
+            association.ingredient = ingredient
+            association.quantity = dose.amount.to_i
+            association.save!
+            puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
           end
-
-          association = RecipeIngredient.new()
-          association.recipe = recipe
-          association.ingredient = ingredient
-          association.quantity = dose.amount.to_i
-          association.save!
-          puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
+        else
+          puts "#{ingr.text.strip} --- NOT AN INGREDIENT!"
         end
-      else
-        puts "#{ingr.text.strip} --- NOT AN INGREDIENT!"
       end
     end
 
@@ -132,6 +137,15 @@ UserRecipe.destroy_all
 
 
     puts "new recipe: #{recipe.name}"
+    waiting_time = (1..5).to_a.sample
+    puts "waiting #{waiting_time}second in order to avoid : \'OpenURI::HTTPError: 429 Too Many Requests\'......"
+
+    waiting_time.times do |sec|
+      puts "#{sec} second(s)"
+      sleep(1)
+    end
+
+    puts "Enought waiting I hope"
 
 
 end

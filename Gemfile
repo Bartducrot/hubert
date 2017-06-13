@@ -23,8 +23,12 @@ gem 'jquery-ui-rails'
 
 
 #seed gem
+gem 'nokogiri'
+gem 'watir'
+gem 'tor'
+gem 'tor_requests'
+gem 'selenium'
 
-# gem 'hangry', '~> 0.0.13'
 gem 'ingreedy', '~> 0.0.9'
 
 group :development, :test do
