@@ -2,46 +2,28 @@
 <%= render 'shared/scroll-days' %>
 
 
-<!-- <h1><%= @day.strftime('%A %e %B') %></h1>
-<h2>Recipe of the day</h2>
-<%= simple_form_for [current_user, @user_recipe] do |f|%>
-  <%= f.input :date,  :as => :hidden, :input_html => {:value => @day} %>
-  <%= f.input :number_of_people %>
-  <%= f.association :recipe %>
-  <%= f.submit "Define recipe of the day", class: "btn btn-primary" %>
-<% end %>
-<h6 class="text-center"><%= @day.strftime('%A %e %B') %></h6>
-<div class="container">
-  <div class="row">
-    <% @user_recipes.each do |u_recipe| %>
-      <div class="col-xs-12 col-sm-6 col-md-4">
-        <% recipe = Recipe.find(u_recipe.recipe_id) %>
-        <h3><%= recipe.name %></h3>
-        <p>for <%= u_recipe.number_of_people %></p>
-        <p><%= recipe.recipe_type %></p>
-        <p><%= recipe.instructions %></p>
-      </div>
-    <% end %>
-  </div>
-</div> -->
-
+<h1 id="calender-date"><%= @day.strftime('%a %e %b') %></h1>
 <div class="meal-type">
   <h2 class="text-center">BREAKFAST</h2>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+    <h2 id="breakfast_delete" class="open-slider close meal-picked"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
       <%= render "shared/swiper", meal: "breakfast", active_recipe: 174 %>
-    <div class="close-slider">
+      <% unless current_user.selected_recipe("breakfast", @day) %>
+    <div class="close-slider apply-empty-meal">
       <%= render "shared/empty-meal" %>
   </div>
+  <% end %>
 </div>
 
 <div class="range-slider">
   <input class="range-slider__range" type="range" value="1" min="1" max="15">
-  <span class="range-slider__value">0</span>
+  <div class="profile-pic">
+    <span class="range-slider__value">0</span>
+  </div>
 </div>
 
 <div class="meal-type">
-  <h2 class="text-center">LUNCH</h2>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+  <h2  class="text-center">LUNCH</h2>
+    <h2 class="open-slider"><i class="fa fa-times meal-cross" id="lunch_delete" aria-hidden="true"></i></h2>
       <%= render "shared/swiper", meal: "lunch", active_recipe: 174 %>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
@@ -55,7 +37,7 @@
 
 <div class="meal-type">
   <h2 class="text-center">APERITIVO</h2>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+    <h2 id="aperitivo_delete" class="open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
       <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174 %>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
@@ -70,7 +52,7 @@
 
 <div class="meal-type">
   <h2 class="text-center">DINNER</h2>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+    <h2 id="dinner_delete" class="open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
       <%= render "shared/swiper", meal: "dinner", active_recipe: 174 %>
     <div class="close-slider">
       <%= render "shared/empty-meal" %>
@@ -91,12 +73,37 @@
 
 <%= content_for(:after_js) do %>
 <script>
-    $(".calender-plus, .delete").click(function() {
-      var $meal = $(this).closest('.meal-type')
-      console.log($meal)
-      $meal.find(".open-slider").toggleClass("close");
-      $meal.find(".close-slider").toggleClass("close");
-   });
+    $(".calender-plus, #lunch_delete").click(function() {
+    var $meal = $(this).closest('.meal-type')
+    $meal.find(".open-slider").toggleClass("close");
+    $meal.find(".close-slider").toggleClass("close");
+ });
+
+
+  <% recipe = current_user.selected_recipe('lunch', @day) %>
+  if ("<%= raw recipe %>") {
+    $(".meal-picked").removeClass("close");
+    console.log("i'm here because i have a meal")
+  }else {
+    $(".meal-picked").addClass("close");
+    console.log("I'm here because i don't have a meal")
+    $(".apply-empty-meal").removeClass("close");
+  };
+
+  $("#lunch_delete").click(function() {
+    var selected_recipe_id = $('.swiper-slide-lunch.swiper-slide-active').attr("data-recipe-id");
+      $.ajax({
+      url: "<%= delete_user_recipe_path %>",
+      type: 'POST',
+      data: { recipe_id: selected_recipe_id, date: '<%= params[:date] %>' },
+      success: function() {
+        var $meal = $("#lunch_delete").closest('.meal-type')
+        $meal.find(".open-slider").toggleClass("close");
+    }
+  });
+});
+
+
 
 var rangeSlider = function(){
   var slider = $('.range-slider'),
