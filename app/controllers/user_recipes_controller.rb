@@ -49,6 +49,9 @@ class UserRecipesController < ApplicationController
     else
       @user_recipes = UserRecipe.where(date: Date.today).where(user: current_user)
     end
+
+
+
   end
 
   def create
