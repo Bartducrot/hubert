@@ -1,12 +1,12 @@
 class UserRecipesController < ApplicationController
 
   def cookbook
-    @user_recipes = UserRecipe.where(:user_id == current_user.id)
+    @user_recipes = UserRecipe.where(user_id: current_user.id)
     @next_user_recipes = UserRecipe.where(user_id: current_user.id).where("date >= ?", Date.today).order(updated_at: :desc)
   end
 
   def shopping_cart
-    @user_recipes = UserRecipe.where(:user_id == current_user.id)
+    @user_recipes = UserRecipe.where(user_id: current_user.id)
 
     @shopping_items = []
 
