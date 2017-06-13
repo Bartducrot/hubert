@@ -2,9 +2,9 @@
   <div class="swiper-wrapper">
     <% selected_recipe = current_user.selected_recipe(meal, params[:date]) %>
     <% if selected_recipe %>
-      <% recipes =  [selected_recipe] + Recipe.where(category: meal).where.not(id: selected_recipe.id) %>
+      <% recipes =  [selected_recipe] + current_user.liked_recipes(meal).select{|recipe| recipe.id != selected_recipe.id}%>
     <% else %>
-      <% recipes =  Recipe.where(category: meal) %>
+      <% recipes =  current_user.liked_recipes(meal) %>
     <% end %>
     <% recipes.each do |recipe| %>
 
