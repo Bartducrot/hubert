@@ -37,15 +37,12 @@ UserRecipe.destroy_all
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
-    index_start = 16000
+    index_start = 16020
 
     url = base_url + "#{index_start + i}"
     puts url
     begin
       html = Nokogiri::HTML(open(url))
-    rescue Exception => e
-
-    end
     recipe_name = ""
     html.search('.summary-background').each do |div|
       recipe_name = div.search('h1.recipe-summary__h1').text.strip
@@ -144,6 +141,9 @@ UserRecipe.destroy_all
     end
 
     puts "Enought waiting I hope"
+    rescue Exception => e
+
+    end
 
 
 end
