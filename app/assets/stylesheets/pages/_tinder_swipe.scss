@@ -1,6 +1,7 @@
 .swiper {
   height: calc(100vh - 150px);
   // padding-bottom: 50px;
+  padding-top:80px;
 }
 #contentMichael {
   display: flex;
@@ -22,7 +23,7 @@
 
 span.meta {
   display: block;
-  height:48px;
+  height:56px;
   background-color: #FFF;
   margin-top: calc(100vh - 280px);
   border-radius: 0px 0px 4px 4px;
