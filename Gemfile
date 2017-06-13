@@ -20,6 +20,7 @@ gem 'cloudinary', '1.1.0'
 gem 'omniauth-facebook'
 
 gem 'jquery-ui-rails'
+gem 'carrierwave', '~> 0.11.2'
 
 
 #seed gem

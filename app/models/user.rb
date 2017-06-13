@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  mount_uploader :photo, PhotoUploader
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
@@ -29,6 +31,26 @@ class User < ApplicationRecord
     end
   end
 
+  def liked_recipes(category)
+    liked_ingredients_ids = Ingredient.all.select{ |ingredient| ingredient.ingredient_tastes.where(user: self).where(like: false).blank? }.map(&:id)
+    # RecipeIngredient.where(ingredient_id: ingredients_ids)
+    @recipes = Recipe.where(category: category)
+    user_liked_recipes = []
+
+    @recipes.each do |recipe|
+      recipe_ingredients_ids = []
+      recipe.recipe_ingredients.each do |ri|
+        recipe_ingredients_ids << ri.ingredient_id
+      end
+      user_liked_recipes << recipe if (recipe_ingredients_ids - liked_ingredients_ids).empty?
+    end
+    return user_liked_recipes
+  end
+
+
+
+
+>>>>>>> master
   def self.find_for_facebook_oauth(auth)
     user_params = auth.slice(:provider, :uid)
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
