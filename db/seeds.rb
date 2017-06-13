@@ -41,8 +41,11 @@ UserRecipe.destroy_all
 
     url = base_url + "#{index_start + i}"
     puts url
+    begin
+      html = Nokogiri::HTML(open(url))
+    rescue Exception => e
 
-    html = Nokogiri::HTML(open(url))
+    end
     recipe_name = ""
     html.search('.summary-background').each do |div|
       recipe_name = div.search('h1.recipe-summary__h1').text.strip
@@ -136,7 +139,7 @@ UserRecipe.destroy_all
     puts "waiting #{waiting_time}second in order to avoid : \'OpenURI::HTTPError: 429 Too Many Requests\'......"
 
     waiting_time.times do |sec|
-      puts "#{sec} second(s)"
+      puts "#{sec + 1} second(s)"
       sleep(1)
     end
 
