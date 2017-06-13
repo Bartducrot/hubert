@@ -23,11 +23,12 @@ gem 'jquery-ui-rails'
 
 
 #seed gem
-gem 'nokogiri'
-gem 'watir'
+gem 'nokogiri' ## Parse HTML
+gem 'watir' ## Create a browser which would be dummy
 gem 'tor'
 gem 'tor_requests'
-gem 'selenium'
+gem 'selenium' ## Web driver
+gem 'aws-sdk', '-> 2.3' ## Amazon cloud
 
 gem 'ingreedy', '~> 0.0.9'
 
