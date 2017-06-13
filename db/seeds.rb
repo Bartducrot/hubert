@@ -33,7 +33,7 @@ UserRecipe.destroy_all
 # Ingredient.destroy_all
 
 
-100.times do |i|
+10.times do |i|
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
@@ -118,7 +118,7 @@ UserRecipe.destroy_all
             association = RecipeIngredient.new()
             association.recipe = recipe
             association.ingredient = ingredient
-            association.quantity = dose.amount.to_i
+            association.quantity = dose.amount.to_f
             association.save!
             puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
           end
