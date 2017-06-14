@@ -5,37 +5,34 @@
       </div>
       <% @next_user_recipes.each do |u_recipe| %>
       <% recipe = Recipe.find(u_recipe.recipe_id) %>
-        <%= link_to recipe_path(recipe) do %>
+
           <div class="col-xs-12">
-            <div class="btn-recipe <%= recipe.category %>">
+            <div class="btn-recipe <%= recipe.category %>" id="<%= u_recipe.id %>">
+            <% category = recipe.category %>
               <div class="recipe-name" ><%= recipe.name %></div>
               <div class="recipe-date" ><%= u_recipe.date.strftime("%A %d/%m/%Y") %></div>
               <div class="recipe-category"><%= recipe.category %></div>
               <i class="fa fa-times meal-cross"></i>
-              def destroy
-    user_recipe = UserRecipe.find(params[:id])
-    user_recipe.destroy
-  end
             </div>
           </div>
         <% end %>
-      <% end %>
+
     </div>
   </div>
+
 <% content_for(:after_js) do %>
    <script>
-   $(".meal-cross").click(function() {
-
-
-   });
-
-function deleteSelectedMeal(id) {
-    $.ajax({
-        method:'DELETE',
-        url: '/user_recipes',
-        data: { user_recipe: {recipe_id: id, date: "<%= u_recipe.date.strftime("%A %d/%m/%Y") %>", number_of_people: 1}},
-        // insert proper number of people when feature is available
-      });
-   }
-
-   </script>
+  $(".meal-cross").click(function() {
+    var $meal = $(this).closest('.main-container')
+    idClick = $meal.find(".btn-recipe").attr('id')
+    $(this).closest('.btn-recipe').fadeOut(400);
+      $.ajax({
+      url: "/user_recipes/" + idClick,
+      type: 'DELETE',
+      success: function() {
+        console.log(this)
+    }
+  });
+});
+</script>
+<% end %>
