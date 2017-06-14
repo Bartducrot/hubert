@@ -1,5 +1,7 @@
-<div class="row">
+<div class="ingredient-name-category">
 <h3><%= i.name %></h3>
+<h6><%= i.category %></h6>
+</div>
 <% taste = user.ingredient_tastes.where(ingredient_id: i.id).first %>
 <% if user.ingredients.include? i %>
   <% if taste && taste.like == true %>
@@ -10,4 +12,3 @@
 <% else %>
   <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
 <% end %>
-</div>
