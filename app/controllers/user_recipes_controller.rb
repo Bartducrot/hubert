@@ -35,7 +35,7 @@ class UserRecipesController < ApplicationController
     @ingredients_hash.each do |category, array|
       @sorted_ingredient_hash[category] = array.sort_by{ |hsh| hsh[:name] }
     end
-    @sorted_ingredient_hash
+    @sorted_ingredient_category_hash = @sorted_ingredient_hash.sort.to_h
   end
 
 
