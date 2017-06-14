@@ -23,7 +23,7 @@ gem 'omniauth-facebook'
 
 gem 'jquery-ui-rails'
 gem 'carrierwave', '~> 0.11.2'
-
+gem 'material_icons'
 
 #seed gem
 # gem 'nokogiri' ## Parse HTML
