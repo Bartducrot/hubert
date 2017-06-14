@@ -1,0 +1,13 @@
+<div class="row">
+<h3><%= i.name %></h3>
+<% taste = user.ingredient_tastes.where(ingredient_id: i.id).first %>
+<% if user.ingredients.include? i %>
+  <% if taste && taste.like == true %>
+    <%= link_to "unlike this", dislike_it_path(name: i.name), method: :post, remote: true, class: "btn btn-danger"  %>
+  <% else %>
+    <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
+  <% end %>
+<% else %>
+  <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
+<% end %>
+</div>
