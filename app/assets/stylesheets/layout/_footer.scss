@@ -14,6 +14,14 @@
   i:hover {
     color: rgb(210, 210, 210);
   }
+
+  a{
+    color: transparent;
+  }
+ }
+
+ .calendar {
+  margin-left: 45px;
  }
 
  .footer-flex {
@@ -25,16 +33,16 @@
 
  .footer-flex-left {
   i {
-    padding: 10px 20px;
-    font-size: 31px;
+    padding: 6px 15px;
+    font-size: 38px;
     z-index: 51;
   }
  }
  .footer-flex-right {
   i {
-    padding: 10px 20px;
-    font-size: 31px;
-    z-index: 50;
+    padding: 6px 45px;
+    font-size: 38px;
+    z-index: 51;
   }
 }
 .footer-ingredient_tastes-swiper{
@@ -42,7 +50,8 @@
 }
 
 .home-button {
-  font-size: 40px;
+  font-size: 55px;
+  margin-bottom: 15px;
 }
 
 .footer-circle {
