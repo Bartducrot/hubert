@@ -17,25 +17,6 @@
     </div>
 
   <% end %>
-  <!-- debug comment -->
-  <p>
-    First recipe in the user_recipe:
-    <%= @user_recipes.first.recipe.name %>
-  </p>
-
-  <p>
-    Number of shopping item in @shopping_items:
-    <%= @shopping_items.length %>
-  </p>
-
-  <h3>all shopping items</h3>
-  <% @user_recipes.each do |u_recipe| %>
-    <p><%= u_recipe.shopping_items.length %></p>
-    <% u_recipe.shopping_items.each do |item| %>
-      <p><%= item.quantity.class %></p>
-    <% end %>
-  <% end %>
-  <!-- end of debbugging -->
 
 </div>
 <%= content_for(:after_js) do  %>

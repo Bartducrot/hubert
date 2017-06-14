@@ -65,7 +65,13 @@ class UserRecipesController < ApplicationController
     @user_recipe.save
     @shopping_items = []
     @user_recipe.recipe.recipe_ingredients.each do |recipe_ingredient|
-      @shopping_items << ShoppingItem.create!(bought: false, quantity: (recipe_ingredient.quantity * @user_recipe.number_of_people),  recipe_ingredient_id: recipe_ingredient.id, user_recipe_id: @user_recipe.id)
+      new_item = ShoppingItem.new()
+      new_item.bought = false
+      new_item.quantity = recipe_ingredient.quantity
+      new_item.recipe_ingredient = recipe_ingredient
+      new_item.user_recipe = @user_recipe
+      new_item.save!
+      @shopping_items << new_item
     end
     # redirect_to user_user_recipes_path(current_user)
     # redirect_to calendar_path(user_recipe_params[:date])
