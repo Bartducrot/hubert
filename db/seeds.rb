@@ -69,7 +69,7 @@ UserRecipe.destroy_all
         recipe.recipe_type = recipe_type
         recipe.category = category
         recipe.instructions = instructions
-        recipe.photo_url = photo_url
+        recipe.remote_photo_url = photo_url
         recipe.save!
 
         puts "new recipe: #{recipe.name}"
