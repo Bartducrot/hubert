@@ -32,8 +32,20 @@
   color: red;
 }
 
-/* input#info {
-  border-radius: 5px;
-  height: 36px;
+.ingredients-form {
+  display: flex;
+  margin: 10px 20px;
 }
- */
+
+.search-btn {
+  width: 100px;
+  margin-left: 10px;
+  background-color: $blue;
+  color: white;
+}
+
+h3 {
+
+  padding-left: 20px;
+
+}
