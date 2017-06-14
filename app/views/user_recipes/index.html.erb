@@ -17,6 +17,7 @@
     <% end %>
   </div>
 
+
   <div class="range-slider">
     <input class="range-slider__range" type="range" value="1" min="1" max="15">
     <div class="profile-pic">
@@ -24,6 +25,15 @@
     </div>
   </div>
 
+
+  <div class="meal-type">
+    <h2 class="text-center">BREAKFAST</h2>
+    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+      <%= render "shared/swiper", meal: "breakfast"%>
+    <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+    </div>
+  </div>
   <hr>
 
   <div class="meal-type">
