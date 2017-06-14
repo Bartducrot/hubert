@@ -2,6 +2,7 @@
   <%= render 'shared/scroll-days' %>
 
   <h1 id="calender-date"><%= @day.strftime('%a %e %b') %></h1>
+
   <div class="meal-type">
     <h2 class="text-center">BREAKFAST</h2>
     <h2 id="breakfast_delete" class="open-slider close meal-picked"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
@@ -13,7 +14,7 @@
           <div class="close-slider">
             <%= render "shared/empty-meal" %>
           </div>
-      `</div>   
+      `</div>
     <% end %>
   </div>
 
