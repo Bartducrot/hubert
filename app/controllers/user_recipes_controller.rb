@@ -9,9 +9,9 @@ class UserRecipesController < ApplicationController
     @user_recipes = UserRecipe.where(user_id: current_user.id)
 
     @shopping_items = []
-    @user_recipes.each do |recipe|
-      if recipe.date >= Date.today
-        recipe.shopping_items.each do |item|
+    @user_recipes.each do |u_recipe|
+      if u_recipe.date >= Date.today
+        u_recipe.shopping_items.each do |item|
           @shopping_items << item
         end
       end
@@ -34,6 +34,7 @@ class UserRecipesController < ApplicationController
     @sorted_ingredient_hash = {}
     @ingredients_hash.each do |category, array|
       @sorted_ingredient_hash[category] = array.sort_by{ |hsh| hsh[:name] }
+      puts @sorted_ingredient_hash[category]
     end
     @sorted_ingredient_category_hash = @sorted_ingredient_hash.sort.to_h
   end
