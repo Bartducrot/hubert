@@ -118,7 +118,7 @@ UserRecipe.destroy_all
               association = RecipeIngredient.new()
               association.recipe = recipe
               association.ingredient = ingredient
-              association.quantity = dose.amount.to_f
+              association.quantity = dose.amount
               association.save!
               puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
             end
