@@ -3,8 +3,9 @@
     <% avatar_url = @user.facebook_picture_url || @user.photo.url(:square) || "http://placehold.it/30x30" %>
     <%= cl_image_tag avatar_url, class: "avatar-large  text-center" %>
   </div>
-  <h3><%= @user.first_name + " " + @user.last_name %></h3>
+  <h3><%= "#{@user.first_name} #{@user.last_name}" %></h3>
 </div>
+
 <div class="container preferences">
   <h4>Preferences:</h4>
   <div class="settings">
@@ -20,4 +21,3 @@
     </div>
   </div>
 </div>
-

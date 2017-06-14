@@ -9,6 +9,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'redis'
 
+gem 'pg_search'
+
 gem 'sass-rails'
 gem 'jquery-rails'
 gem 'uglifier'
@@ -37,6 +39,9 @@ gem 'carrierwave', '~> 0.11.2'
 gem 'ingreedy', '~> 0.0.9'
 
 group :development, :test do
+  gem 'binding_of_caller'
+  gem 'better_errors'
+
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'
