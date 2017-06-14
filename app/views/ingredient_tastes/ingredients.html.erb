@@ -1,17 +1,35 @@
 <div class="main-container">
-  <h3>Choose your favourite ingredients</h3>
-  <%= form_tag ingredients_path, method: :get do %>
-    <%= text_field_tag :info, params[:info] %>
-    <%= submit_tag("search")%>
+  <div class="search-bar">
+    <h3>Choose your favourite ingredients</h3>
+    <%= form_tag ingredients_path, method: :get, class: "search-ingredients" do %>
+      <%= text_field_tag :info, params[:info], class: "form-control" %>
+      <%= submit_tag 'find', class: "btn btn-default" %>
+    <% end %>
+  </div>
+
+ <% if @ingredients %>
+  <div class="ingredient-action">
+    <% taste = @user.ingredient_tastes.all %>
+    <% if @user.ingredients.include? %>
+      <% if taste && taste.like == true %>
+        <%= link_to "unlike this", dislike_it_path(name: i.name), method: :post, remote: true, class: "btn btn-danger"  %>
+      <% else %>
+        <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
+      <% end %>
+    <% else %>
+      <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
+    <% end %>
+  <% else %>
+    <p>No results</p>
   <% end %>
+
+
   <% if @ingredients %>
-    <ul>
       <% @ingredients.each do |i| %>
         <div id="ingredient-<%= i.id %>">
           <%= render 'ingredient_tastes/ingredient', i: i, user: @user %>
         </div>
       <% end %>
-    </ul>
     <% else %>
     <p>No results</p>
   <% end %>
