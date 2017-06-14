@@ -1,20 +1,20 @@
 <div class="main-container">
   <% @sorted_ingredient_hash.each_key do |category| %>
 
-  <h2><%= category.capitalize %></h2>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-10">
-        <% @sorted_ingredient_hash[category].each do |item| %>
-          <%= simple_form_for [current_user, item[:s_item]], remote: true, class: "form-inline" do |f| %>
-            <% bought = item[:s_item].bought %>
-            <%= f.submit " ", class: (bought ? "btn-checkbox btn-checked" : "btn-checkbox") %>
-            <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>"><%= " #{item[:name]} #{item[:quantity]}#{item[:unit]}" %></span>
+    <h2><%= category.capitalize %></h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-10">
+          <% @sorted_ingredient_category_hash[category].each do |item| %>
+            <%= simple_form_for [current_user, item[:s_item]], remote: true, class: "form-inline" do |f| %>
+              <% bought = item[:s_item].bought %>
+              <%= f.submit " ", class: (bought ? "btn-checkbox btn-checked" : "btn-checkbox") %>
+              <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>"><%= " #{item[:name]} #{item[:quantity]}#{item[:unit]}" %></span>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
-  </div>
 
   <% end %>
 
@@ -23,8 +23,8 @@
 <script>
 
   $("input").on('click', function(e){
-    $(this).addClass('btn-checked');
-    $(this).next().addClass('text-item-checked');
+    $(this).toggleClass('btn-checked');
+    $(this).next().toggleClass('text-item-checked');
   });
 </script>
 <% end %>
