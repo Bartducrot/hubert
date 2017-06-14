@@ -30,9 +30,9 @@
 
        spaceBetween: 10,
        onSlideChangeEnd: function(swiper) {
-        // get the id of current meal
         var a = swiper.slides[swiper.activeIndex];
         var b = $(a).attr("data-recipe-id")
+        console.log(b)
         postSelectedMeal(b);
 ;       }
    });
@@ -52,24 +52,24 @@
    }
 
   <!--
-    function getConfirmation(){
-      var a = $(".swiper-slide-breakfast.swiper-slide-active").attr("data-recipe-id")
+    // function getConfirmation(){
+    //   var a = $(".swiper-slide-breakfast.swiper-slide-active").attr("data-recipe-id")
 
-      $.ajax({
-          method:'POST',
-          url: '/user_recipes',
-          data: { user_recipe: {recipe_id: a, date: "<%= params[:date] %>", number_of_people: 1}},
-          // insert proper number of people when feature is available
-          success: function(){
-            $(this).User_recipe("done");
-          }
-        });
+    //   $.ajax({
+    //       method:'POST',
+    //       url: '/user_recipes',
+    //       data: { user_recipe: {recipe_id: a, date: "<%# params[:date] %>", number_of_people: 1}},
+    //       // insert proper number of people when feature is available
+    //       success: function(){
+    //         $(this).User_recipe("done");
+    //       }
+    //     });
 /*      var b = $(".swiper-slide-lunch.swiper-slide-active").attr("data-recipe-id")
 
       $.ajax({
           method:'POST',
           url: '/user_recipes',
-          data: { user_recipe: {recipe_id: b, date: "<%= params[:date] %>", number_of_people: 1}},
+          data: { user_recipe: {recipe_id: b, date: "<%# params[:date] %>", number_of_people: 1}},
           // insert proper number of people when feature is available
           success: function(){
             $(this).User_recipe("done");
@@ -80,7 +80,7 @@
       $.ajax({
           method:'POST',
           url: '/user_recipes',
-          data: { user_recipe: {recipe_id: c, date: "<%= params[:date] %>", number_of_people: 1}},
+          data: { user_recipe: {recipe_id: c, date: "<%# params[:date] %>", number_of_people: 1}},
           // insert proper number of people when feature is available
           success: function(){
             $(this).User_recipe("done");
@@ -89,16 +89,16 @@
 
       var d = $(".swiper-slide-dinner.swiper-slide-active").attr("data-recipe-id")*/
 
-      alert("Breakfast: " + a + ",  Lunch: " + b + ",  Aperitivo: " + c + ",  Dinner: " + d);
-      $.ajax({
-          method:'POST',
-          url: '/user_recipes',
-          data: { user_recipe: {recipe_id: d, date: "<%= params[:date] %>", number_of_people: 1}},
-          // insert proper number of people when feature is available
-          success: function(){
-            $(this).User_recipe("done");
-          }
-        });
-      }
+      // alert("Breakfast: " + a + ",  Lunch: " + b + ",  Aperitivo: " + c + ",  Dinner: " + d);
+      // $.ajax({
+      //     method:'POST',
+      //     url: '/user_recipes',
+      //     data: { user_recipe: {recipe_id: d, date: "<%# params[:date] %>", number_of_people: 1}},
+      //     // insert proper number of people when feature is available
+      //     success: function(){
+      //       $(this).User_recipe("done");
+      //     }
+      //   });
+      // }
    </script>
 <% end %>

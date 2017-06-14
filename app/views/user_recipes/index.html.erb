@@ -2,21 +2,26 @@
   <%= render 'shared/scroll-days' %>
 
   <h1 id="calender-date"><%= @day.strftime('%a %e %b') %></h1>
+
   <div class="meal-type">
-    <h2 class="text-center">BREAKFAST</h2>
-    <h2 id="breakfast_delete" class="open-slider close meal-picked"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "breakfast" %>
-     <% unless current_user.selected_recipe("breakfast", @day) %>
-        <div class="close-slider apply-empty-meal">
-          <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-          <%= render "shared/swiper", meal: "breakfast"%>
-          <div class="close-slider">
-            <%= render "shared/empty-meal" %>
-          </div>
-      `</div>
+
+    <h2  class="text-center">BREAKFAST</h2>
+    <% selected_recipe = current_user.selected_recipe("breakfast", params[:date]) %>
+    <% if selected_recipe %>
+      <h2 id="breakfast_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "breakfast"%>
+     <div class="close-slider close">
+      <%= render "shared/empty-meal" %>
+     </div>
+    <% else %>
+      <h2 id="breakfast_delete" class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "breakfast"%>
+     <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+     </div>
+
     <% end %>
   </div>
-
 
   <div class="range-slider">
     <input class="range-slider__range" type="range" value="1" min="1" max="15">
@@ -25,24 +30,24 @@
     </div>
   </div>
 
-
-  <div class="meal-type">
-    <h2 class="text-center">BREAKFAST</h2>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-      <%= render "shared/swiper", meal: "breakfast"%>
-    <div class="close-slider">
-      <%= render "shared/empty-meal" %>
-    </div>
-  </div>
   <hr>
 
   <div class="meal-type">
     <h2  class="text-center">LUNCH</h2>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "lunch"%>
-    <div class="close-slider">
+    <% selected_recipe = current_user.selected_recipe("lunch", params[:date]) %>
+    <% if selected_recipe %>
+      <h2 id="lunch_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "lunch"%>
+     <div class="close-slider close">
       <%= render "shared/empty-meal" %>
-    </div>
+     </div>
+    <% else %>
+      <h2 id="lunch_delete" class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "lunch"%>
+     <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+     </div>
+    <% end %>
   </div>
 
   <div class="range-slider">
@@ -52,15 +57,23 @@
 
   <hr>
 
-  <div class="meal-type">
-    <h2 class="text-center">APERITIVO</h2>
-    <h2 id="aperitivo_delete" class="open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "aperitivo" %>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "aperitivo"%>
-    <div class="close-slider">
+    <div class="meal-type">
+    <h2  class="text-center">APERITIVO</h2>
+    <% selected_recipe = current_user.selected_recipe("aperitivo", params[:date]) %>
+    <% if selected_recipe %>
+      <h2 id="aperitivo_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "aperitivo"%>
+     <div class="close-slider close">
+
       <%= render "shared/empty-meal" %>
-    </div>
+     </div>
+    <% else %>
+      <h2 id="aperitivo_delete" class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "aperitivo"%>
+     <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+     </div>
+    <% end %>
   </div>
 
   <div class="range-slider">
@@ -70,16 +83,22 @@
 
   <hr>
 
-
-  <div class="meal-type">
-    <h2 class="text-center">DINNER</h2>
-    <h2 id="dinner_delete" class="open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "dinner", active_recipe: 174 %>
-    <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "dinner"%>
-    <div class="close-slider">
+    <div class="meal-type">
+    <h2  class="text-center">DINNER</h2>
+    <% selected_recipe = current_user.selected_recipe("dinner", params[:date]) %>
+    <% if selected_recipe %>
+      <h2 id="dinner_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "dinner"%>
+     <div class="close-slider close">
       <%= render "shared/empty-meal" %>
-    </div>
+     </div>
+    <% else %>
+      <h2 id="dinner_delete" class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+     <%= render "shared/swiper", meal: "dinner"%>
+     <div class="close-slider">
+      <%= render "shared/empty-meal" %>
+     </div>
+    <% end %>
   </div>
 
   <div class="range-slider">
@@ -91,34 +110,32 @@
 
 </div>
 
+
 <%= content_for(:after_js) do %>
 <script>
-    $(".calender-plus, #lunch_delete").click(function() {
+    $(".calender-plus, #lunch_delete, #breakfast_delete, #aperitivo_delete, #dinner_delete").click(function() {
     var $meal = $(this).closest('.meal-type')
     $meal.find(".open-slider").toggleClass("close");
     $meal.find(".close-slider").toggleClass("close");
  });
 
 
-  <% recipe = current_user.selected_recipe('lunch', @day) %>
-  if ("<%= raw recipe %>") {
-    $(".meal-picked").removeClass("close");
-    console.log("i'm here because i have a meal")
-  }else {
-    $(".meal-picked").addClass("close");
-    console.log("I'm here because i don't have a meal")
-    $(".apply-empty-meal").removeClass("close");
-  };
 
-  $("#lunch_delete").click(function() {
-    var selected_recipe_id = $('.swiper-slide-lunch.swiper-slide-active').attr("data-recipe-id");
+  $("#lunch_delete, #breakfast_delete, #aperitivo_delete, #dinner_delete").click(function() {
+    var $mealClick = $(this).attr('id')
+    console.log($mealClick)
+    var $mealType = $mealClick.substr(0, $mealClick.length - 7);
+    console.log($mealType)
+    var $interpolation = '.swiper-slide-'+$mealType+'.swiper-slide-active'
+    console.log($interpolation)
+    var selected_recipe_id = $($interpolation).attr("data-recipe-id");
+    console.log(selected_recipe_id)
       $.ajax({
       url: "<%= delete_user_recipe_path %>",
       type: 'POST',
       data: { recipe_id: selected_recipe_id, date: '<%= params[:date] %>' },
       success: function() {
-        var $meal = $("#lunch_delete").closest('.meal-type')
-        $meal.find(".open-slider").toggleClass("close");
+        console.log("I worked")
     }
   });
 });

@@ -9,21 +9,17 @@ class UserRecipesController < ApplicationController
     @user_recipes = UserRecipe.where(user_id: current_user.id)
 
     @shopping_items = []
-
-    @user_recipes.each do |recipe|
-      if recipe.date >= Date.today
-        recipe.shopping_items.each do |item|
+    @user_recipes.each do |u_recipe|
+      if u_recipe.date >= Date.today
+        u_recipe.shopping_items.each do |item|
           @shopping_items << item
         end
       end
     end
-    @recipe_ingredients = []
-    # @ingredients = []
-    @shopping_items.each do |item|
-      #create [recipe_ingr, shopping_item]
-      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
 
-      # @ingredients << Ingredient.find(item.recipe_ingredient.ingredient_id)
+    @recipe_ingredients = []
+    @shopping_items.each do |item|
+      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
     end
 
     @ingredients_hash = {}
@@ -34,11 +30,13 @@ class UserRecipesController < ApplicationController
       end
       @ingredients_hash[r_ingredient.first.ingredient.category] << {s_item: r_ingredient.last , name: r_ingredient.first.ingredient.name, quantity: r_ingredient.first.quantity, unit: r_ingredient.first.ingredient.unit}
     end
+
     @sorted_ingredient_hash = {}
     @ingredients_hash.each do |category, array|
       @sorted_ingredient_hash[category] = array.sort_by{ |hsh| hsh[:name] }
+      puts @sorted_ingredient_hash[category]
     end
-    @sorted_ingredient_hash
+    @sorted_ingredient_category_hash = @sorted_ingredient_hash.sort.to_h
   end
 
 
@@ -67,7 +65,13 @@ class UserRecipesController < ApplicationController
     @user_recipe.save
     @shopping_items = []
     @user_recipe.recipe.recipe_ingredients.each do |recipe_ingredient|
-      @shopping_items << ShoppingItem.create!(bought: false, quantity: (recipe_ingredient.quantity * @user_recipe.number_of_people),  recipe_ingredient_id: recipe_ingredient.id, user_recipe_id: @user_recipe.id)
+      new_item = ShoppingItem.new()
+      new_item.bought = false
+      new_item.quantity = recipe_ingredient.quantity
+      new_item.recipe_ingredient = recipe_ingredient
+      new_item.user_recipe = @user_recipe
+      new_item.save!
+      @shopping_items << new_item
     end
     # redirect_to user_user_recipes_path(current_user)
     # redirect_to calendar_path(user_recipe_params[:date])
