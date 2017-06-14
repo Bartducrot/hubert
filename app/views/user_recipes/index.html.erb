@@ -5,7 +5,7 @@
   <div class="meal-type">
     <h2 class="text-center">BREAKFAST</h2>
     <h2 id="breakfast_delete" class="open-slider close meal-picked"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "breakfast", active_recipe: 174 %>
+    <%= render "shared/swiper", meal: "breakfast" %>
      <% unless current_user.selected_recipe("breakfast", @day) %>
         <div class="close-slider apply-empty-meal">
           <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
@@ -13,7 +13,7 @@
           <div class="close-slider">
             <%= render "shared/empty-meal" %>
           </div>
-      `</div>   
+      `</div>
     <% end %>
   </div>
 
@@ -55,7 +55,7 @@
   <div class="meal-type">
     <h2 class="text-center">APERITIVO</h2>
     <h2 id="aperitivo_delete" class="open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-    <%= render "shared/swiper", meal: "aperitivo", active_recipe: 174 %>
+    <%= render "shared/swiper", meal: "aperitivo" %>
     <h2 class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
     <%= render "shared/swiper", meal: "aperitivo"%>
     <div class="close-slider">
