@@ -7,6 +7,7 @@
   align-items: center;
   flex-direction: column;
   position: relative;
+  z-index: 0;
 }
 
 .card h3 {
@@ -15,6 +16,12 @@
   font-size: 23px;
   font-weight: bolder;
   margin-bottom: 30px;
+  text-decoration: none;
+}
+
+.card-style {
+  color: white !important;
+  text-decoration: none !important
 }
 
 .card-time {
@@ -40,4 +47,15 @@
   right: 7px;
   bottom: 55px;
   color: white;
+}
+
+.card-link {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index:2;
+  background: black;
+  opacity: 0;
 }
