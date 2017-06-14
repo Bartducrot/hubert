@@ -1,0 +1,14 @@
+<%= link_to recipe_path(recipe), class: "product #{recipe.category}" do %>
+    <div style="background-image: url(<%= image_path 'chicken-salad' %>)" class="product-image"></div>
+    <div class='product-body'>
+      <div class="recipe-name"><%= recipe.name %></div>
+      <div class="recipe-date"><%= u_recipe.date.strftime("%A %d/%m/%Y") %></div>
+    </div>
+    <div>
+      <div class="recipe-category"><%= recipe.category %></div>
+      <ul class="list-inline product-controls">
+        <li><i class="fa fa-heart"></i></li>
+      </ul>
+    </div>
+
+<% end %>
