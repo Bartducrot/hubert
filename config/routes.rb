@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   end
   resources :recipes, only: [:show]
-
+  post :delete_user_recipe, to: "users#delete_user_recipe"
 
   get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'

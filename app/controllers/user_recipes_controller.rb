@@ -84,6 +84,11 @@ class UserRecipesController < ApplicationController
 
   end
 
+  def destroy
+    user_recipe = UserRecipe.find(params[:id])
+    user_recipe.destroy
+  end
+
   private
 
   def user_recipe_params
