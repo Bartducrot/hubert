@@ -4,6 +4,7 @@
   <h1 id="calender-date"><%= @day.strftime('%a %e %b') %></h1>
 
   <div class="meal-type">
+
     <h2  class="text-center">BREAKFAST</h2>
     <% selected_recipe = current_user.selected_recipe("breakfast", params[:date]) %>
     <% if selected_recipe %>
@@ -18,6 +19,7 @@
      <div class="close-slider">
       <%= render "shared/empty-meal" %>
      </div>
+
     <% end %>
   </div>
 
@@ -62,6 +64,7 @@
       <h2 id="aperitivo_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
      <%= render "shared/swiper", meal: "aperitivo"%>
      <div class="close-slider close">
+
       <%= render "shared/empty-meal" %>
      </div>
     <% else %>
