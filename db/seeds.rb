@@ -28,16 +28,16 @@ require 'date'
 
 ShoppingItem.destroy_all
 UserRecipe.destroy_all
-# RecipeIngredient.destroy_all
-# Recipe.destroy_all
-# Ingredient.destroy_all
+RecipeIngredient.destroy_all
+Recipe.destroy_all
+Ingredient.destroy_all
 
 
-100.times do |i|
+3.times do |i|
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
-    index_start = 17021
+    index_start = 16000
 
     url = base_url + "#{index_start + i}"
     puts url
@@ -54,7 +54,7 @@ UserRecipe.destroy_all
 
       instructions = ""
       html.search('.directions--section__steps span').each do |step|
-        instructions += step.text.strip
+        instructions += "#{step.text.strip}\n"
       end
 
       photo_url = html.search('#BI_openPhotoModal1').first.attribute('src')
@@ -68,6 +68,7 @@ UserRecipe.destroy_all
         recipe.name = recipe_name
         recipe.recipe_type = recipe_type
         recipe.category = category
+        instructions = instructions.match(/\d+/).nil? ? instructions : instructions[instructions.match(/\d+/)[0].length..-1]
         recipe.instructions = instructions
         recipe.remote_photo_url = photo_url
         recipe.save!
@@ -102,8 +103,9 @@ UserRecipe.destroy_all
                 ingredient_end_season = Date.new(2017,12,31)
 
                 ingredient = Ingredient.new()
-
-                ingredient.name = ingredient_name
+                t = ingredient_name
+                t = t.match(/([\w ]+),([\w ]+)/).nil? ? t : t.match(/([\w ]+),([\w ]+)/)[1]
+                ingredient.name = t.gsub(/\([\w ]+\)/, "").strip.gsub(/  /, " ")
                 ingredient.category = ingredient_category
                 ingredient.start_of_seasonality = ingredient_start_season
                 ingredient.end_of_seasonality = ingredient_end_season
