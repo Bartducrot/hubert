@@ -28,6 +28,7 @@ class IngredientTastesController < ApplicationController
     # binding.pry
     # # raise
     ingredient_taste = IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: true )
+    @ingredient_taste = ingredient_taste
   end
 
   def like_true_and_reload
@@ -47,6 +48,7 @@ class IngredientTastesController < ApplicationController
     # binding.pry
     # raise
     ingredient_taste = IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: false )
+    @ingredient_taste = ingredient_taste
   end
 
   def like_false_and_reload

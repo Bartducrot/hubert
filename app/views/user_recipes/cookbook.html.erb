@@ -26,7 +26,7 @@
   $(".meal-cross").click(function() {
     var $meal = $(this).closest('.main-container')
     idClick = $meal.find(".btn-recipe").attr('id')
-    $(this).closest('.btn-recipe').fadeOut(400);
+    $(this).closest('.btn-recipe').fadeOut(200);
       $.ajax({
       url: "/user_recipes/" + idClick,
       type: 'DELETE',
