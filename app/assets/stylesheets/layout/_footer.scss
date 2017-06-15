@@ -1,7 +1,7 @@
  .footer {
   position: fixed;
   bottom: 0;
-  height: 50px;
+  height: 60px;
   width: 100%;
   color: white;
   background-color: $off-black;
@@ -11,64 +11,31 @@
     color: white;
   }
 
-  i:hover {
-    color: rgb(210, 210, 210);
-  }
-
   a{
     color: transparent;
   }
  }
 
- .calendar {
-  margin-left: 45px;
- }
-
  .footer-flex {
   display: flex;
   justify-content: space-between;
-  position: relative;
-  background-color: $off-black;
+  background-color: #292d35;
+  padding-left: 20px;
+  padding-right: 20px;
  }
 
- .footer-flex-left {
+ .footer-flex {
   i {
-    padding: 6px 15px;
-    font-size: 38px;
+    padding: 8px 0px;
+    font-size: 45px;
     z-index: 51;
   }
  }
- .footer-flex-right {
-  i {
-    padding: 6px 45px;
-    font-size: 38px;
-    z-index: 51;
-  }
-}
+
 .footer-ingredient_tastes-swiper{
   position: absolute !important;
 }
 
-.home-button {
-  font-size: 55px;
-  margin-bottom: 15px;
+.active i {
+  color: $blue;
 }
-
-.footer-circle {
-  background-color: $off-black;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: -20px;
-  left: 0px;
-  right: 0px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 -5px 5px -5px $off-black;
-  z-index: 0;
- }
-

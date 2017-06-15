@@ -15,30 +15,19 @@
  <% if user_signed_in? %>
 <div class="footer footer-<%= params[:controller] %>-<%= params[:action] %>">
   <div class="footer-flex">
-    <div class="footer-flex-left">
       <%= link_to swiper_path do  %>
         <i class="material-icons footer-menu-item" aria-hidden="true">thumbs_up_down</i>
-        <!-- <i class="material-icons md-dark">face</i> -->
       <% end %>
       <%= link_to calendar_path(Date.today) do  %>
         <i class="material-icons footer-menu-item calendar" aria-hidden="true">date_range</i>
       <% end %>
-    </div>
 
-    <div class="footer-circle">
-      <%= link_to root_path do  %>
-        <i class="fa fa-home home-button" aria-hidden="true"></i>
-      <% end %>
-    </div>
-
-    <div class="footer-flex-right">
       <%= link_to cookbook_path do  %>
         <i class="material-icons footer-menu-item" aria-hidden="true">book</i>
       <% end %>
       <%= link_to shopping_cart_path do  %>
         <i class="material-icons footer-menu-item" aria-hidden="true">shopping_cart</i>
       <% end %>
-    </div>
   </div>
 </div>
  <% else %>
@@ -65,4 +54,16 @@
       </div>
   </div>
 </footer>
+<% end %>
+
+<% content_for(:after_js) do %>
+<script>
+var pathname = window.location.pathname;
+
+  $('.footer-flex a').each(function(){
+    if ($(this).attr('href') === pathname) {
+      $(this).addClass('active');
+    }
+  });
+</script>
 <% end %>
