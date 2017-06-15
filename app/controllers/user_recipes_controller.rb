@@ -82,6 +82,7 @@ class UserRecipesController < ApplicationController
   end
 
   def update
+
   end
 
   def date

@@ -8,11 +8,11 @@
 
 .meal-cross {
   position: absolute;
-  top: 0px;
+  top: -3px;
   margin: 0px;
   padding: 0px;
   font-size: 30px;
-  margin-left: 10px;
+  margin-left: -14px;
   margin-bottom: 10px;
 }
 
@@ -25,6 +25,8 @@
 .meal-type h2 {
   font-weight: bolder;
   font-size: 20px;
+  margin-top: 0px;
+  margin-left: 26px;
 }
 
 // Base Colors
@@ -155,4 +157,21 @@ input::-moz-focus-outer {
 #calender-date {
   text-align: center;
   font-size: 20px;
+}
+
+.title-meal-people {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.dropdown-toggle {
+  margin: 0px;
+}
+
+.dropdown-menu {
+  text-align: center;
+  width: 20px;
 }

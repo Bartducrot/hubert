@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :user_recipes, only: [:create]
+  resources :user_recipes, only: [:create, :destroy]
   resources :users, only: [:show] do
     resources :user_recipes, only: [:index, :edit, :update]
     resources :shopping_items, only: [:update]
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   resources :recipes, only: [:show]
   post :delete_user_recipe, to: "users#delete_user_recipe"
+  post :update_people_recipe, to: "users#update_people_recipe"
 
   get "cookbook", to: "user_recipes#cookbook", as: "cookbook"
   get "calendar/:date", to: "user_recipes#index", as: 'calendar'
