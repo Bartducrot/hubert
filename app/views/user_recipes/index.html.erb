@@ -181,13 +181,20 @@
     $meal.find(".close-slider").toggleClass("close");
  });
 
+
     $("li").click(function() {
       var $itemSelection = $(this).text()
+      var $meal = $(this).closest('.meal-type')
+      if ($itemSelection == 1) {
+        $people = ' person'
+      } else {
+        $people = ' people'
+      };
+      $meal.find('.dropdown-toggle').text($itemSelection+ $people)
       var $meal = $(this).attr("class")
       var $mealReduced = $meal.substr(0, $meal.length - 7)
       var $interpolation = '.swiper-slide-'+$mealReduced+'.swiper-slide-active'
       var $selected_recipe_id = $($interpolation).attr("data-recipe-id");
-      console.log($selected_recipe_id)
       $.ajax({
       url: "<%= update_people_recipe_path %>",
       type: 'POST',
