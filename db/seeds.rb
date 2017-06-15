@@ -37,7 +37,7 @@ UserRecipe.destroy_all
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
-    index_start = 16020
+    index_start = 17021
 
     url = base_url + "#{index_start + i}"
     puts url
@@ -57,6 +57,8 @@ UserRecipe.destroy_all
         instructions += step.text.strip
       end
 
+      photo_url = html.search('#BI_openPhotoModal1').first.attribute('src')
+
       recipe = Recipe.find_by_name(recipe_name)
       if recipe
         puts "this recipe already exist in the data base : name = \"#{recipe.name}\" , id = #{recipe.id}"
@@ -67,6 +69,7 @@ UserRecipe.destroy_all
         recipe.recipe_type = recipe_type
         recipe.category = category
         recipe.instructions = instructions
+        recipe.remote_photo_url = photo_url
         recipe.save!
 
         puts "new recipe: #{recipe.name}"
@@ -118,7 +121,7 @@ UserRecipe.destroy_all
               association = RecipeIngredient.new()
               association.recipe = recipe
               association.ingredient = ingredient
-              association.quantity = dose.amount.to_f
+              association.quantity = dose.amount
               association.save!
               puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
             end
