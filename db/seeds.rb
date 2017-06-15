@@ -29,8 +29,10 @@ require 'date'
 ShoppingItem.destroy_all
 UserRecipe.destroy_all
 RecipeIngredient.destroy_all
+IngredientTaste.destroy_all
 Recipe.destroy_all
 Ingredient.destroy_all
+
 
 
 3.times do |i|
