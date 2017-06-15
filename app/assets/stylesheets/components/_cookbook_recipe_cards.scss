@@ -1,81 +1,111 @@
 .product {
-  padding: 5px 5px;
   border-radius: 3px;
   transition: all 0.15s ease;
   text-decoration: none;
   height: 100px;
-  margin: 5px;
   display: flex;
+  margin: 8px 0;
+
+  .i {
+    color: rgb (110,110,110);
+    text-decoration: none;
+  }
+
+  .fa {
+    position: relative;
+    color: black;
+    // right: 15px;
+  }
+
+  &:hover {
+    text-decoration: none !important;
+  }
 }
 
+// font-family: 'Oswald', sans-serif;
+// font-family: 'Lato', sans-serif;
+// font-family: 'Montserrat', sans-serif;
+// font-family: 'Open Sans Condensed', sans-serif;
 
 .breakfast {
-  background: rgba(242, 0, 7, 0.05);
+  background: rgba(210, 51, 51, 0.05);
 
 }
 
 /* Body design */
 .product-body {
   flex: 1 1 auto;
+  padding: 0 5px;
+  position: relative;
+
+  .recipe-name {
+    font-size: 20px;
+    color: rgb(110,110,110);
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .recipe-people {
+    font-size: 15px;
+    color: rgb(110,110,110);
+    position: absolute;
+    bottom: 3px;
+    right: 10px;
+
+    i {
+      color: rgb(110,110,110);
+    }
+  }
+
+  .recipe-date {
+    font-size: 13px;
+    color: rgb(110,110,110);
+    font-weight: 300;
+    position: absolute;
+    bottom: 3px;
+    font-style: italic;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .recipe-category{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(110,110,110);
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    padding-top: 5px;
+  }
+
 }
 /* Product image */
 .product-image {
   border-radius: 5px 0px 0px 5px;
-  margin-right: 5px;
   min-width: 115px;
   background-size: cover;
 }
 
 /* Hover effects */
-.product:hover {
-  background: #f7f7fa;
-  cursor: pointer;
-}
+// .product:hover {
+//   background: #f7f7fa;
+//   cursor: pointer;
+// }
 // .product:hover .product-upvote { transform: scale(1.2) }
 // .product:hover .product-controls-hidden a { color: #E6E6E6 }
 
-.recipe-name {
-  font-size: 15px;
-  // padding: 5px 10px;
-  font-weight: 400;
-  color: rgb(150,150,150);
-  &:first-letter{
-    text-transform: capitalize;
-  }
-}
-.recipe-date {
-  font-size: 13px;
-  color: rgb(150,150,150);
-  font-weight: 300;
-  // text-align: right;
-  // padding-right: 10px;
-  padding-top: 10px;
-  position: absolute;
-  font-style: italic;
-}
 
-.recipe-category{
-  font-size: 15px;
-  font-weight: 500;
-  color: rgb(150,150,150);
-  text-transform: uppercase;
-  top: 5px;
-
-}
 
 
 
 .lunch{
-  background-opacity: 0.3;
+  background: rgba(50, 183, 150, 0.05);
 
 }
 
 .dinner {
-  background-opacity: 0.3;
+  background: rgba(70, 154, 224, 0.05);
 
 }
 
 .aperitivo {
-  background-opacity: 0.3;
+  background: rgba(230, 126, 34, 0.05);
 
 }
