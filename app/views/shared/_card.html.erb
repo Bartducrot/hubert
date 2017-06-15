@@ -1,8 +1,16 @@
 <%= link_to recipe_path(recipe.id), class: 'card-style' do %>
-<div class="card" class="banner" style="background-image: linear-gradient(rgba(0,0,0,0) 30%, rgba(0,0,0,3)), url('<%= image_path "chicken-bake.jpg", height: 300, width: 400, crop: :fill %>'); background-size: cover">
+<% if recipe.photo.blank? %>
+<% photo = image_path 'ingredients.jpg' %>
+
+<% else %>
+<% photo = recipe.photo %>
+
+<% end %>
+<div class="card" class="banner" style="background-image: linear-gradient(rgba(0,0,0,0) 30%, rgba(0,0,0,3)), url('<%= photo %>' ); background-size: cover">
     <h3><%= recipe.name.capitalize %></h3>
   <div class="card-time"><i class="fa fa-clock-o" aria-hidden="true"></i><em><%= recipe.category.upcase %></em></div>
   <i class="fa fa-chevron-left banner-chevron-left" aria-hidden="true"></i>
   <i class="fa fa-chevron-right banner-chevron-right" aria-hidden="true"></i>
 </div>
 <% end %>
+
