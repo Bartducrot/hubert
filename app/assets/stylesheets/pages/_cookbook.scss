@@ -1,51 +1,12 @@
-.recipe-name {
+  .recipe-cross {
   font-size: 20px;
-  padding: 5px 10px;
-  &:first-letter{
-    text-transform: capitalize;
-  }
-}
-.recipe-date {
-  font-size: 15px;
-  text-align: right;
-  padding-right: 10px;
+  color: rgb(250,250,250);
   position: absolute;
-  bottom: 5px;
+  top: 0px;
   right: 5px;
-  font-style: italic;
-}
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
 
-.recipe-category{
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
-  text-transform: uppercase;
-  background: $dark-grey;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-
-.breakfast {
-  background: $blue;
-  position: relative;
-}
-
-.lunch{
-  background: $red;
-  position: relative;
-}
-
-.dinner {
-  background: $brand-color;
-  position: relative;
-}
-
-.aperitivo {
-  background: $orange;
-  position: relative;
-}
-
-i {
-  color: black;
+  // i {
+  //   color: rgb(110,110,110);
+  // }
 }
