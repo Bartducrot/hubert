@@ -1,10 +1,10 @@
-<div class="main-container">
+<div class="main-container shopping-cart" style="background-image: linear-gradient(rgba(240,240,240,0.8) 0%, rgba(240,240,240,0.9) 50%), url('<%= cl_image_path "Hubert Page pictures/tablecloth-458019_960_720", width:700, :crop=>"scale" %>')">
   <% @sorted_ingredient_hash.each_key do |category| %>
 
     <h2><%= category.capitalize %></h2>
-    <div class="container">
+    <div class="container qwerty">
       <div class="row">
-        <div class="col-xs-10">
+        <div class="col-xs-12">
           <% @sorted_ingredient_category_hash[category].each do |item| %>
             <%= simple_form_for [current_user, item[:s_item]], remote: true, class: "form-inline" do |f| %>
               <% bought = item[:s_item].bought %>
