@@ -1,5 +1,12 @@
 <!-- needs to change title and image to dynamic -->
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0) 30%, rgba(0,0,0,3)), url('<%= image_path "pizza.jpg", height: 300, width: 400, crop: :fill %>'); background-size: cover">
+<% if @recipe.photo.blank? %>
+<% photo = image_path 'ingredients.jpg' %>
+
+<% else %>
+<% photo = @recipe.photo %>
+
+<% end %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0) 30%, rgba(0,0,0,3)), url('<%= photo %>'); background-size: cover">
   <div class="banner-content">
     <h1><%= @recipe.name.capitalize %></h1>
   </div>

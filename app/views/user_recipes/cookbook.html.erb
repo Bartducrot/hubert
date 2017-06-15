@@ -1,32 +1,20 @@
-<div class="container main-container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h2>Your current recipes</h2>
-      </div>
-      <% @next_user_recipes.each do |u_recipe| %>
-        <% recipe = Recipe.find(u_recipe.recipe_id) %>
-          <div class="col-xs-12">
-            <div class="btn-recipe <%= recipe.category %>" id="<%= u_recipe.id %>">
-            <% category = recipe.category %>
-              <div class="recipe-name" ><%= recipe.name %></div>
-              <div class="recipe-date" ><%= u_recipe.date.strftime("%A %d/%m/%Y") %></div>
-              <%= link_to recipe_path(recipe) do %>
-                <div class="recipe-category"><%= recipe.category %></div>
-              <% end %>
-              <i class="fa fa-times meal-cross"></i>
-            </div>
-          </div>
-      <% end %>
-
+<div class="container-fluid main-container">
+  <% @next_user_recipes.each do |u_recipe| %>
+    <% recipe = Recipe.find(u_recipe.recipe_id) %>
+    <div class="recipe-card-wrapper">
+      <%= render "shared/cookbook_recipe_cards", recipe: recipe, u_recipe: u_recipe %>
+      <div class="recipe-cross"><i class="fa fa-times"></i></div>
     </div>
-  </div>
+  <% end %>
+ </div>
 
 <% content_for(:after_js) do %>
    <script>
-  $(".meal-cross").click(function() {
+  $(".recipe-cross").click(function() {
     var $meal = $(this).closest('.main-container')
-    idClick = $meal.find(".btn-recipe").attr('id')
-    $(this).closest('.btn-recipe').fadeOut(400);
+    idClick = $meal.find(".delete-recipe").attr('id')
+    console.log(idClick);
+    $(this).closest('.recipe-card-wrapper').fadeOut(400);
       $.ajax({
       url: "/user_recipes/" + idClick,
       type: 'DELETE',
@@ -37,3 +25,4 @@
 });
 </script>
 <% end %>
+
