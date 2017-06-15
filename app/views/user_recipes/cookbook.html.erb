@@ -1,17 +1,20 @@
 <div class="container-fluid main-container">
-  <h2>Your current recipes</h2>
   <% @next_user_recipes.each do |u_recipe| %>
     <% recipe = Recipe.find(u_recipe.recipe_id) %>
+    <div class="recipe-card-wrapper">
       <%= render "shared/cookbook_recipe_cards", recipe: recipe, u_recipe: u_recipe %>
+      <div class="recipe-cross"><i class="fa fa-times"></i></div>
+    </div>
   <% end %>
  </div>
 
 <% content_for(:after_js) do %>
    <script>
-  $(".meal-cross").click(function() {
+  $(".recipe-cross").click(function() {
     var $meal = $(this).closest('.main-container')
-    idClick = $meal.find(".delete-recipeg").attr('id')
-    $(this).closest('.delete-recipeg').fadeOut(400);
+    idClick = $meal.find(".delete-recipe").attr('id')
+    console.log(idClick);
+    $(this).closest('.recipe-card-wrapper').fadeOut(400);
       $.ajax({
       url: "/user_recipes/" + idClick,
       type: 'DELETE',

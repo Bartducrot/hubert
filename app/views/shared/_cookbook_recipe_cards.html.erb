@@ -1,10 +1,10 @@
-<%= link_to recipe_path(recipe), class: "product #{recipe.category} delete-recipe" do %>
-  <div style="background-image: url(<%= image_path 'chicken-salad' %>)" class="product-image"></div>
+<%= link_to recipe_path(recipe), class: "product #{recipe.category} delete-recipe", id: u_recipe.id do %>
+  <% photo_path = u_recipe.recipe.photo? ? u_recipe.recipe.photo.path : 'Hubert Page pictures/CIN_IngTech_0615_feature' %>
+  <div style="background-image: url('<%= cl_image_path photo_path %>')" class="product-image"></div>
   <div class='product-body'>
     <div class="recipe-name"><%= recipe.name %></div>
     <div class="recipe-category"><%= recipe.category %></div>
     <div class="recipe-date"><%= u_recipe.date.strftime("%A %d/%m/%Y") %></div>
     <div class="recipe-people"><%= u_recipe.number_of_people %> <i class="fa fa-cutlery"></i></div>
-    <i class="fa fa-times meal-cross"></i>
   </div>
 <% end %>

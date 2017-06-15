@@ -6,10 +6,10 @@
   display: flex;
   margin: 8px 0;
 
-  .i {
-    color: rgb (110,110,110);
-    text-decoration: none;
-  }
+  // .i {
+  //   color: rgb (110,110,110);
+  //   text-decoration: none;
+  // }
 
   .fa {
     position: relative;
@@ -33,6 +33,23 @@
 }
 
 /* Body design */
+.recipe-card-wrapper {
+  position: relative;
+}
+
+//   .recipe-cross {
+//   font-size: 20px;
+//   color: rgb(250,250,250);
+//   position: absolute;
+//   top: 0px;
+//   right: 5px;
+//   text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
+
+//   i {
+//     color: rgb(110,110,110);
+//   }
+// }
+
 .product-body {
   flex: 1 1 auto;
   padding: 0 5px;
@@ -42,6 +59,7 @@
     font-size: 20px;
     color: rgb(110,110,110);
     font-family: 'Oswald', sans-serif;
+    max-width: 256px;
   }
 
   .recipe-people {
@@ -55,6 +73,10 @@
       color: rgb(110,110,110);
     }
   }
+
+
+
+
 
   .recipe-date {
     font-size: 13px;
