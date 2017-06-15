@@ -70,7 +70,7 @@ Ingredient.destroy_all
         recipe.name = recipe_name
         recipe.recipe_type = recipe_type
         recipe.category = category
-        instructions = instructions.match(/\d+/).nil? ? instructions : instructions[instructions.match(/\d+/)[0].length..-1]
+        instructions = instructions.match(/\d+/).nil? ? instructions : (instructions[instructions.match(/\d+/)[0].length - 1)..-1]
         recipe.instructions = instructions
         recipe.remote_photo_url = photo_url
         recipe.save!
