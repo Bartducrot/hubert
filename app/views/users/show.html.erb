@@ -27,10 +27,10 @@
             </div>
             <div class="likes col-xs-6">
               <h4>Liked</h4>
-              <% if @like_ingredient_tastes %>
-                  <% @liked_ingredients_tastes.each do |i| %>
-                    <ul><%= i.ingredient.name %></ul>
-                  <% end %>
+              <% if @liked_ingredient_tastes %>
+                <% @liked_ingredient_tastes.each do |i| %>
+                  <li><%= i.ingredient.name %></li>
+                <% end %>
               <% else %>
                 <p>None liked</p>
               <% end %>
