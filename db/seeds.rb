@@ -70,7 +70,12 @@ Ingredient.destroy_all
         recipe.name = recipe_name
         recipe.recipe_type = recipe_type
         recipe.category = category
+        puts "instructions before regex"
+        puts instructions
+        puts "===================="
         instructions = instructions.match(/\d+/).nil? ? instructions : instructions[(instructions.match(/\d+/)[0].length - 1)..-1]
+        puts "instructions after regex"
+        puts instructions
         recipe.instructions = instructions
         recipe.remote_photo_url = photo_url
         recipe.save!
