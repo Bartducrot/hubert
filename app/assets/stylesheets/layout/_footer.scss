@@ -11,17 +11,9 @@
     color: white;
   }
 
-  i:hover {
-    color: rgb(210, 210, 210);
-  }
-
   a{
     color: transparent;
   }
- }
-
- .calendar {
-  // margin-left: 0px;
  }
 
  .footer-flex {
@@ -44,3 +36,6 @@
   position: absolute !important;
 }
 
+.active i {
+  color: $blue;
+}
