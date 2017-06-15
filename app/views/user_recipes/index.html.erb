@@ -4,36 +4,68 @@
   <h1 id="calender-date"><%= @day.strftime('%a %e %b') %></h1>
 
   <div class="meal-type">
-
-    <h2  class="text-center">BREAKFAST</h2>
-    <% selected_recipe = current_user.selected_recipe("breakfast", params[:date]) %>
-    <% if selected_recipe %>
-      <h2 id="breakfast_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-     <%= render "shared/swiper", meal: "breakfast"%>
-     <div class="close-slider close">
-      <%= render "shared/empty-meal" %>
-     </div>
-    <% else %>
-      <h2 id="breakfast_delete" class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
-     <%= render "shared/swiper", meal: "breakfast"%>
-     <div class="close-slider">
-      <%= render "shared/empty-meal" %>
-     </div>
-
-    <% end %>
-  </div>
-
-  <div class="range-slider">
-    <input class="range-slider__range" type="range" value="1" min="1" max="15">
-    <div class="profile-pic">
-      <span class="range-slider__value">0</span>
+    <div class="title-meal-people">
+      <h2  class="text-center">BREAKFAST</h2>
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <span class="caret" class="fa fa-user" ></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right">
+          <li class="breakfast_people">1</li>
+          <li class="breakfast_people">2</li>
+          <li class="breakfast_people">3</li>
+          <li class="breakfast_people">4</li>
+          <li class="breakfast_people">5</li>
+          <li class="breakfast_people">6</li>
+          <li class="breakfast_people">7</li>
+          <li class="breakfast_people">8</li>
+          <li class="breakfast_people">9</li>
+          <li class="breakfast_people">10</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
+      <% selected_recipe = current_user.selected_recipe("breakfast", params[:date]) %>
+      <% if selected_recipe %>
+        <h2 id="breakfast_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+       <%= render "shared/swiper", meal: "breakfast"%>
+       <div class="close-slider close">
+        <%= render "shared/empty-meal" %>
+       </div>
+      <% else %>
+        <h2 id="breakfast_delete" class="delete open-slider close"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
+        <%= render "shared/swiper", meal: "breakfast"%>
+       <div class="close-slider">
+          <%= render "shared/empty-meal" %>
+       </div>
+      <% end %>
+    </div>
   <hr>
 
   <div class="meal-type">
-    <h2  class="text-center">LUNCH</h2>
+    <div class="title-meal-people">
+      <h2  class="text-center">LUNCH</h2>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            <span class="caret" class="fa fa-user" ></span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-right">
+            <li class="lunch_people">1</li>
+            <li class="lunch_people">2</li>
+            <li class="lunch_people">3</li>
+            <li class="lunch_people">4</li>
+            <li class="lunch_people">5</li>
+            <li class="lunch_people">6</li>
+            <li class="lunch_people">7</li>
+            <li class="lunch_people">8</li>
+            <li class="lunch_people">9</li>
+            <li class="lunch_people">10</li>
+          </ul>
+        </div>
+      </div>
+
     <% selected_recipe = current_user.selected_recipe("lunch", params[:date]) %>
     <% if selected_recipe %>
       <h2 id="lunch_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
@@ -50,15 +82,31 @@
     <% end %>
   </div>
 
-  <div class="range-slider">
-    <input class="range-slider__range" type="range" value="1" min="1" max="15">
-    <span class="range-slider__value">0</span>
-  </div>
-
   <hr>
 
-    <div class="meal-type">
-    <h2  class="text-center">APERITIVO</h2>
+  <div class="meal-type">
+    <div class="title-meal-people">
+      <h2  class="text-center">APERITIVO</h2>
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+              <i class="fa fa-user" aria-hidden="true"></i>
+              <span class="caret" class="fa fa-user" ></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li class="aperitivo_people">1</li>
+              <li class="aperitivo_people">2</li>
+              <li class="aperitivo_people">3</li>
+              <li class="aperitivo_people">4</li>
+              <li class="aperitivo_people">5</li>
+              <li class="aperitivo_people">6</li>
+              <li class="aperitivo_people">7</li>
+              <li class="aperitivo_people">8</li>
+              <li class="aperitivo_people">9</li>
+              <li class="aperitivo_people">10</li>
+            </ul>
+          </div>
+        </div>
+
     <% selected_recipe = current_user.selected_recipe("aperitivo", params[:date]) %>
     <% if selected_recipe %>
       <h2 id="aperitivo_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
@@ -76,17 +124,36 @@
     <% end %>
   </div>
 
-  <div class="range-slider">
-    <input class="range-slider__range" type="range" value="1" min="1" max="15">
-    <span class="range-slider__value">0</span>
-  </div>
+
 
   <hr>
 
     <div class="meal-type">
-    <h2  class="text-center">DINNER</h2>
+      <div class="title-meal-people">
+        <h2  class="text-center">DINNER</h2>
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <span class="caret" class="fa fa-user" ></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dinner_people">1</li>
+                <li class="dinner_people">2</li>
+                <li class="dinner_people">3</li>
+                <li class="dinner_people">4</li>
+                <li class="dinner_people">5</li>
+                <li class="dinner_people">6</li>
+                <li class="dinner_people">7</li>
+                <li class="dinner_people">8</li>
+                <li class="dinner_people">9</li>
+                <li class="dinner_people">10</li>
+              </ul>
+            </div>
+          </div>
+
     <% selected_recipe = current_user.selected_recipe("dinner", params[:date]) %>
     <% if selected_recipe %>
+
       <h2 id="dinner_delete" class="delete open-slider"><i class="fa fa-times meal-cross" aria-hidden="true"></i></h2>
      <%= render "shared/swiper", meal: "dinner"%>
      <div class="close-slider close">
@@ -101,11 +168,6 @@
     <% end %>
   </div>
 
-  <div class="range-slider">
-    <input class="range-slider__range" type="range" value="1" min="1" max="15">
-    <span class="range-slider__value">0</span>
-  </div>
-
   <hr>
 
 </div>
@@ -118,6 +180,23 @@
     $meal.find(".open-slider").toggleClass("close");
     $meal.find(".close-slider").toggleClass("close");
  });
+
+    $("li").click(function() {
+      var $itemSelection = $(this).text()
+      var $meal = $(this).attr("class")
+      var $mealReduced = $meal.substr(0, $meal.length - 7)
+      var $interpolation = '.swiper-slide-'+$mealReduced+'.swiper-slide-active'
+      var $selected_recipe_id = $($interpolation).attr("data-recipe-id");
+      console.log($selected_recipe_id)
+      $.ajax({
+      url: "<%= update_people_recipe_path %>",
+      type: 'POST',
+      data: { recipe_id: $selected_recipe_id, date: '<%= params[:date] %>', number_of_people: $itemSelection },
+      success: function() {
+        console.log("I worked")
+      }
+    });
+  });
 
 
 
@@ -140,7 +219,9 @@
   });
 });
 
-
+$('.range-slider__range::-webkit-slider-thumb').click(function() {
+    console.log("Hello")
+  });
 
 var rangeSlider = function(){
   var slider = $('.range-slider'),
