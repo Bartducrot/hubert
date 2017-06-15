@@ -73,7 +73,7 @@ Ingredient.destroy_all
         puts "instructions before regex"
         puts instructions
         puts "===================="
-        instructions = instructions.match(/\d+/).nil? ? instructions : instructions[(instructions.match(/\d+/)[0].length - 1)..-1]
+        instructions = instructions.match(/\A\d+/).nil? ? instructions : instructions[(instructions.match(/\A\d+/)[0].length - 1)..-1]
         puts "instructions after regex"
         puts instructions
         recipe.instructions = instructions
