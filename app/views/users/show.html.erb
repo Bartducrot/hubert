@@ -1,4 +1,4 @@
-m<div class="main-container">
+<div class="main-container">
   <div class="container user-profile text-center">
     <div class="avatar-position" >
       <% avatar_url = @user.facebook_picture_url || @user.photo.url(:square) || "http://placehold.it/30x30" %>
@@ -27,10 +27,10 @@ m<div class="main-container">
             </div>
             <div class="likes col-xs-6">
               <h4>Liked</h4>
-              <% if @like_ingredient_tastes %>
-                  <% @liked_ingredients_tastes.each do |i| %>
-                    <ul><%= i.ingredient.name %></ul>
-                  <% end %>
+              <% if @liked_ingredient_tastes %>
+                <% @liked_ingredient_tastes.each do |i| %>
+                  <li><%= i.ingredient.name %></li>
+                <% end %>
               <% else %>
                 <p>None liked</p>
               <% end %>
