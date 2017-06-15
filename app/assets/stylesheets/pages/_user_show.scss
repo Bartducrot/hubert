@@ -10,14 +10,29 @@
   }
 }
 
-.preferences {
-  h4 {
-    padding-left: 10px;
-  }
+.edit {
+  margin-top: 10px;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 
   .settings {
     background:rgb(240, 240, 240);
     border-radius: 5px;
-
   }
+}
+
+h2 {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  font-weight: lighter;
+}
+
+li {
+  font-size: 14px;
 }
