@@ -22,8 +22,76 @@
       swipeDislike();
     });
 
+    function getCategoryImage(category){
+      switch (category){
+        case 'meat':
+          var image_path = "<%= image_path('meat.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'dairy':
+          var image_path = "<%= image_path('dairy.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'vegetable':
+          var image_path = "<%= image_path('vegetable.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'fruits':
+          var image_path = "<%= image_path('fruits.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'spices':
+          var image_path = "<%= image_path('spices.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'fish':
+          var image_path = "<%= image_path('fish.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'baking':
+          var image_path = "<%= image_path('baking.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'oils':
+          var image_path = "<%= image_path('oils.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'seafood':
+          var image_path = "<%= image_path('seafood.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'sweeteners':
+          var image_path = "<%= image_path('sweeteners.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'seasonings':
+          var image_path = "<%= image_path('seasonings.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'nuts':
+          var image_path = "<%= image_path('nuts.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'condiments':
+          var image_path = "<%= image_path('condiments.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'desserts':
+          var image_path = "<%= image_path('desserts.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'beverages':
+          var image_path = "<%= image_path('beverages.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'soup':
+          var image_path = "<%= image_path('soup.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'alternatives':
+          var image_path = "<%= image_path('alternatives.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'sauces':
+          var image_path = "<%= image_path('sauces.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        case 'alcohol':
+          var image_path = "<%= image_path('alcohol.jpg', width: 400, height: 300, crop: :fill) %>";
+          break;
+        default:
+          var image_path = "<%= image_path('ingredients.jpg', width: 400, height: 300, crop: :fill) %>";
+      }
+      return image_path
+    }
+
+
     var ingredient = ingredient_json.pop()
-    addNewIngredient( ingredient.name, ingredient.category , '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
+    console.log(ingredient)
+    var image_path = getCategoryImage(ingredient.category)
+    addNewIngredient( ingredient.name, ingredient.category , image_path);
 
     function swipe() {
       Draggable.create("#photoIngredient", {
@@ -46,8 +114,9 @@
       swipe.staggerTo($photo_like, 0.8, {bezier:[{left:"+=400", top:"+=300", rotation:"30"}], ease:Power1.easeInOut});
 
       var ingredient = ingredient_json.pop()
+      var image_path = getCategoryImage(ingredient.category)
 
-      addNewIngredient( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
+      addNewIngredient( ingredient.name, ingredient.category, image_path);
       $.ajax({
         type: "POST",
         url: "/like",
@@ -66,8 +135,9 @@
       swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=-350", top:"+=300", rotation:"-30"}], ease:Power1.easeInOut});
 
       var ingredient = ingredient_json.pop()
+      var image_path = getCategoryImage(ingredient.category)
 
-      addNewIngredient( ingredient.name, ingredient.category, '<%= image_path("ingredients.jpg", width: 400, height: 300, crop: :fill) %>');
+      addNewIngredient( ingredient.name, ingredient.category, image_path);
 
       $.ajax({
         type: "POST",
