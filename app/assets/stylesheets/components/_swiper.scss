@@ -10,7 +10,6 @@
    text-align: center;
    font-size: 18px;
    background: #fff;
-   /* Center slide text vertically */
    display: -webkit-box;
    display: -ms-flexbox;
    display: -webkit-flex;
@@ -25,14 +24,25 @@
    align-items: center;
 }
 
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7px;
+  margin-bottom: 3px;
+}
+
 .tinder-swiper {
   padding-top: 66px;
 
+  i {
+    font-size: 13px;
+    margin: 0 5px;
+  }
+
   h2 {
+    margin: 0;
     font-size: 28px;
     font-family: oswald;
-    margin-top: 2px;
-    margin-left: 15px;
-    margin-bottom: 3px;
   }
 }
