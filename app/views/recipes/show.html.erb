@@ -30,8 +30,7 @@
     </ul>
   </div>
   <div id="menu1" class="tab-pane fade method-text">
-    <p> <%= @recipe.instructions %>
-    </p>
+    <%= simple_format (@recipe.instructions) %>
   </div>
 </div>
 
