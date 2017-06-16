@@ -59,7 +59,7 @@ Ingredient.destroy_all
         instructions += "#{step.text.strip}\n"
       end
 
-      photo_url = html.search('#BI_openPhotoModal1').first.attribute('src')
+      photo_url = html.search('.rec-photo').first.attribute('src')
 
       recipe = Recipe.find_by_name(recipe_name)
       if recipe
@@ -87,6 +87,7 @@ Ingredient.destroy_all
         puts "#{recipe.instructions}"
         puts 'Ingredient :'
 
+
         #search for the ingredient
         html.search('span.recipe-ingred_txt.added').each do |ingr|
           puts "---- #{ingr.text.strip}"
@@ -97,8 +98,10 @@ Ingredient.destroy_all
             rescue Exception => e
             end
             puts "ingredient in the recipe"
-            puts dose.name
+
+
             if dose
+              ingredient_name = dose.ingredient
               ingredient_category = ["vegetable", "meat", "dairy"].sample
               if ingredient_name.match(/s{2}/)
                 ingredient_unit = dose.ingredient
@@ -167,6 +170,7 @@ Ingredient.destroy_all
               association.save!
               puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
             end
+
           else
             puts "#{ingr.text.strip} --- NOT AN INGREDIENT!"
           end
