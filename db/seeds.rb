@@ -35,11 +35,11 @@ Ingredient.destroy_all
 
 
 
-30.times do |i|
+300.times do |i|
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
-    index_start = 16700
+    index_start = 16730
 
     url = base_url + "#{index_start + i}"
     puts url
