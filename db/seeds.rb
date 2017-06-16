@@ -96,9 +96,13 @@ Ingredient.destroy_all
               dose = Ingreedy.parse(ingr.text.strip)
             rescue Exception => e
             end
+            puts "ingredient in the recipe"
+            puts dose.name
             if dose
               ingredient_category = ["vegetable", "meat", "dairy"].sample
-              unless ingredient_name.match(/s{2}/)
+              if ingredient_name.match(/s{2}/)
+                ingredient_unit = dose.ingredient
+              else
                 ingredient_name = dose.ingredient.gsub(/s$/, "")
               end
               t = ingredient_name
