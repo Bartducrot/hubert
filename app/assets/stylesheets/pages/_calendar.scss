@@ -4,6 +4,10 @@
 
 .meal-type {
   position: relative;
+  button {
+    background-color: $dark-grey;
+    color: white;
+  }
 }
 
 .meal-cross {

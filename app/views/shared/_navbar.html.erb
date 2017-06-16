@@ -1,11 +1,8 @@
 <div class="navbar-wagon navbar-<%= params[:controller] %>-<%= params[:action]%>">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "logo-hubert.png" %>
+    <%= image_tag "hubert-logo.png" %>
   <% end %>
-
-
-
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
@@ -16,7 +13,8 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <% avatar_url = current_user.facebook_picture_url || current_user.photo.url(:square) || "http://placehold.it/30x30" %>
+        <% logo = image_url "hubert-logo.png" %>
+          <% avatar_url = current_user.facebook_picture_url || current_user.photo.url(:square) || logo %>
           <%= cl_image_tag avatar_url, class: "avatar avatar-bordered dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
@@ -50,7 +48,8 @@
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">
         <div class="dropdown">
-          <% avatar_url = current_user.facebook_picture_url || current_user.photo.url(:square) || "http://placehold.it/30x30" %>
+        <% logo = image_url "hubert-logo.png" %>
+          <% avatar_url = current_user.facebook_picture_url || current_user.photo.url(:square) || logo %>
           <%= image_tag avatar_url, class: "avatar-bordered dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
           <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
             <li>
