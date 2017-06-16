@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @liked_ingredient_tastes = @user.ingredient_tastes.where(like: true)
-    @disliked_ingredient_tastes = @user.ingredient_tastes.where(like: false)
+    @liked_ingredient_tastes = @user.ingredient_tastes.where(like: true).sort_by { |i| i.ingredient.name }
+    @disliked_ingredient_tastes = @user.ingredient_tastes.where(like: false).sort_by { |i| i.ingredient.name }
   end
 
 

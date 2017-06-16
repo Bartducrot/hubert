@@ -55,3 +55,15 @@
   </div>
 </footer>
 <% end %>
+
+<% content_for(:after_js) do %>
+<script>
+var pathname = window.location.pathname;
+
+  $('.footer-flex a').each(function(){
+    if ($(this).attr('href') === pathname) {
+      $(this).addClass('active');
+    }
+  });
+</script>
+<% end %>

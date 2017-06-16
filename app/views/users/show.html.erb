@@ -15,8 +15,8 @@
     <div class="settings">
       <div class="row">
           <div class="preferences">
-            <div class="dislikes col-xs-6">
-              <h4>Disliked</h4>
+            <div class="dislikes col-xs-5 col-xs-offset-1">
+              <h4 class="disliked">Disliked</h4>
               <% if @disliked_ingredient_tastes %>
                 <% @disliked_ingredient_tastes.each do |i| %>
                   <li><%= i.ingredient.name %></li>
@@ -25,8 +25,8 @@
                 <p>None disliked</p>
               <% end %>
             </div>
-            <div class="likes col-xs-6">
-              <h4>Liked</h4>
+            <div class="likes col-xs-5 col-xs-offset-1">
+              <h4 class="liked">Liked</h4>
               <% if @liked_ingredient_tastes %>
                 <% @liked_ingredient_tastes.each do |i| %>
                   <li><%= i.ingredient.name %></li>

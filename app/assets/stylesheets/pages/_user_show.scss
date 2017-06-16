@@ -27,6 +27,13 @@
     }
   }
 
+  .disliked {
+    color: $danger;
+  }
+
+  .liked {
+    color: $success;
+  }
 
   h2 {
     padding: 10px;
@@ -37,5 +44,16 @@
 
   li {
     font-size: 14px;
+    list-style-type: none;
+    margin-bottom: 5px;
   }
+
+  li:nth-child(even) {
+    color: $off-black;
+  }
+
+  li:nth-child(odd) {
+    color: $darker-grey;
+  }
+
 }
