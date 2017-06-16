@@ -28,16 +28,18 @@ require 'date'
 
 ShoppingItem.destroy_all
 UserRecipe.destroy_all
-# RecipeIngredient.destroy_all
-# Recipe.destroy_all
-# Ingredient.destroy_all
+RecipeIngredient.destroy_all
+IngredientTaste.destroy_all
+Recipe.destroy_all
+Ingredient.destroy_all
 
 
-100.times do |i|
+
+300.times do |i|
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
-    index_start = 17021
+    index_start = 16730
 
     url = base_url + "#{index_start + i}"
     puts url
@@ -54,10 +56,10 @@ UserRecipe.destroy_all
 
       instructions = ""
       html.search('.directions--section__steps span').each do |step|
-        instructions += step.text.strip
+        instructions += "#{step.text.strip}\n"
       end
 
-      photo_url = html.search('#BI_openPhotoModal1').first.attribute('src')
+      photo_url = html.search('.rec-photo').first.attribute('src')
 
       recipe = Recipe.find_by_name(recipe_name)
       if recipe
@@ -68,6 +70,12 @@ UserRecipe.destroy_all
         recipe.name = recipe_name
         recipe.recipe_type = recipe_type
         recipe.category = category
+        puts "instructions before regex"
+        puts instructions
+        puts "===================="
+        instructions = instructions.match(/\A\d+/).nil? ? instructions : instructions[(instructions.match(/\A\d+/)[0].length - 1)..-1]
+        puts "instructions after regex"
+        puts instructions
         recipe.instructions = instructions
         recipe.remote_photo_url = photo_url
         recipe.save!
@@ -79,6 +87,7 @@ UserRecipe.destroy_all
         puts "#{recipe.instructions}"
         puts 'Ingredient :'
 
+
         #search for the ingredient
         html.search('span.recipe-ingred_txt.added').each do |ingr|
           puts "---- #{ingr.text.strip}"
@@ -88,22 +97,57 @@ UserRecipe.destroy_all
               dose = Ingreedy.parse(ingr.text.strip)
             rescue Exception => e
             end
+            puts "ingredient in the recipe"
+
+
             if dose
+              ingredient_name = dose.ingredient
               ingredient_category = ["vegetable", "meat", "dairy"].sample
-              ingredient = Ingredient.find_by_name(dose.ingredient)
+              if ingredient_name.match(/s{2}/)
+                ingredient_unit = dose.ingredient
+              else
+                ingredient_name = dose.ingredient.gsub(/s$/, "")
+              end
+              t = ingredient_name
+              t = t.match(/([\w ]+),([\w ]+)/).nil? ? t : t.match(/([\w ]+),([\w ]+)/)[1]
+              ingredient_name = t.gsub(/\([\w ]+\)/, "").strip.gsub(/  /, " ")
+
+              ingredient = Ingredient.find_by_name(ingredient_name)
+              # ingredient = Ingredient.find_by_name(dose.ingredient)
 
               if ingredient
                 puts "#{ingredient.name} already exist"
+                # stuff to do with dose.amount (convertion to the right unit )
+                unless dose.unit == ingredient.unit
+                # TODO convert the quantity to the right amount
+                  if dose.unit == "cup" && ingredient.unit == "tablespoon"
+                    ingredient_quantity = dose.amount * 16
+                  elsif dose.unit == "cup" && ingredient.unit == "teaspoon"
+                    ingredient_quantity = dose.amount * 48
+                  elsif dose.unit == "tablespoon" && ingredient.unit == "cup"
+                    ingredient_quantity = dose.amount * 0.0625
+                  elsif dose.unit == "tablespoon" && ingredient.unit == "teaspoon"
+                    ingredient_quantity = dose.amount * 3
+                  elsif dose.unit == "teaspoon" && ingredient.unit == "cup"
+                    ingredient_quantity = dose.amount * 0.208333
+                  elsif dose.unit == "teaspoon" && ingredient.unit == "tablespoon"
+                    ingredient_quantity = dose.amount * 0.333333
+                  else
+                    ingredient_quantity = dose.amount
+                  end
+                end
               else
                 ingredient = Ingredient.new()
-                ingredient_name = dose.ingredient
+                # ingredient_name = dose.ingredient
                 ingredient_unit = dose.unit
                 ingredient_start_season = Date.new(2017,1,1)
                 ingredient_end_season = Date.new(2017,12,31)
 
                 ingredient = Ingredient.new()
-
                 ingredient.name = ingredient_name
+                # t = ingredient_name
+                # t = t.match(/([\w ]+),([\w ]+)/).nil? ? t : t.match(/([\w ]+),([\w ]+)/)[1]
+                # ingredient.name = t.gsub(/\([\w ]+\)/, "").strip.gsub(/  /, " ")
                 ingredient.category = ingredient_category
                 ingredient.start_of_seasonality = ingredient_start_season
                 ingredient.end_of_seasonality = ingredient_end_season
@@ -112,6 +156,7 @@ UserRecipe.destroy_all
                 else
                   ingredient.unit = ingredient_unit
                 end
+                ingredient_quantity = dose.amount
 
                 ingredient.save!
 
@@ -121,10 +166,11 @@ UserRecipe.destroy_all
               association = RecipeIngredient.new()
               association.recipe = recipe
               association.ingredient = ingredient
-              association.quantity = dose.amount
+              association.quantity = ingredient_quantity
               association.save!
               puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
             end
+
           else
             puts "#{ingr.text.strip} --- NOT AN INGREDIENT!"
           end
