@@ -8,10 +8,18 @@
   </div>
 
   <div class="container user_page">
+
+    <div class="actions row">
+      <h3>Select your diet</h3>
+      <%= link_to "Vegetarian", vegetarian_path, method: :post, class: "btn btn-success"  %>
+    </div>
+
     <div class="row flex">
       <div class="title"><h2>Preferences</h2></div>
       <div class="edit"><%= link_to "Edit", ingredients_path, class: 'btn btn-primary' %></div>
     </div>
+
+
     <div class="settings">
       <div class="row">
           <div class="preferences">
@@ -40,3 +48,26 @@
     </div>
   </div>
 </div>
+<script>
+  $(document).ready(function(event) {
+    var ingredient_json = <%= raw @ingredient_objects.to_json %>;
+
+    $("div#vegetarian").on( "click", function() {
+      setUserToVegetarian();
+    });
+
+    function setUserToVegetarian() {
+
+      $.ajax({
+        type: "POST",
+        url: "/vegetarian",
+        data: "",
+        success: function(data) {
+          console.log("the user is now vegetarian");
+        }
+      });
+
+    }
+
+  });
+</script>
