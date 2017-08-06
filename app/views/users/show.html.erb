@@ -57,7 +57,8 @@
     });
 
     function setUserToVegetarian() {
-
+      // use the set_user_to_vegetarian method in users_controller.rb
+      // define all the IngredientTaste for meat to false
       $.ajax({
         type: "POST",
         url: "/vegetarian",
@@ -66,7 +67,7 @@
           console.log("the user is now vegetarian");
         }
       });
-
+      $.alert("You are now vegetarian");
     }
 
   });
