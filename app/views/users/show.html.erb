@@ -11,8 +11,10 @@
 
     <div class="actions row">
       <h3>Select your diet</h3>
-      <%= link_to "Vegetarian", vegetarian_path, method: :post, class: "btn btn-success"  %>
+      <%= link_to "Vegetarian", vegetarian_path, method: :post, class: "btn btn-success" , id: "vegetarian" %>
+      <%= link_to "Vegan", vegan_path, method: :post, class: "btn btn-success" , id: "vegan" %>
     </div>
+
 
     <div class="row flex">
       <div class="title"><h2>Preferences</h2></div>
@@ -48,27 +50,3 @@
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(event) {
-    var ingredient_json = <%= raw @ingredient_objects.to_json %>;
-
-    $("div#vegetarian").on( "click", function() {
-      setUserToVegetarian();
-    });
-
-    function setUserToVegetarian() {
-      // use the set_user_to_vegetarian method in users_controller.rb
-      // define all the IngredientTaste for meat to false
-      $.ajax({
-        type: "POST",
-        url: "/vegetarian",
-        data: "",
-        success: function(data) {
-          console.log("the user is now vegetarian");
-        }
-      });
-      $.alert("You are now vegetarian");
-    }
-
-  });
-</script>

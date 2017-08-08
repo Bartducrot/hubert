@@ -30,4 +30,5 @@ Rails.application.routes.draw do
 
   # in order to specify diet in user settings
   post "/vegetarian", to: "users#set_user_to_vegetarian"
+  post "/vegan", to: "users#set_user_to_vegan"
 end
