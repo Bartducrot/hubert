@@ -27,4 +27,8 @@ Rails.application.routes.draw do
   # for the user settings not the swiper
   post "/like_it", to: "ingredient_tastes#like_true_and_reload"
   post "/dislike_it", to: "ingredient_tastes#like_false_and_reload"
+
+  # in order to specify diet in user settings
+  post "/vegetarian", to: "users#set_user_to_vegetarian"
+  post "/vegan", to: "users#set_user_to_vegan"
 end

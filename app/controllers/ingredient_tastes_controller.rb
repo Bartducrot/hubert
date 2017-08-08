@@ -69,6 +69,8 @@ class IngredientTastesController < ApplicationController
     end
   end
 
+
+
   def index
 
   end
