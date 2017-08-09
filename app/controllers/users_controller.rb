@@ -68,7 +68,6 @@ class UsersController < ApplicationController
 # seafood
 # soup
 
-
   private
 
   def like_on_category(category_name, like) #category_name is a string, like is a boolean (put false for dislike)
