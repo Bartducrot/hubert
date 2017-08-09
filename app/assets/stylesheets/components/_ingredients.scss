@@ -3,11 +3,29 @@
   display: flex;
   justify-content: space-between;
 }
+.ingredient-left {
+  max-width: 150px;
+}
 
 .ingredient-right {
   display: flex;
   align-items: center;
 }
+
+.ingredient-liked {
+  color: $green;
+  text-shadow: 1px 1px $light-grey;
+}
+
+.ingredient-disliked {
+  color: $red-red;
+  text-shadow: 1px 1px $light-grey;
+}
+
+.ingredient-unknown {
+  color: black;
+}
+
 
 .ingredient-category {
   margin-right: 10px;
@@ -16,11 +34,11 @@
   font-weight: bold;
 }
 
-.ingredient-category-vegatable {
+.ingredient-category-vegetable {
   color: green;
 }
 .ingredient-category-dairy {
-  color: pink;
+  color: $blue;
 }
 .ingredient-category-meat {
   color: brown;
