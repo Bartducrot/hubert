@@ -3,15 +3,15 @@
     <h4><%= i.name %></h4>
   </div>
   <div class="ingredient-right">
-  <% if i.category == "vegetable" %>
-    <% badge = "ingredient-category-vegatable" %>
-  <% elsif i.category == "dairy"%>
-    <% badge = "ingredient-category-dairy" %>
-  <% elsif i.category == "meat"%>
-    <% badge = "ingredient-category-meat" %>
-  <% elsif i.category == "sauce"%>
-    <% badge = "ingredient-category-sauce" %>
-  <% end %>
+    <% if i.category == "vegetable" %>
+      <% badge = "ingredient-category-vegetable" %>
+    <% elsif i.category == "dairy"%>
+      <% badge = "ingredient-category-dairy" %>
+    <% elsif i.category == "meat"%>
+      <% badge = "ingredient-category-meat" %>
+    <% elsif i.category == "sauce"%>
+      <% badge = "ingredient-category-sauce" %>
+    <% end %>
     <div class="ingredient-category <%= badge %>">
       <h6><%= i.category %></h6>
     </div>
