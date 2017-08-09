@@ -1,6 +1,13 @@
 <div class="ingredient-container">
   <div class="ingredient-left">
-    <h4><%= i.name %></h4>
+    <% taste = user.ingredient_tastes.find_by(ingredient_id: i.id) %>
+
+    <% if taste %>
+      <% taste.like ? ingredient_liked = "ingredient-liked" : ingredient_liked = "ingredient-disliked" %>
+    <% else %>
+      <% ingredient_liked = "ingredient-unknown" %>
+    <% end %>
+    <h4 class="<%= ingredient_liked %>"><%= i.name %></h4>
   </div>
   <div class="ingredient-right">
     <% if i.category == "vegetable" %>
@@ -16,15 +23,15 @@
       <h6><%= i.category %></h6>
     </div>
     <div class="ingredient-action">
-      <% taste = user.ingredient_tastes.where(ingredient_id: i.id).first %>
-      <% if user.ingredients.include? i %>
-        <% if taste && taste.like == true %>
-          <%= link_to "unlike this", dislike_it_path(name: i.name), method: :post, remote: true, class: "btn btn-danger"  %>
+      <% if taste %>
+        <% if taste.like == true %>
+          <%= link_to "dislike", dislike_it_path(name: i.name), method: :post, remote: true, class: "btn btn-danger"  %>
         <% else %>
-          <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
+          <%= link_to "like", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
         <% end %>
       <% else %>
-        <%= link_to "like this", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
+          <%= link_to "dislike", dislike_it_path(name: i.name), method: :post, remote: true, class: "btn btn-danger"  %>
+          <%= link_to "like", like_it_path(name: i.name), method: :post, remote: true, class: "btn btn-success"  %>
       <% end %>
     </div>
   </div>
