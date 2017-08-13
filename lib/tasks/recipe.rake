@@ -17,17 +17,17 @@ namespace :recipe do
         # make an array with every ingredient_id ==> ex: arr = [1456, 2785, 3832, 4737, 1456, 4737]
         arr << r_ingr.ingredient_id
       end
-      puts "ingredients before algorithm : count = #{arr.length}"
+      puts "ingredients before algorithm : count = #{recipe.recipe_ingredients.length}"
       p arr
       # create an array with the id of duplicates ingredient
       duplicates = arr.select { |e| arr.count(e) > 1 }.uniq
       # duplicates = [ingredient_id, ....] ==> ex: duplicates = [1456, 4737]
-      list.length.times do |i|
-        # add the id of the RecipeIngredient in the array
-        arr[i] = [arr[i], list[i].id]
-      end
-      # arr = [[ingredient_id, recipe_ingredient_id], .....]
-      # => ex: arr = [[1456,11] ,[2785,25], [3832,34], [4737,74], [1456,58], [4737, 89]]
+        # list.length.times do |i|
+        #   # add the id of the RecipeIngredient in the array
+        #   arr[i] = [arr[i], list[i].id]
+        # end
+        # => arr = [[ingredient_id, recipe_ingredient_id], .....]
+        # => ex: arr = [[1456,11] ,[2785,25], [3832,34], [4737,74], [1456,58], [4737, 89]]
       p duplicates
       until duplicates.length == 0
         puts "let's unify this ingredient"
@@ -35,6 +35,11 @@ namespace :recipe do
         ingr_id = duplicates.pop
         p "ingredient id: #{ingr_id}"
         res = list.where(ingredient_id: ingr_id)
+        puts "---------"
+        res.each do |r|
+          puts "quantity: #{r.quantity}"
+        end
+        puts "---------"
         puts "res #{res.first.quantity}"
         # sum all the quantity of the ingredient in a variable (quant)
         quant = 0.0
@@ -52,21 +57,20 @@ namespace :recipe do
         sum.quantity = quant
         sum.save
         # delete the recipe_ingredient that appear several times
-        res.each do |recipe_ingredient|
-            res.each do |r|
-              r.destroy if recipe_ingredient != sum
-            end
+        puts recipe.recipe_ingredients.where(ingredient_id: ingr_id).length
+        until recipe.recipe_ingredients.where(ingredient_id: ingr_id).length == 1
+          res.second.destroy
+          puts recipe.recipe_ingredients.where(ingredient_id: ingr_id).length
         end
+        # res.each do |recipe_ingredient|
+        #     res.each do |r|
+        #       r.destroy if recipe_ingredient != sum
+        #     end
+        # end
       end
-      arr = []
-      # take all the recipe ingredient of the recipe
-      list = recipe.recipe_ingredients
-      puts "ingredients after algorithm : count = #{list.length}"
-      list.each do |r_ingr|
-        # make an array with every ingredient_id ==> ex: arr = [1456, 2785, 3832, 4737, 1456, 4737]
-        arr << r_ingr.ingredient_id
-      end
-      p arr
+
+      puts "ingredients after algorithm : count = #{Recipe.find(recipe.id).recipe_ingredients.length}"
+
 
     end
     # (ie there is only one RecipeIngredient for a couple Recipe/Ingredient)
