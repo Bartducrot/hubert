@@ -59,26 +59,27 @@ namespace :recipe do
         # delete the recipe_ingredient that appear several times
         puts recipe.recipe_ingredients.where(ingredient_id: ingr_id).length
         until recipe.recipe_ingredients.where(ingredient_id: ingr_id).length == 1
-          res.second.destroy
+          res.second.destroy # as the first recipe_ingredient in the array is the one where the quantities has been merge
           puts recipe.recipe_ingredients.where(ingredient_id: ingr_id).length
         end
-        # res.each do |recipe_ingredient|
-        #     res.each do |r|
-        #       r.destroy if recipe_ingredient != sum
-        #     end
-        # end
+
       end
 
       puts "ingredients after algorithm : count = #{Recipe.find(recipe.id).recipe_ingredients.length}"
 
-
     end
-    # (ie there is only one RecipeIngredient for a couple Recipe/Ingredient)
-    # until all ingredient are uniq in the recipe
-
-    # If there is at least one ingredient that appear twice in the RecipeIngredient's of the recipe
-    # merge two RecipeIngredient with the same Ingredient together in the first occurence (addition of the two quantity), delete the second RecipeIngredient occurence
-    # when all the Ingredient are uniq, go to next recipe
   end
+
+  desc "Be sure that every recipe_ingredient has a quantity field different from nil, puts 0 instead of nil"
+
+  task quantity_not_nil: :environment do
+    puts "Before -- Number of RecipeIngredient where quantity is nil: #{RecipeIngredient.where(quantity: nil).length}"
+    RecipeIngredient.where(quantity: nil).each do |r_ingr|
+      r_ingr.quantity = 1.0
+      r_ingr.save
+    end
+    puts "After -- Number of RecipeIngredient where quantity is nil: #{RecipeIngredient.where(quantity: nil).length}"
+  end
+
 
 end
