@@ -10,6 +10,7 @@
               <% bought = item[:s_item].bought %>
               <%= f.submit " ", class: (bought ? "btn-checkbox btn-checked" : "btn-checkbox") %>
               <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>"><%= " #{item[:name]} #{item[:quantity]}#{item[:unit]}" %></span>
+              <br><span> <%= item[:recipe_name] %> - <%= item[:date] %></span>
             <% end %>
           <% end %>
         </div>
@@ -17,6 +18,7 @@
     </div>
 
   <% end %>
+
 
 </div>
 <%= content_for(:after_js) do  %>

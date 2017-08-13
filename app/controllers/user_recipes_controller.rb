@@ -22,13 +22,21 @@ class UserRecipesController < ApplicationController
       @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
     end
 
+
     @ingredients_hash = {}
 
     @recipe_ingredients.each do |r_ingredient|
       unless @ingredients_hash.has_key?(r_ingredient.first.ingredient.category)
         @ingredients_hash[r_ingredient.first.ingredient.category] = []
       end
-      @ingredients_hash[r_ingredient.first.ingredient.category] << {s_item: r_ingredient.last , name: r_ingredient.first.ingredient.name, quantity: r_ingredient.first.quantity, unit: r_ingredient.first.ingredient.unit}
+      h = {s_item: r_ingredient.last ,
+        name: r_ingredient.first.ingredient.name,
+        quantity: r_ingredient.first.quantity,
+        unit: r_ingredient.first.ingredient.unit,
+        recipe_name: r_ingredient.first.recipe.name,
+        date: r_ingredient.second.user_recipe.date.strftime('%A %d %B %Y')
+      }
+      @ingredients_hash[r_ingredient.first.ingredient.category] << h
     end
 
     @sorted_ingredient_hash = {}
