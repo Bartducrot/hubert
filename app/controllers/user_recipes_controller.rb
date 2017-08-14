@@ -31,7 +31,7 @@ class UserRecipesController < ApplicationController
       end
       h = {s_item: r_ingredient.last ,
         name: r_ingredient.first.ingredient.name,
-        quantity: r_ingredient.first.quantity,
+        quantity: r_ingredient.last.quantity,
         unit: r_ingredient.first.ingredient.unit,
         recipe_name: r_ingredient.first.recipe.name,
         date: r_ingredient.second.user_recipe.date.strftime('%A %d %B %Y')
@@ -85,6 +85,7 @@ class UserRecipesController < ApplicationController
       new_item.save!
       @shopping_items << new_item
     end
+
     # redirect_to user_user_recipes_path(current_user)
     # redirect_to calendar_path(user_recipe_params[:date])
     # - ajax doesn't redirect

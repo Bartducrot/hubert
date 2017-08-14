@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def delete_user_recipe
-    user_recipe = UserRecipe.where(user: current_user, date: params[:date], recipe_id: params[:recipe_id]).first
+    user_recipe = UserRecipe.find_by(user: current_user, date: params[:date], recipe_id: params[:recipe_id])
     user_recipe.destroy if user_recipe
       respond_to do |format|
         format.js { head :ok }
@@ -14,8 +14,11 @@ class UsersController < ApplicationController
   end
 
   def update_people_recipe
-    user_recipe = UserRecipe.where(user: current_user, date: params[:date],recipe_id: params[:recipe_id]).first
+    user_recipe = UserRecipe.find_by(user: current_user, date: params[:date],recipe_id: params[:recipe_id])
     user_recipe.update(number_of_people: params[:number_of_people])
+    user_recipe.shopping_items.each do |s_i|
+      s_i.update(quantity: s_i.recipe_ingredient.quantity * user_recipe.number_of_people)
+    end
     puts "debug"
       respond_to do |format|
         format.js { head :ok }
