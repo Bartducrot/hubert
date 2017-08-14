@@ -19,6 +19,7 @@ class UserRecipesController < ApplicationController
 
     @recipe_ingredients = []
     @shopping_items.each do |item|
+      # item here is a ShoppingItem instance
       @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
     end
 
