@@ -19,6 +19,7 @@ class UserRecipesController < ApplicationController
 
     @recipe_ingredients = []
     @shopping_items.each do |item|
+      # item here is a ShoppingItem instance
       @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
     end
 
@@ -31,7 +32,7 @@ class UserRecipesController < ApplicationController
       end
       h = {s_item: r_ingredient.last ,
         name: r_ingredient.first.ingredient.name,
-        quantity: r_ingredient.first.quantity,
+        quantity: r_ingredient.last.quantity,
         unit: r_ingredient.first.ingredient.unit,
         recipe_name: r_ingredient.first.recipe.name,
         date: r_ingredient.second.user_recipe.date.strftime('%A %d %B %Y')
@@ -66,8 +67,11 @@ class UserRecipesController < ApplicationController
   end
 
   def create
+    # find the selected recipe
     @recipe = Recipe.find(params[:user_recipe][:recipe_id])
+    # destroy the previuous UserRecipe instance for this date
     UserRecipe.where(user: current_user, date: params[:user_recipe][:date]).select{|ur| ur.recipe.category == @recipe.category}.each{|ur| ur.destroy}
+    # create a new UserRecipe instance from the params
     @user_recipe = UserRecipe.new(user_recipe_params)
     @user_recipe.user = current_user
     @user_recipe.save
@@ -75,12 +79,14 @@ class UserRecipesController < ApplicationController
     @user_recipe.recipe.recipe_ingredients.each do |recipe_ingredient|
       new_item = ShoppingItem.new()
       new_item.bought = false
-      new_item.quantity = recipe_ingredient.quantity
+      # each recipe is for  people => a 5 people recipe take 5 times the quantity
+      new_item.quantity = recipe_ingredient.quantity * @user_recipe.number_of_people
       new_item.recipe_ingredient = recipe_ingredient
       new_item.user_recipe = @user_recipe
       new_item.save!
       @shopping_items << new_item
     end
+
     # redirect_to user_user_recipes_path(current_user)
     # redirect_to calendar_path(user_recipe_params[:date])
     # - ajax doesn't redirect

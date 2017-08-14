@@ -10,7 +10,7 @@
 
     <div class="swiper-slide swiper-slide-<%= meal %>" data-recipe-title="<%= recipe.name %>" data-recipe-id="<%= recipe.id %>">
       <div class="col-xs-12 recipe-cards">
-          <% if Recipe.all != nil %>
+          <% if recipes.length != 0 %>
             <%= render "shared/card", recipe: recipe %>
            <!--  <div class="hidden" id="recipe-js"><%= recipe.id %></div> -->
           <% else %>
