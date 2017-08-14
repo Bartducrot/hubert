@@ -66,8 +66,11 @@ class UserRecipesController < ApplicationController
   end
 
   def create
+    # find the selected recipe
     @recipe = Recipe.find(params[:user_recipe][:recipe_id])
+    # destroy the previuous UserRecipe instance for this date
     UserRecipe.where(user: current_user, date: params[:user_recipe][:date]).select{|ur| ur.recipe.category == @recipe.category}.each{|ur| ur.destroy}
+    # create a new UserRecipe instance from the params
     @user_recipe = UserRecipe.new(user_recipe_params)
     @user_recipe.user = current_user
     @user_recipe.save
@@ -75,7 +78,8 @@ class UserRecipesController < ApplicationController
     @user_recipe.recipe.recipe_ingredients.each do |recipe_ingredient|
       new_item = ShoppingItem.new()
       new_item.bought = false
-      new_item.quantity = recipe_ingredient.quantity
+      # each recipe is for  people => a 5 people recipe take 5 times the quantity
+      new_item.quantity = recipe_ingredient.quantity * @user_recipe.number_of_people
       new_item.recipe_ingredient = recipe_ingredient
       new_item.user_recipe = @user_recipe
       new_item.save!
