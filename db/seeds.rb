@@ -35,7 +35,7 @@ Ingredient.destroy_all
 
 
 
-300.times do |i|
+10.times do |i|
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
@@ -99,10 +99,11 @@ Ingredient.destroy_all
             end
             puts "ingredient in the recipe"
 
-
             if dose
               ingredient_name = dose.ingredient
               ingredient_category = ["vegetable", "meat", "dairy"].sample
+
+              # DELETE THE S at the end excet for double s words
               if ingredient_name.match(/s{2}/)
                 ingredient_unit = dose.ingredient
               else
@@ -113,64 +114,39 @@ Ingredient.destroy_all
               ingredient_name = t.gsub(/\([\w ]+\)/, "").strip.gsub(/  /, " ")
 
               ingredient = Ingredient.find_by_name(ingredient_name)
-              # ingredient = Ingredient.find_by_name(dose.ingredient)
-
               if ingredient
                 puts "#{ingredient.name} already exist"
-                # stuff to do with dose.amount (convertion to the right unit )
-                unless dose.unit == ingredient.unit
-                # TODO convert the quantity to the right amount
-                  if dose.unit == "cup" && ingredient.unit == "tablespoon"
-                    ingredient_quantity = dose.amount * 16
-                  elsif dose.unit == "cup" && ingredient.unit == "teaspoon"
-                    ingredient_quantity = dose.amount * 48
-                  elsif dose.unit == "tablespoon" && ingredient.unit == "cup"
-                    ingredient_quantity = dose.amount * 0.0625
-                  elsif dose.unit == "tablespoon" && ingredient.unit == "teaspoon"
-                    ingredient_quantity = dose.amount * 3
-                  elsif dose.unit == "teaspoon" && ingredient.unit == "cup"
-                    ingredient_quantity = dose.amount * 0.208333
-                  elsif dose.unit == "teaspoon" && ingredient.unit == "tablespoon"
-                    ingredient_quantity = dose.amount * 0.333333
-                  else
-                    ingredient_quantity = dose.amount
-                  end
-                end
               else
                 ingredient = Ingredient.new()
-                # ingredient_name = dose.ingredient
-                ingredient_unit = dose.unit
+                # AS WE DON'T KNOW THE SEASONLITY OF TH INGREDIENT YET, WE JUST PUT THE WHOLE YEAR
                 ingredient_start_season = Date.new(2017,1,1)
                 ingredient_end_season = Date.new(2017,12,31)
-
-                ingredient = Ingredient.new()
                 ingredient.name = ingredient_name
-                # t = ingredient_name
-                # t = t.match(/([\w ]+),([\w ]+)/).nil? ? t : t.match(/([\w ]+),([\w ]+)/)[1]
-                # ingredient.name = t.gsub(/\([\w ]+\)/, "").strip.gsub(/  /, " ")
                 ingredient.category = ingredient_category
                 ingredient.start_of_seasonality = ingredient_start_season
                 ingredient.end_of_seasonality = ingredient_end_season
-                if ingredient_unit.is_a? NilClass
-                  ingredient.unit = "unit"
-                else
-                  ingredient.unit = ingredient_unit
-                end
-                ingredient_quantity = dose.amount
-
                 ingredient.save!
-
                 puts "#{ingredient.name} ---- \'#{ingredient.unit}\' has been created"
               end
 
               association = RecipeIngredient.new()
               association.recipe = recipe
               association.ingredient = ingredient
-              association.quantity = ingredient_quantity
+              ingredient_quantity = dose.amount
+              if ingredient_quantity.is_a? NilClass
+                association.quantity = 1.0
+              else
+                association.quantity = ingredient_quantity
+              end
+              ingredient_unit = dose.unit
+              if ingredient_unit.is_a? NilClass
+                association.unit = "unit"
+              else
+                association.unit = ingredient_unit
+              end
               association.save!
               puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
             end
-
           else
             puts "#{ingr.text.strip} --- NOT AN INGREDIENT!"
           end
@@ -197,6 +173,33 @@ Ingredient.destroy_all
 
 end
 
+# AS UNIT IS IN THE RecipeIngredient Table, this is no longer needed
+# ingredient_unit = dose.unit
+# if ingredient_unit.is_a? NilClass
+#   ingredient.unit = "unit"
+# else
+#   ingredient.unit = ingredient_unit
+# end
+
+# stuff to do with dose.amount (convertion to the right unit )
+# unless dose.unit == ingredient.unit
+# # TODO convert the quantity to the right amount
+#   if dose.unit == "cup" && ingredient.unit == "tablespoon"
+#     ingredient_quantity = dose.amount * 16
+#   elsif dose.unit == "cup" && ingredient.unit == "teaspoon"
+#     ingredient_quantity = dose.amount * 48
+#   elsif dose.unit == "tablespoon" && ingredient.unit == "cup"
+#     ingredient_quantity = dose.amount * 0.0625
+#   elsif dose.unit == "tablespoon" && ingredient.unit == "teaspoon"
+#     ingredient_quantity = dose.amount * 3
+#   elsif dose.unit == "teaspoon" && ingredient.unit == "cup"
+#     ingredient_quantity = dose.amount * 0.208333
+#   elsif dose.unit == "teaspoon" && ingredient.unit == "tablespoon"
+#     ingredient_quantity = dose.amount * 0.333333
+#   else
+#     ingredient_quantity = dose.amount
+#   end
+# end
 
 # puts "Start seeding ingredients"
 # INGREDIENTS = {

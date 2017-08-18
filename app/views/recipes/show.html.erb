@@ -25,7 +25,7 @@
   <div id="home" class="tab-pane fade in active ingredients-list">
     <ul>
       <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-        <li><%= "#{recipe_ingredient.quantity} #{recipe_ingredient.ingredient.unit} #{recipe_ingredient.ingredient.name}" %></li>
+        <li><%= "#{recipe_ingredient.quantity} #{recipe_ingredient.unit} #{recipe_ingredient.ingredient.name}" %></li>
       <% end %>
     </ul>
   </div>
