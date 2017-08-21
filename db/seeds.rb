@@ -5,7 +5,7 @@ require 'date'
 # require 'selenium-webdriver'
 # require 'selenium'
 
-
+# ATTEMPT TO USE TOR TO SCRAPE ON WEBSITE WITHOUT RESTRICTION
 # browser = Watir::Browser.new :phantomjs
 #   profile = Selenium::WebDriver::PhantomJS::Profile.new
 #   profile['network.proxy.socks'] = "127.0.0.1"
@@ -25,7 +25,7 @@ require 'date'
 # browser.close
 
 
-
+# Clear the database
 ShoppingItem.destroy_all
 UserRecipe.destroy_all
 RecipeIngredient.destroy_all
@@ -34,8 +34,12 @@ Recipe.destroy_all
 Ingredient.destroy_all
 
 
+# List of ingredient categories
+CATEGORIES = ["dairy", "vegetable", "alcohol", "condiments", "meat", "baking",
+  "seasonings", "spices", "fish", "sauces", "sweeteners", "alternatives",
+  "oils", "fruits", "beverages", "nuts", "desserts", "seafood", "soup"]
 
-10.times do |i|
+300.times do |i|
 
     base_url = "http://allrecipes.com/recipe/"
     # index_start = 6663
@@ -93,6 +97,7 @@ Ingredient.destroy_all
           puts "---- #{ingr.text.strip}"
 
           if ingr.text.strip != "Add all ingredients to list"
+            # Ingreedy allow to extract from a string an ingredient name, unit and quantity
             begin
               dose = Ingreedy.parse(ingr.text.strip)
             rescue Exception => e
@@ -101,8 +106,9 @@ Ingredient.destroy_all
 
             if dose
               ingredient_name = dose.ingredient
-              ingredient_category = ["vegetable", "meat", "dairy"].sample
-
+              # As we don't know the category, we put a random one (the real category has to be modified by hand)
+              ingredient_category = CATEGORIES.sample
+              # Process the ingredient name
               # DELETE THE S at the end excet for double s words
               if ingredient_name.match(/s{2}/)
                 ingredient_unit = dose.ingredient
@@ -113,22 +119,23 @@ Ingredient.destroy_all
               t = t.match(/([\w ]+),([\w ]+)/).nil? ? t : t.match(/([\w ]+),([\w ]+)/)[1]
               ingredient_name = t.gsub(/\([\w ]+\)/, "").strip.gsub(/  /, " ")
 
+              # check if the Ingredient already exist
               ingredient = Ingredient.find_by_name(ingredient_name)
               if ingredient
                 puts "#{ingredient.name} already exist"
               else
+                # if the Ingredient doesn't exist, we create it
                 ingredient = Ingredient.new()
-                # AS WE DON'T KNOW THE SEASONLITY OF TH INGREDIENT YET, WE JUST PUT THE WHOLE YEAR
-                ingredient_start_season = Date.new(2017,1,1)
-                ingredient_end_season = Date.new(2017,12,31)
                 ingredient.name = ingredient_name
                 ingredient.category = ingredient_category
-                ingredient.start_of_seasonality = ingredient_start_season
-                ingredient.end_of_seasonality = ingredient_end_season
+                # AS WE DON'T KNOW THE SEASONLITY OF THE INGREDIENT, WE JUST PUT THE WHOLE YEAR
+                ingredient.start_of_seasonality = Date.new(2017,1,1)
+                ingredient.end_of_seasonality = Date.new(2017,12,31)
                 ingredient.save!
-                puts "#{ingredient.name} ---- \'#{ingredient.unit}\' has been created"
+                puts "#{ingredient.name} ---- \'#{ingredient.category}\' has been created"
               end
 
+              # Creation of the link between Recipe and Ingredient (RecipeIngredient)
               association = RecipeIngredient.new()
               association.recipe = recipe
               association.ingredient = ingredient
@@ -145,9 +152,10 @@ Ingredient.destroy_all
                 association.unit = ingredient_unit
               end
               association.save!
-              puts "the association between #{recipe.name} and #{ingredient.name} has been created (#{association.quantity} )"
+              puts "the dose has been created (#{ingredient.name} - #{association.quantity} #{association.unit} )"
             end
           else
+            # if Ingreedy doesn't have any answer, we just assume that the Ingredient is not an Ingredient
             puts "#{ingr.text.strip} --- NOT AN INGREDIENT!"
           end
         end
@@ -156,7 +164,7 @@ Ingredient.destroy_all
 
 
 
-      puts "new recipe: #{recipe.name}"
+      puts "new recipe: #{recipe.name} - #{recipe.recipe_type} - #{recipe.category}"
       waiting_time = (1..5).to_a.sample
       puts "waiting #{waiting_time}second in order to avoid : \'OpenURI::HTTPError: 429 Too Many Requests\'......"
 
