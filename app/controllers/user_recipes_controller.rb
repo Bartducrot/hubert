@@ -33,7 +33,7 @@ class UserRecipesController < ApplicationController
       h = {s_item: r_ingredient.last ,
         name: r_ingredient.first.ingredient.name,
         quantity: r_ingredient.last.quantity,
-        unit: r_ingredient.first.ingredient.unit,
+        unit: r_ingredient.first.unit,
         recipe_name: r_ingredient.first.recipe.name,
         date: r_ingredient.second.user_recipe.date.strftime('%A %d %B %Y')
       }
