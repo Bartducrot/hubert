@@ -17,27 +17,20 @@ class UserRecipesController < ApplicationController
       end
     end
 
-    @recipe_ingredients = []
-    @shopping_items.each do |item|
-      # item here is a ShoppingItem instance
-      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
-    end
-
 
     @ingredients_hash = {}
 
-    @recipe_ingredients.each do |r_ingredient|
-      unless @ingredients_hash.has_key?(r_ingredient.first.ingredient.category)
-        @ingredients_hash[r_ingredient.first.ingredient.category] = []
+    @shopping_items.each do |shopping_item|
+      unless @ingredients_hash.has_key?(shopping_item.recipe_ingredient.ingredient.category)
+        @ingredients_hash[shopping_item.recipe_ingredient.ingredient.category] = []
       end
-      h = {s_item: r_ingredient.last ,
-        name: r_ingredient.first.ingredient.name,
-        quantity: r_ingredient.last.quantity,
-        unit: r_ingredient.first.unit,
-        recipe_name: r_ingredient.first.recipe.name,
-        date: r_ingredient.second.user_recipe.date.strftime('%A %d %B %Y')
+      h = {s_item: shopping_item ,
+        name: shopping_item.recipe_ingredient.ingredient.name,
+        unit: shopping_item.recipe_ingredient.unit,
+        recipe_name: shopping_item.recipe_ingredient.recipe.name,
+        date: shopping_item.user_recipe.date.strftime('%A %d %B %Y')
       }
-      @ingredients_hash[r_ingredient.first.ingredient.category] << h
+      @ingredients_hash[shopping_item.recipe_ingredient.ingredient.category] << h
     end
 
     @sorted_ingredient_hash = {}
@@ -46,6 +39,7 @@ class UserRecipesController < ApplicationController
       puts @sorted_ingredient_hash[category]
     end
     @sorted_ingredient_category_hash = @sorted_ingredient_hash.sort.to_h
+    puts @sorted_ingredient_category_hash
   end
 
 

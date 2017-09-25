@@ -1,3 +1,5 @@
+
+
 <div class="main-container shopping-cart" style="background-image: linear-gradient(rgba(240,240,240,0.8) 0%, rgba(240,240,240,0.9) 50%), url('<%= cl_image_path "Hubert Page pictures/tablecloth-458019_960_720", width:700, :crop=>"scale" %>')">
   <% @sorted_ingredient_hash.each_key do |category| %>
 
@@ -9,8 +11,13 @@
             <%= simple_form_for [current_user, item[:s_item]], remote: true, class: "form-inline" do |f| %>
               <% bought = item[:s_item].bought %>
               <%= f.submit " ", class: (bought ? "btn-checkbox btn-checked" : "btn-checkbox") %>
-              <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>"><%= " #{item[:name]} #{item[:quantity]}#{item[:unit]}" %></span>
-              <br><span> <%= item[:recipe_name] %> - <%= item[:date] %></span>
+              <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>">
+                <%= " #{item[:name].capitalize} #{item[:s_item].quantity.round(2)} #{item[:unit]}" %><%= "s" if item[:s_item].quantity > 1 %>
+              </span>
+              <br>
+              <span>
+                <%= item[:recipe_name] %> - <%= item[:date] %>
+              </span>
             <% end %>
           <% end %>
         </div>
@@ -21,6 +28,13 @@
 
 
 </div>
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-xs-offset-1 col-xs-10"><span>
+      <%= @shopping_items %>
+    </span></div>
+  </div>
+</div> -->
 <%= content_for(:after_js) do  %>
 <script>
 
