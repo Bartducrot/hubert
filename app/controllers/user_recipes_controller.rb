@@ -17,35 +17,39 @@ class UserRecipesController < ApplicationController
       end
     end
 
-    @recipe_ingredients = []
-    @shopping_items.each do |item|
-      # item here is a ShoppingItem instance
-      @recipe_ingredients << [RecipeIngredient.find(item.recipe_ingredient_id), item]
-    end
-
 
     @ingredients_hash = {}
+    @shopping_items.each do |shopping_item|
+      # extracting the name and the category from the shopping item
+      cat = shopping_item.recipe_ingredient.ingredient.category
+      ingr_name = shopping_item.recipe_ingredient.ingredient.name
 
-    @recipe_ingredients.each do |r_ingredient|
-      unless @ingredients_hash.has_key?(r_ingredient.first.ingredient.category)
-        @ingredients_hash[r_ingredient.first.ingredient.category] = []
+      # testing if the category of ingredient is already a key for the 1st layer of the hash
+      unless @ingredients_hash.has_key?(cat)
+        @ingredients_hash[shopping_item.recipe_ingredient.ingredient.category] = {}
       end
-      h = {s_item: r_ingredient.last ,
-        name: r_ingredient.first.ingredient.name,
-        quantity: r_ingredient.last.quantity,
-        unit: r_ingredient.first.unit,
-        recipe_name: r_ingredient.first.recipe.name,
-        date: r_ingredient.second.user_recipe.date.strftime('%A %d %B %Y')
-      }
-      @ingredients_hash[r_ingredient.first.ingredient.category] << h
+      # testing if he ingredient_name is already a key of the 2nd layer of the hash
+      if @ingredients_hash[cat].has_key?(ingr_name)
+        @ingredients_hash[cat][ingr_name] << shopping_item
+      else
+        # if the ingredient name is not a key yet, we create the array and put the s_item inside
+        @ingredients_hash[cat][ingr_name] = [shopping_item]
+      end
     end
 
-    @sorted_ingredient_hash = {}
-    @ingredients_hash.each do |category, array|
-      @sorted_ingredient_hash[category] = array.sort_by{ |hsh| hsh[:name] }
-      puts @sorted_ingredient_hash[category]
-    end
-    @sorted_ingredient_category_hash = @sorted_ingredient_hash.sort.to_h
+    # => @ingredient_hash2 =
+    # {"category_name1" =>
+    #           {
+    #             "ingredient_name1" => [ShoppingItem1, ShoppingItem2],
+    #             "ingredient_name2" => [ShoppingItem3, ShoppingItem4]
+    #           }
+    # {"category_name2" =>
+    #           {
+    #             "ingredient_name3" => [ShoppingItem5, ShoppingItem6],
+    #             "ingredient_name4" => [ShoppingItem7, ShoppingItem8]
+    #           }
+    #  }
+
   end
 
 
