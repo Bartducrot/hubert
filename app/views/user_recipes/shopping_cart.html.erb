@@ -3,15 +3,15 @@
 
 <div class="main-container shopping-cart" style="background-image: linear-gradient(rgba(240,240,240,0.8) 0%, rgba(240,240,240,0.9) 50%), url('<%= cl_image_path "Hubert Page pictures/tablecloth-458019_960_720", width:700, :crop=>"scale" %>')">
 
-  <% @ingredients_hash2.each_key do |category| %>
+  <% @ingredients_hash.each_key do |category| %>
 
     <h2><%= category.capitalize %></h2>
     <div class="container qwerty">
       <div class="row">
         <div class="col-xs-12">
-          <% @ingredients_hash2[category].each_key do |ingr_name| %>
+          <% @ingredients_hash[category].each_key do |ingr_name| %>
             <span class="text-item"><%= ingr_name.capitalize %></span>
-            <%  @ingredients_hash2[category][ingr_name].each do |s_item| %>
+            <%  @ingredients_hash[category][ingr_name].each do |s_item| %>
 
               <%= simple_form_for [current_user, s_item], remote: true, class: "form-inline" do |f| %>
                 <% bought = s_item.bought %>

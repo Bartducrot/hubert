@@ -17,65 +17,27 @@ class UserRecipesController < ApplicationController
       end
     end
 
-    # -------------------------------------------------------------------
-    # -----------------------------------------------------------------
 
     @ingredients_hash = {}
-
-    @shopping_items.each do |shopping_item|
-      unless @ingredients_hash.has_key?(shopping_item.recipe_ingredient.ingredient.category)
-        @ingredients_hash[shopping_item.recipe_ingredient.ingredient.category] = []
-      end
-      h = {
-        s_item: shopping_item ,
-        name: shopping_item.recipe_ingredient.ingredient.name,
-        unit: shopping_item.recipe_ingredient.unit,
-        recipe_name: shopping_item.recipe_ingredient.recipe.name,
-        date: shopping_item.user_recipe.date.strftime('%A %d %B %Y')
-      }
-      @ingredients_hash[shopping_item.recipe_ingredient.ingredient.category] << h
-    end
-    # @ingredient_hash is an hash of array of hash, with category as key
-    @sorted_ingredient_hash = {}
-    @ingredients_hash.each do |category, array|
-      @sorted_ingredient_hash[category] = array.sort_by{ |hsh| hsh[:name] }
-    end
-
-    # => @sorted_ingredient_hash =
-    # {"category_name1" =>
-    #           [
-    #             {:s_item => ShoppingItem1, :name => "string" , :unit => "unit_name", :recipe_name => "string", :date => "string"},
-    #             {:s_item => ShoppingItem2, :name => "string" , :unit => "unit_name", :recipe_name => "string", :date => "string"}
-    #           ]
-    # "category_name2" =>
-    #           [
-    #             {:s_item => ShoppingItem3, :name => "string" , :unit => "unit_name", :recipe_name => "string", :date => "string"},
-    #             {:s_item => ShoppingItem4, :name => "string" , :unit => "unit_name", :recipe_name => "string", :date => "string"}
-    #           ]
-    #  }
-    #
-
-    @ingredients_hash2 = {}
     @shopping_items.each do |shopping_item|
       # extracting the name and the category from the shopping item
       cat = shopping_item.recipe_ingredient.ingredient.category
       ingr_name = shopping_item.recipe_ingredient.ingredient.name
 
       # testing if the category of ingredient is already a key for the 1st layer of the hash
-      unless @ingredients_hash2.has_key?(cat)
-        @ingredients_hash2[shopping_item.recipe_ingredient.ingredient.category] = {}
+      unless @ingredients_hash.has_key?(cat)
+        @ingredients_hash[shopping_item.recipe_ingredient.ingredient.category] = {}
       end
       # testing if he ingredient_name is already a key of the 2nd layer of the hash
-      if @ingredients_hash2[cat].has_key?(ingr_name)
-        @ingredients_hash2[cat][ingr_name] << shopping_item
+      if @ingredients_hash[cat].has_key?(ingr_name)
+        @ingredients_hash[cat][ingr_name] << shopping_item
       else
         # if the ingredient name is not a key yet, we create the array and put the s_item inside
-        @ingredients_hash2[cat][ingr_name] = [shopping_item]
+        @ingredients_hash[cat][ingr_name] = [shopping_item]
       end
     end
 
-    #  OBJECTIF
-    # => @ingredient_hash =
+    # => @ingredient_hash2 =
     # {"category_name1" =>
     #           {
     #             "ingredient_name1" => [ShoppingItem1, ShoppingItem2],
