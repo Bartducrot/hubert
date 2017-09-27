@@ -10,17 +10,19 @@
       <div class="row">
         <div class="col-xs-12">
           <% @ingredients_hash2[category].each_key do |ingr_name| %>
+            <span class="text-item"><%= ingr_name.capitalize %></span>
             <%  @ingredients_hash2[category][ingr_name].each do |s_item| %>
 
               <%= simple_form_for [current_user, s_item], remote: true, class: "form-inline" do |f| %>
                 <% bought = s_item.bought %>
                 <%= f.submit " ", class: (bought ? "btn-checkbox btn-checked" : "btn-checkbox") %>
                 <span class="<%= bought ? 'text-item text-item-checked' : 'text-item' %>">
-                  <%= " #{ingr_name.capitalize} #{s_item.quantity.round(2)} #{s_item.recipe_ingredient.unit}" %><%= "s" if s_item.quantity > 1 %>
+                  <%= "#{s_item.quantity.round(2)} #{s_item.recipe_ingredient.unit}" %><%= "s" if s_item.quantity > 1 %>
                 </span>
+                <span><%= "for " + s_item.user_recipe.recipe.name %></span>
                 <br>
-                <span>
-                  <%= s_item.user_recipe.recipe.name %> - <%= s_item.user_recipe.date.strftime('%A %d %B %Y') %>
+                <span class="small">
+                  on <%= s_item.user_recipe.date.strftime('%A %d %B %Y') %> for the <%= s_item.user_recipe.recipe.category %>
                 </span>
               <% end %>
             <% end %>

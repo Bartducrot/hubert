@@ -65,40 +65,17 @@ class UserRecipesController < ApplicationController
       unless @ingredients_hash2.has_key?(cat)
         @ingredients_hash2[shopping_item.recipe_ingredient.ingredient.category] = {}
       end
-      puts ""
-      puts "##############################################################"
-      puts "check the category #{cat.upcase} BEFORE adding the ingredient #{ingr_name.upcase}"
-      puts "number of ingredient in the category: #{@ingredients_hash2[cat].length}"
-      puts "##############################################################"
-      puts @ingredients_hash2[cat]
       # testing if he ingredient_name is already a key of the 2nd layer of the hash
-      puts "###############################"
-      puts "check the ingredient #{ingr_name} in the #{cat} category"
-      puts "###############################"
       if @ingredients_hash2[cat].has_key?(ingr_name)
-        @ingredients_hash2[cat][ingr_name] < shopping_item
-        p @ingredients_hash2[cat][ingr_name]
+        @ingredients_hash2[cat][ingr_name] << shopping_item
       else
         # if the ingredient name is not a key yet, we create the array and put the s_item inside
         @ingredients_hash2[cat][ingr_name] = [shopping_item]
-        p @ingredients_hash2[cat][ingr_name]
       end
-      puts "##############################################################"
-      puts "check the category #{cat.upcase} AFTER adding the ingredient #{ingr_name.upcase}"
-      puts "number of ingredient in the category: #{@ingredients_hash2[cat].length}"
-      puts "##############################################################"
-      puts @ingredients_hash2[cat]
-      puts "NEXT NEXT NEXT NEXT NEXT NEXT NEXT NEXT NEXT NEXT NEXT NEXT "
-      puts ""
     end
 
-
-
-
-
-
     #  OBJECTIF
-    # => @sorted_ingredient_hash =
+    # => @ingredient_hash =
     # {"category_name1" =>
     #           {
     #             "ingredient_name1" => [ShoppingItem1, ShoppingItem2],
