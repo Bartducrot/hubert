@@ -10,6 +10,7 @@
       <div class="row">
         <div class="col-xs-12">
           <% @ingredients_hash[category].each_key do |ingr_name| %>
+            <hr>
             <span class="text-item"><%= ingr_name.capitalize %></span>
             <%  @ingredients_hash[category][ingr_name].each do |s_item| %>
 
