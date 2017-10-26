@@ -39,13 +39,13 @@ CATEGORIES = ["dairy", "vegetable", "alcohol", "condiments", "meat", "baking",
   "seasonings", "spices", "fish", "sauces", "sweeteners", "alternatives",
   "oils", "fruits", "beverages", "nuts", "desserts", "seafood", "soup"]
 
-300.times do |i|
+100.times do |i|
 
-    base_url = "http://allrecipes.com/recipe/"
+    base_url = "https://allrecipes.com/recipe/"
     # index_start = 6663
     index_start = 16730
 
-    url = base_url + "#{index_start + i}"
+    url = base_url + "#{index_start + i}/"
     puts url
     begin
       html = Nokogiri::HTML(open(url))
@@ -101,6 +101,7 @@ CATEGORIES = ["dairy", "vegetable", "alcohol", "condiments", "meat", "baking",
             begin
               dose = Ingreedy.parse(ingr.text.strip)
             rescue Exception => e
+              puts 'error with Ingreedy'
             end
             puts "ingredient in the recipe"
 
@@ -165,19 +166,21 @@ CATEGORIES = ["dairy", "vegetable", "alcohol", "condiments", "meat", "baking",
 
 
       puts "new recipe: #{recipe.name} - #{recipe.recipe_type} - #{recipe.category}"
-      waiting_time = (1..5).to_a.sample
-      puts "waiting #{waiting_time}second in order to avoid : \'OpenURI::HTTPError: 429 Too Many Requests\'......"
 
-      waiting_time.times do |sec|
-        puts "#{sec + 1} second(s)"
-        sleep(1)
-      end
 
       puts "Enought waiting I hope"
-      rescue Exception => e
-
+    rescue Exception => e
+      puts e
+      puts 'error somewhere, has to wait'
     end
 
+    waiting_time = (1..5).to_a.sample
+    puts "waiting #{waiting_time}second in order to avoid : \'OpenURI::HTTPError: 429 Too Many Requests\'......"
+
+    waiting_time.times do |sec|
+      puts "#{sec + 1} second(s)"
+      sleep(1)
+    end
 
 end
 

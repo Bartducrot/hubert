@@ -25,33 +25,45 @@ class IngredientTastesController < ApplicationController
   end
 
   def like_true
-    # binding.pry
-    # # raise
-    ingredient_taste = IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: true )
+    IngredientTaste.create(
+      user: current_user,
+      ingredient_id: Ingredient.where(name: params['name']).first.id,
+      like: true
+    )
   end
 
   def like_true_and_reload
     @user = current_user
     @ingredient = Ingredient.where(name: params['name']).first
 
-    ingredient_taste = IngredientTaste.where(user: current_user, ingredient_id: @ingredient.id).first
+    ingredient_taste = IngredientTaste.where(
+      user: current_user,
+      ingredient_id: @ingredient.id
+    ).first
+
     if ingredient_taste
       ingredient_taste.like = true
       ingredient_taste.save
     else
-      IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: true )
+      IngredientTaste.create(
+        user: current_user,
+        ingredient: Ingredient.find_by(name: params['name']),
+        like: true
+      )
     end
   end
 
   def like_false
-    # binding.pry
-    # raise
-    ingredient_taste = IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: false )
+    IngredientTaste.create(
+      user: current_user,
+      ingredient: Ingredient.find_by(name: params['name']),
+      like: false
+    )
   end
 
   def like_false_and_reload
     @user = current_user
-    @ingredient = Ingredient.where(name: params['name']).first
+    @ingredient = Ingredient.find_by(name: params['name'])
 
     puts "************************************"
     puts "************************************"
@@ -65,14 +77,15 @@ class IngredientTastesController < ApplicationController
       ingredient_taste.like = false
       ingredient_taste.save
     else
-      IngredientTaste.create(user: current_user, ingredient_id: Ingredient.where(name: params['name']).first.id, like: false )
+      IngredientTaste.create(
+        user: current_user,
+        ingredient: Ingredient.find_by(name: params['name']),
+        like: false
+      )
     end
   end
 
-
-
   def index
-
   end
 
   private
