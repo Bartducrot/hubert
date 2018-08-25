@@ -1,32 +1,41 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    @liked_ingredient_tastes = @user.ingredient_tastes.where(like: true).sort_by { |i| i.ingredient.name }
-    @disliked_ingredient_tastes = @user.ingredient_tastes.where(like: false).sort_by { |i| i.ingredient.name }
+    @liked_ingredient_tastes =  @user.ingredient_tastes.where(like: true).joins(:ingredient).order('ingredients.name ASC')
+    @disliked_ingredient_tastes = @user.ingredient_tastes.where(like: false).joins(:ingredient).order('ingredients.name ASC')
   end
 
   def delete_user_recipe
     user_recipe = UserRecipe.find_by(user: current_user, date: params[:date], recipe_id: params[:recipe_id])
     user_recipe.destroy if user_recipe
-      respond_to do |format|
-        format.js { head :ok }
-      end
+    respond_to do |format|
+      format.js { head :ok }
+    end
   end
 
   def update_people_recipe
-    user_recipe = UserRecipe.find_by(user: current_user, date: params[:date],recipe_id: params[:recipe_id])
-    user_recipe.update(number_of_people: params[:number_of_people])
-    user_recipe.shopping_items.each do |s_i|
-      s_i.update(quantity: s_i.recipe_ingredient.quantity * user_recipe.number_of_people)
+    user_recipe = UserRecipe.where(
+      user: current_user,
+      date: params[:date],
+      recipe_id: params[:recipe_id]
+    ).first_or_create
+
+    user_recipe.update(
+      number_of_people: params[:number_of_people]
+    )
+
+    user_recipe.reload.shopping_items.each do |shoppping_item|
+      shoppping_item.update(
+        quantity: shoppping_item.recipe_ingredient.quantity * user_recipe.number_of_people
+      )
     end
-    puts "debug"
-      respond_to do |format|
-        format.js { head :ok }
-      end
+    respond_to do |format|
+      format.js { head :ok }
+    end
   end
 
   def set_user_to_vegetarian
-    like_on_category("meat", false) #dislike all the Ingredient from the "meat" category
+    like_on_category("meat", false) # dislike all the Ingredient from the "meat" category
     like_on_category("fish", false)
     like_on_category("seafood", false)
     redirect_to user_path(current_user.id)
@@ -36,18 +45,23 @@ class UsersController < ApplicationController
     set_user_to_vegetarian
     like_on_category("dairy", false)
     # dislike all egg recipes
-    Ingredient.where("name LIKE ?", "%egg %").each do |egg|
-      taste = IngredientTaste.find_by(user: current_user, ingredient: egg)
+    Ingredient.where("name LIKE ?", "%egg %").each do |egg_ingredient|
+      taste = IngredientTaste.find_by(
+        user: current_user,
+        ingredient: egg_ingredient
+      )
       # check if there is already a define taste on it, puts it to false
       if taste
-        taste.like = false
-        taste.save
+        taste.update(like: false)
       else
         # if no taste is define for this ingredient, create it and puts the value of "like" to true or false (parameter)
-        taste = IngredientTaste.create(user: current_user, ingredient: egg, like: false)
+        IngredientTaste.create(
+          user: current_user,
+          ingredient: egg_ingredient,
+          like: false
+        )
       end
     end
-
   end
 
 # ALL THE Ingredients Categories :
@@ -76,7 +90,7 @@ class UsersController < ApplicationController
   def like_on_category(category_name, like) #category_name is a string, like is a boolean (put false for dislike)
     # Iterate one each Ingredient with category_name category
     user = current_user
-    Ingredient.all.where(category: category_name).each do |ingr|
+    Ingredient.where(category: category_name).each do |ingr|
       taste = IngredientTaste.find_by(user: user, ingredient: ingr)
       # check if there is already a define taste on it, puts it to false
       if taste
@@ -90,5 +104,4 @@ class UsersController < ApplicationController
       end
     end
   end
-
 end

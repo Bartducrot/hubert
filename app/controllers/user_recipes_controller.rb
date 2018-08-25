@@ -1,12 +1,12 @@
 class UserRecipesController < ApplicationController
-
   def cookbook
     @user_recipes = UserRecipe.where(user_id: current_user.id)
     @next_user_recipes = UserRecipe.where(user_id: current_user.id).where("date >= ?", Date.today).order(updated_at: :desc)
   end
 
   def shopping_cart
-    @user_recipes = UserRecipe.where(user_id: current_user.id)
+    @user_recipes = UserRecipe.where(user: current_user)
+                              .where('date >= ?', Date.today)
 
     @shopping_items = []
     @user_recipes.each do |u_recipe|
@@ -16,7 +16,6 @@ class UserRecipesController < ApplicationController
         end
       end
     end
-
 
     @ingredients_hash = {}
     @shopping_items.each do |shopping_item|
@@ -36,7 +35,6 @@ class UserRecipesController < ApplicationController
         @ingredients_hash[cat][ingr_name] = [shopping_item]
       end
     end
-
     # => @ingredient_hash2 =
     # {"category_name1" =>
     #           {
@@ -49,13 +47,7 @@ class UserRecipesController < ApplicationController
     #             "ingredient_name4" => [ShoppingItem7, ShoppingItem8]
     #           }
     #  }
-
   end
-
-
-
-
-
 
   def index
     @day = Date.parse(params[:date])
@@ -65,9 +57,6 @@ class UserRecipesController < ApplicationController
     else
       @user_recipes = UserRecipe.where(date: Date.today).where(user: current_user)
     end
-
-
-
   end
 
   def create
@@ -90,10 +79,6 @@ class UserRecipesController < ApplicationController
       new_item.save!
       @shopping_items << new_item
     end
-
-    # redirect_to user_user_recipes_path(current_user)
-    # redirect_to calendar_path(user_recipe_params[:date])
-    # - ajax doesn't redirect
   end
 
   def edit
@@ -117,5 +102,4 @@ class UserRecipesController < ApplicationController
   def user_recipe_params
     params.require(:user_recipe).permit(:number_of_people, :recipe_id, :date)
   end
-
 end
