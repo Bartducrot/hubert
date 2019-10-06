@@ -45,6 +45,8 @@ group :development, :test do
   # linter
   gem 'rubocop'
 
+  gem 'rails-erd'
+
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'spring'

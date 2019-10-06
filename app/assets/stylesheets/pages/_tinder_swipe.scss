@@ -3,7 +3,8 @@
   // padding-bottom: 50px;
   padding-top:80px;
 }
-#contentMichael {
+
+#ingredient-card{
   display: flex;
   height: calc(100vh - 245px);
 
@@ -76,10 +77,4 @@ span.meta {
   background-size: 15px;
   background-position: center;
   background-repeat: no-repeat;
-}
-
-p {
-  // padding:0;
-  // margin:0;
-  // float: left;
 }

@@ -3,13 +3,8 @@ class IngredientTastesController < ApplicationController
   before_action :set_ingredient_taste, only: [:update]
 
   def swiper
-    @ingredients = current_user.unknown_ingredients
-    # @ingredient_taste = IngredientTaste.new()
-    # @ingredient_taste.user = current_user
-    # @ingredient_taste.ingredient = @ingredients.pop
-    @ingredient_objects = []
-    @ingredients.each do |ingredient|
-      @ingredient_objects << { category: ingredient.category, name: ingredient.name }
+    @ingredient_objects = current_user.unknown_ingredients.map do |ingredient|
+      { id: ingredient.id, category: ingredient.category, name: ingredient.name }
     end
   end
 
@@ -25,9 +20,9 @@ class IngredientTastesController < ApplicationController
   end
 
   def like_true
-    IngredientTaste.create(
+    IngredientTaste.create!(
       user: current_user,
-      ingredient_id: Ingredient.where(name: params['name']).first.id,
+      ingredient: Ingredient.find(params[:id]),
       like: true
     )
   end
@@ -54,9 +49,9 @@ class IngredientTastesController < ApplicationController
   end
 
   def like_false
-    IngredientTaste.create(
+    IngredientTaste.create!(
       user: current_user,
-      ingredient: Ingredient.find_by(name: params['name']),
+      ingredient: Ingredient.find(params[:id]),
       like: false
     )
   end
@@ -64,13 +59,6 @@ class IngredientTastesController < ApplicationController
   def like_false_and_reload
     @user = current_user
     @ingredient = Ingredient.find_by(name: params['name'])
-
-    puts "************************************"
-    puts "************************************"
-    puts "************************************"
-    puts "************************************"
-    p @ingredient
-
 
     ingredient_taste = IngredientTaste.where(user: current_user, ingredient_id: @ingredient.id).first
     if ingredient_taste

@@ -2,20 +2,20 @@
   <div class="search-bar">
     <h3>Preferences</h3>
     <%= form_tag ingredients_path, method: :get, class: "search-ingredients" do %>
-    <div class="ingredients-form list-inline">
-      <%= text_field_tag :info, params[:info], class: "form-control" %>
-      <%= submit_tag 'find', class: "btn btn-default search-btn" %>
-    </div>
+      <div class="ingredients-form list-inline">
+        <%= text_field_tag :info, params[:info], class: "form-control" %>
+        <%= submit_tag 'find', class: "btn btn-default search-btn" %>
+      </div>
     <% end %>
   </div>
 
   <% if @ingredients %>
-      <% @ingredients.each do |i| %>
-        <div id="ingredient-<%= i.id %>">
-          <%= render 'ingredient_tastes/ingredient', i: i, user: @user %>
-        </div>
-      <% end %>
-    <% else %>
+    <% @ingredients.each do |i| %>
+      <div id="ingredient-<%= i.id %>">
+        <%= render 'ingredient_tastes/ingredient', i: i, user: @user %>
+      </div>
+    <% end %>
+  <% else %>
     <p>No results</p>
   <% end %>
 </div>

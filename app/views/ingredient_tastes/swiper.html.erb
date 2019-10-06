@@ -4,7 +4,7 @@
     <h2 class="text-center">SWIPE AWAY!</h2>
     <i class="fa fa-arrow-right"></i>
   </div>
-  <div id="contentMichael">
+  <div id="ingredient-card">
   </div>
   <div class="footer-swipe">
     <div id="swipe_dislike" class="rate"></div>
@@ -112,8 +112,7 @@
     }
 
     function swipeLike() {
-      var $photo_like = $("div#contentMichael").find('#photoIngredient');
-      console.log($photo_like)
+      var $photo_like = $("div#ingredient-card").find('#photoIngredient');
       var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo_like]});
       swipe.staggerTo($photo_like, 0.8, {bezier:[{left:"+=400", top:"+=300", rotation:"30"}], ease:Power1.easeInOut});
 
@@ -133,7 +132,7 @@
     }
 
     function swipeDislike() {
-      var $photo = $("div#contentMichael").find('#photoIngredient');
+      var $photo = $("div#ingredient-card").find('#photoIngredient');
 
       var swipe = new TimelineMax({repeat:0, yoyo:false, repeatDelay:0, onComplete:remove, onCompleteParams:[$photo]});
       swipe.staggerTo($photo, 0.8, {bezier:[{left:"+=-350", top:"+=300", rotation:"-30"}], ease:Power1.easeInOut});
@@ -159,7 +158,7 @@
 
     function addNewIngredient(name, category, photo) {
       console.log("add new ingrediemt", name);
-      $("div#contentMichael").prepend('<div class="photo" id="photoIngredient" style="background-image:url('+photo+')">'
+      $("div#ingredient-card").prepend('<div class="photo" id="photoIngredient" style="background-image:url('+photo+')">'
         + '<span class="meta">'
         + '<p>'+name+', '+category+'</p>'
         + '</span>'

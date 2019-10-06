@@ -1,29 +1,28 @@
   <div class="scroller">
     <div class="scroll-flex">
-
       <% 29.times do |i| %>
         <% day = (@day - 14 + i) %>
-        <% class_name = "scroll-btn " %>
+        <% day_badge_class = "scroll-btn " %>
 
         <% if day == @day %>
-          <% class_name += "selected " %>
+          <% day_badge_class += "selected " %>
         <% end %>
 
-        <%if day == Date.today %>
-          <% class_name += "today " %>
+        <%if day.today? %>
+          <% day_badge_class += "today " %>
         <% end %>
 
-        <% bought = current_user.user_recipes.where(date: day).joins(:shopping_items).where("shopping_items.bought = false").count.zero? %>
+        <% nb_ingredient_to_buy = current_user.user_recipes.where(date: day).joins(:shopping_items).where(shopping_items: { bought: false }).count %>
 
         <%= link_to calendar_path(day), class: 'badge-container' do %>
-          <div class="<%= class_name %>">
-              <h2><%= "#{ day.strftime('%a %e %b')}" %></h2>
+          <div class="<%= day_badge_class %>">
+            <h2><%= "#{ day.strftime('%a %e %b')}" %></h2>
 
-              <% if bought %>
-              <div class="badge badge-blue"><%= current_user.user_recipes.where(date: day).count %></div>
-              <% else %>
-              <div class="badge badge-red"><%= current_user.user_recipes.where(date: day).count %></div>
-              <% end %>
+            <% if nb_ingredient_to_buy == 0 %>
+              <div class="badge badge-blue"><%= nb_ingredient_to_buy %></div>
+            <% else %>
+              <div class="badge badge-red"><%= nb_ingredient_to_buy %></div>
+            <% end %>
           </div>
         <% end %>
       <% end %>
@@ -32,8 +31,6 @@
 
 <%= content_for(:after_js) do %>
 <script>
-  $('scroll-flex').on('scroll', function() {
-    console.log(window)
-  });
+
 </script>
 <% end %>

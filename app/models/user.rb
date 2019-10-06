@@ -14,44 +14,35 @@ class User < ApplicationRecord
 
 
   def known_ingredients
-    @ingredients = Ingredient.joins(:ingredient_tastes).where(ingredient_tastes: {user: self})
+    Ingredient.joins(:ingredient_tastes).where(ingredient_tastes: { user: self })
   end
 
   def unknown_ingredients
-    @known_ingredients = known_ingredients
-    @ingredients = Ingredient.all - known_ingredients
+    Ingredient.where.not(id: known_ingredients.ids)
   end
 
   def selected_recipe(category, date)
-    selected_user_recipe = self.user_recipes.where(date: date)
-                                            .joins(:recipe)
-                                            .where('recipes.category = ?', category)
-                                            .first
-                                            # .select{|ur| ur.recipe.category == category}.first
-    if selected_user_recipe
-      selected_user_recipe.recipe
-    else
-      false
-    end
+    Recipe.joins(:user_recipes)
+          .merge(
+            user_recipes.where(date: date)
+                        .joins(:recipe)
+                        .where(recipes: { category: category })
+          ).first
+  end
+
+  def unliked_recipes(category: 'breakfast')
+    Recipe.where(category: category)
+          .joins(:ingredients)
+          .merge(
+            Ingredient.joins(:ingredient_tastes)
+                      .merge(
+                        ingredient_tastes.where(like: false)
+                      )
+          )
   end
 
   def liked_recipes(category = 'breakfast')
-    # liked_ingredients_ids = Ingredient.where.not(id: self.ingredient_tastes.where(like: false).pluck(:ingredient_id)).pluck(:id)
-    unliked_ingredients_ids = Ingredient.where(id: ingredient_tastes.where(like: false).pluck(:ingredient_id)).pluck(:id)
-    unliked_recipes = Recipe.where(category: "breakfast")
-                            .includes(:recipe_ingredients)
-                            .includes(:ingredients)
-                            .where('ingredients.id' => unliked_ingredients_ids)
     Recipe.where(category: category).where.not(id: unliked_recipes.pluck(:id))
-
-    # RecipeIngredient.where(ingredient_id: ingredients_ids)
-    # recipes = Recipe.where(category: category)
-    # user_liked_recipes = []
-    # recipes.each do |recipe|
-    #   recipe_ingredients_ids = recipe.recipe_ingredients.pluck(:ingredient_id)
-    #   user_liked_recipes << recipe if (recipe_ingredients_ids - liked_ingredients_ids).empty?
-    # end
-    # user_liked_recipes
   end
 
   def self.find_for_facebook_oauth(auth)
@@ -64,6 +55,7 @@ class User < ApplicationRecord
 
     user = User.find_by(provider: auth.provider, uid: auth.uid)
     user ||= User.find_by(email: auth.info.email) # User did a regular sign up in the past.
+
     if user
       user.update(user_params)
     else
